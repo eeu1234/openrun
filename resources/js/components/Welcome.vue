@@ -3,9 +3,12 @@
 
 </template>
 <script>
+
+// import '/public/common/css/tailwindcss.css'
+
 export default {
     setup: () => ({
-        hello: '안녕하세요~!'
+        hello: '안녕하세요!!'
     })
 }
 </script>
