@@ -13,12 +13,14 @@ use Illuminate\Support\Facades\DB;
 class Controller extends \Illuminate\Routing\Controller
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
     public function index()
     {
-        $test = User::se;
+        $user = User::where('idtest', 1)->get('test');
+//        $user = User::all();
+//        $memos = Memo::orderBy('created_at', 'desc')->get();
+//        $user = DB::table('test')->get();
 
-        \Log::info($test);
-
-        return view('welcome');
+        return view('main', ['user' => $user]);
     }
 }
