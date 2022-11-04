@@ -21,6 +21,8 @@ class Controller extends \Illuminate\Routing\Controller
 //        $memos = Memo::orderBy('created_at', 'desc')->get();
 //        $user = DB::table('test')->get();
 
-        return view('main', ['user' => $user]);
+        \Log::info([$user]);
+
+        return view('welcome', ['user' => $user]);
     }
 }

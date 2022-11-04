@@ -1,5 +1,8 @@
 <template>
-    <h1>{{ hello }}</h1>
+    <h1 class="text-gray-500">{{ hello }}</h1>
+    <div class="flex justify-center items-center ">
+        <h1>Awesome Tailwind!!</h1>
+    </div>
 
 </template>
 <script>
