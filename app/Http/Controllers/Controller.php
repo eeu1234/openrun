@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 
-use App\Models\User;
+use App\Models\Store;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -16,11 +16,7 @@ class Controller extends \Illuminate\Routing\Controller
 
     public function index()
     {
-        $user = User::where('idtest', 1)->get('test');
-//        $user = User::all();
-//        $memos = Memo::orderBy('created_at', 'desc')->get();
-//        $user = DB::table('test')->get();
-
+        $user = Store::where('STORECODE', 1)->get('STORENAME');
         \Log::info([$user]);
 
         return view('welcome', ['user' => $user]);

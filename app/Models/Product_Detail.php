@@ -9,7 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Model
+class Product_Detail extends Model
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -20,17 +20,16 @@ class User extends Model
      */
 
     protected $connection = 'mysql';
-    protected $table ='STORE';
+    protected $table ='PRODUCT_DETAIL';
     // 컬럼명
     protected $fillable = [
-        'STORECODE',
-        'STORENAME',
-        'STORELOCATION',
-        'STOREDETAIL_LOCATION',
-        'WAITNGSPOT'
+        'FINALPRODUCTCODE',
+        'FINALPRODUCTNAME',
+        'PRODUCTCODE',
+        'SIZE',
+        'COLOR',
+        'PATTERN',
+        'HARDWARE'
     ];
-
-
-
 
 }
