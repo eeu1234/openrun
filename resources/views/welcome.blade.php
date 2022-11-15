@@ -6,13 +6,6 @@
 </head>
 <body class="antialiased">
 <div id="app"></div>
-<div id="app1"></div>
-
-@foreach($user as $memo)
-    <div>
-        <span>{{ $memo->STORENAME}}</span>
-    </div>
-@endforeach
 </body>
 
 </html>
