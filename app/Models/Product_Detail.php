@@ -25,11 +25,14 @@ class Product_Detail extends Model
     protected $fillable = [
         'FINALPRODUCTCODE',
         'FINALPRODUCTNAME',
-        'PRODUCTCODE',
+        'SEASONCHECK',
         'SIZE',
         'COLOR',
+        'COLOR2',
         'PATTERN',
-        'HARDWARE'
+        'MATERIAL',
+        'IMG',
+        'PRODUCTCODE'
     ];
 
 }

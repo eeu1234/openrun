@@ -24,9 +24,8 @@ class Product extends Model
     // 컬럼명
     protected $fillable = [
         'PRODUCTCODE',
-        'CLASSIFTCODE',
         'PRODUCTNAME',
-        'SEASONCHEAK'
+        'CLASSIFTCODE'
     ];
 
 

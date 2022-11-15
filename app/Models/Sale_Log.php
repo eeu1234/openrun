@@ -9,7 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class Sale_Record extends Model
+class Sale_Log extends Model
 {
     use HasApiTokens, HasFactory, Notifiable;
 
