@@ -6,7 +6,9 @@
 
 </head>
 <body class="antialiased">
-<div id="app"></div>
+<div id="header"></div>
+<div id="searchMain" class = "w-full h-full"></div>
+<div id="sideMenu" class = "absolute right-0 top-0" ></div>
 </body>
 
 </html>

@@ -30,7 +30,13 @@ class Store extends Model
         'WAITNGSPOT'
     ];
 
+    public function main()
+    {
+        $user = Store::where('STORECODE', 1)->get('STORENAME');
+        \Log::info([$user]);
 
+        return view('welcome', ['user' => $user]);
+    }
 
 
 }

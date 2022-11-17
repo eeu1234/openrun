@@ -11,12 +11,26 @@
 </template>
 
 <script>
+
 $(document).ready(function(){
     $('#menu_button').click(function(){
-        $("#test").css("display","block");
-        $("#test").css("background-color","black");
-        console.log("hi");
+       slideSideMenu();
+    });
+    $('#closeButton').click(function(){
+        closeSideMenu();
     });
 });
+function slideSideMenu(){
+    $("#sideBar").css("display","block");
+    $("#sideMenu").css("width","17%");
+    $("#sideMenu").css("height","100%");
+    console.log("hi");
+
+}
+function closeSideMenu(){
+    $("#sideBar").css("display","none");
+    $("#sideMenu").css("width",'');
+    $("#sideMenu").css("height",'');
+}
 </script>
 
