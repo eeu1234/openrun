@@ -3,11 +3,9 @@
     <div class="flex justify-center items-center ">
         <h1>Awesome Tailwind!!</h1>
     </div>
-
+    <div id = "test" style = "width:100px; height:100px; display: none; background-color:red;">영광</div>
 </template>
 <script>
-
-// import '/public/common/css/tailwindcss.css'
 
 export default {
     setup: () => ({

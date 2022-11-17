@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-    @vite(['resources/js/app.js','resources/css/app.css'])
+    @vite(['resources/js/components/user/search/search.js','resources/css/app.css'])
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 </head>
 <body class="antialiased">

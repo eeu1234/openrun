@@ -10,7 +10,6 @@
     </div>
 </template>
 
-
 <script>
 $(document).ready(function(){
     $('#menu_button').click(function(){
