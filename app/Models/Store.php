@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Sale_Log;
 
 class Store extends Model
 {
@@ -30,13 +31,12 @@ class Store extends Model
         'WAITNGSPOT'
     ];
 
-    public function main()
-    {
-        $user = Store::where('STORECODE', 1)->get('STORENAME');
-        \Log::info([$user]);
 
-        return view('welcome', ['user' => $user]);
+    public function salesLog(){
+
+        return $this->hasOne(Sale_Log::class,'STORECODE','STORECODE');
     }
+
 
 
 }

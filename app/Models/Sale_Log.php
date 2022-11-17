@@ -20,7 +20,7 @@ class Sale_Log extends Model
      */
 
     protected $connection = 'mysql';
-    protected $table ='SALE_RECORD';
+    protected $table ='SALES_LOG';
     // 컬럼명
     protected $fillable = [
         'SALECODE',
