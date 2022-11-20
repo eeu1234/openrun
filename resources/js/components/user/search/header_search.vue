@@ -9,12 +9,16 @@
         <div class = "clear-both"></div>
     </div>
 
-    <div id = "testQurey" v-for="store in stores" class="flex justify-center items-center">
-        <div style = "background-color:red;">{{store.STORECODE}}</div>
-        <div style = "background-color:yellow;">{{store.STORENAME}}</div>
-        <div v-if="store.sales_log != null"> <!--값이 널이면 출력할때 오류가 생긴다. 따라서 v-if로 분기를 처리해야함-->
-            <div style = "background-color:yellowgreen;">{{store.sales_log.FINALPRODUCTCODE}}</div>
-        </div>
+<!--    <div id = "testQurey" v-for="store in stores" class="flex justify-center items-center">-->
+<!--        <div style = "background-color:red;">{{store.STORECODE}}</div>-->
+<!--        <div style = "background-color:yellow;">{{store.STORENAME}}</div>-->
+<!--        <div v-if="store.sales_log != null"> &lt;!&ndash;값이 널이면 출력할때 오류가 생긴다. 따라서 v-if로 분기를 처리해야함&ndash;&gt;-->
+<!--            <div style = "background-color:yellowgreen;">{{store.sales_log.FINALPRODUCTCODE}}</div>-->
+<!--        </div>-->
+<!--    </div>-->
+
+    <div if = "scheduleQureyTest">
+
     </div>
 </template>
 
