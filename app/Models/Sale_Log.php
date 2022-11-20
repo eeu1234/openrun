@@ -30,4 +30,15 @@ class Sale_Log extends Model
         'REMARK'
     ];
 
+
+    public function intoStoreForschedule(){
+
+        return $this->hasMany(Store::class,'STORECODE','STORECODE');
+    }
+
+    public function schedule(){
+        return $this->hasManyThrough(Product_Detail::class, Store::class,
+            'STORECODE','FINALPRODUCTNAME','FINALPRODUCTNAME','STORECODE');
+    }
+
 }

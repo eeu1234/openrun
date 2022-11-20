@@ -28,14 +28,4 @@ class Product extends Model
         'CLASSIFTCODE'
     ];
 
-    public function productList()
-    {
-        $productList = Product::get();
-
-        return arr(['productList' => $productList]);
-    }
-
-
-
-
 }

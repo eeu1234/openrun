@@ -37,6 +37,8 @@ class Store extends Model
         return $this->hasOne(Sale_Log::class,'STORECODE','STORECODE');
     }
 
-
+    public function intoProductDetailForschedule(){
+            return $this->hasOne(Product_Detail::class,'FINALPRODUCTCODE','FINALPRODUCTCODE');
+    }
 
 }
