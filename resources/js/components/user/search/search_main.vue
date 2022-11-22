@@ -1,7 +1,7 @@
 <template>
     <div class = "w-100 h-full p-20">
         <div id = "searchArea" class = "w-full  pb-20">
-            <input class = "h-20 w-10/12 float-left border-2 rounded-2xl text-black" type = "text" placeholder="    검색어를 입력하세요">
+            <input class = "h-20 w-10/12 float-left border-2 rounded-2xl text-black text-3xl pl-10 outline-none" type = "text" placeholder="검색어를 입력하세요">
             <div id = "searchButton_with_logo" class = "float-right w-28 h-20 text-4xl py-4 px-0.5 border-2 rounded-2xl bg-slate-300">search</div>
             <div class = clear-both></div>
         </div>
