@@ -19,13 +19,11 @@ class Controller extends \Illuminate\Routing\Controller
     public function index()
     {
 
-        return view('welcome');
+        return view('search');
     }
 
-
-
     public function storeList(){
-        $store = Sale_log::with(['schedule'])->get();
+        $store = Store::with(['schedule'])->get();
         \Log::info("DDDDDDDDDDDDDDDDDDDDDDDDDDDD");
         \Log::info([$store]);
         return response()->json($store);
