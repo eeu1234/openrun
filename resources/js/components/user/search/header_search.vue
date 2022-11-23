@@ -34,7 +34,7 @@ $(document).ready(function(){
 });
 function slideSideMenu(){
     $("#sideBar").css("display","block");
-    $("#sideMenu").css("width","25%");
+    $("#sideMenu").css("width","20%");
     $("#sideMenu").css("height","100%");
     console.log("hi");
 
