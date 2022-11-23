@@ -18,8 +18,8 @@
                             <img class = "h-full" src="/img/classic_medium_bag.jpg">
                         </div>
                         <div id="productInfo" class = "float-left pl-12 w-3/4 h-full">
-                            <div class="h-1/5 w-full text-xl tracking-wide font-medium">chanel</div>
-                            <div class="h-2/5 w-full text-4xl tracking-wide font-medium" style = "line-height:4rem;">Classic Medium bag</div>
+                            <div class="h-1/5 w-full text-xl tracking-wide font-medium">Chanel</div>
+                            <div class="h-2/5 w-full text-4xl tracking-wide font-medium" style = "line-height:4rem;">{{result.product_name.PRODUCTNAME}} </div>
                             <div class="h-1/5 w-full text-xl tracking-wide text-slate-400">{{result.COLOR}} {{result.MATERIAL}}</div>
                             <div class="h-1/5 w-full text-xl tracking-wide text-slate-400">{{result.COLOR2}}</div>
                         </div>

@@ -35,4 +35,10 @@ class Product_Detail extends Model
         'PRODUCTCODE'
     ];
 
+    public function productName(){
+
+            return $this->hasOne(Product::class,'PRODUCTCODE','PRODUCTCODE');
+    }
+
+
 }

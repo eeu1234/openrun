@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Models\Store;
+use App\Models\Product_Detail;
 use App\Models\Sale_Log;
 
 use http\Env\Response;
@@ -25,9 +26,9 @@ class Controller extends \Illuminate\Routing\Controller
     }
 
     public function storeList(){
-        $store = Store::with(['schedule'])->get();
-        \Log::info("DDDDDDDDDDDDDDDDDDDDDDDDDDDD");
-        \Log::info([$store]);
+        $store = Store::select()->get();
+
+
         return response()->json($store);
 
     }
@@ -63,7 +64,11 @@ class Controller extends \Illuminate\Routing\Controller
     public function searchPage(Request $request)
     {
         $searchWord = $request->input('searchWord');
-        $productInfo = DB::table('PRODUCT_DETAIL')
+       /* $productInfo = DB::table('PRODUCT_DETAIL')
+            ->where('FINALPRODUCTNAME', 'like', '%' . $searchWord . '%')
+            ->get();
+       */
+        $productInfo = Product_Detail::with(['productName'])
             ->where('FINALPRODUCTNAME', 'like', '%' . $searchWord . '%')
             ->get();
 
