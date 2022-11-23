@@ -19,6 +19,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/','\App\Http\Controllers\Controller@index')->name('view');
 Route::any('/store','\App\Http\Controllers\Controller@storeList')->name('store');
 
+//검색페이지
+Route::post('/search','\App\Http\Controllers\Controller@searchPage')->name('search');
+
 /*관리자 페이지*/
 Route::get('/admin','\App\Http\Controllers\Admin\AdminController@main')->name('view');
 

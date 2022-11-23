@@ -6,11 +6,13 @@ namespace App\Http\Controllers;
 use App\Models\Store;
 use App\Models\Sale_Log;
 
+use http\Env\Response;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 
 class Controller extends \Illuminate\Routing\Controller
 {
@@ -57,5 +59,17 @@ class Controller extends \Illuminate\Routing\Controller
         \Log::info([$productInfo]);
         return response()->json($productInfo);
     }
+
+    public function searchPage(Request $request)
+    {
+        $searchWord = $request->input('searchWord');
+        $productInfo = DB::table('PRODUCT_DETAIL')
+            ->where('FINALPRODUCTNAME', 'like', '%' . $searchWord . '%')
+            ->get();
+
+        \Log::info([$productInfo]);
+        return response()->json($productInfo);
+    }
+
 
 }
