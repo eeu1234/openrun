@@ -53,13 +53,9 @@ class Controller extends \Illuminate\Routing\Controller
             ->groupBy('SALES_LOG.FINALPRODUCTCODE')
             ->get();
 
-        $test = DB::table(function ($q) {
-            $q->from('PRODUCT');
-        })
-            ->get();
 
         \Log::info([$productInfo]);
-        return response()->json($test);
+        return response()->json($productInfo);
     }
 
 }
