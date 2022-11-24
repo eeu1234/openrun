@@ -2,12 +2,17 @@
     <div class = "bg-black text-white text-center text-5xl" >
         <div class="float-left w-full">
             <img class = "h-40 m-auto" src="/img/chanel_logo.png">
+            <div class="font-sans pb-5">
+                NO WHERE
+            </div>
         </div>
         <div id = "menu_button" class = "absolute right-0">
             <img class = "h-40 py-10" src="/img/menu.png">
         </div>
+
         <div class = "clear-both"></div>
     </div>
+
 
 <!--    <div id = "testQurey" v-for="store in stores" class="flex justify-center items-center">-->
 <!--        <div style = "background-color:red;">{{store.STORECODE}}</div>-->
