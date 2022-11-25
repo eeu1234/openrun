@@ -1,10 +1,11 @@
 <template>
     <div class = "w-full h-full">
-        <div class = "w-100 h-8 p-20">
-            <div class ="float-left w-1/4 h-full p-20"></div>
-            <div class ="float-left w-2/4 h-full p-20">상세페이지</div>
-            <div class ="float-left w-1/4 h-full p-20"></div>
-            <div class = clear-both></div>
+        <div class = "w-100 h-24 content-center text-center items-center">
+            <div class ="flex float-left w-1/4 h-full text-center"></div>
+            <div class ="flex float-left w-2/4 h-full items-center content-center text-center">
+                <p class="text-center items-center m-auto text-3xl font-sans font-semibold">상세페이지</p></div>
+            <div class ="flex float-left w-1/4 h-full "></div>
+            <div class = "clear-both"></div>
         </div>
         <div id="productImg" class="w-full">
             <img class = "w-full h-fit " src="/img/classic_medium_bag.jpg">
@@ -14,9 +15,13 @@
 
 <script>
 
-// import '/public/common/css/tailwindcss.css'
+
 
 export default {
+    components: {
+
+    },
+
     setup: () => ({
         hello: '안녕하세요!!'
     }),

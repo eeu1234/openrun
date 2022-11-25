@@ -2,11 +2,11 @@
     <div class = "bg-black text-white text-center text-5xl" >
         <div class="float-left w-full">
             <img class = "h-40 m-auto" src="/img/chanel_logo.png">
-            <div class="font-sans font-extrabold pb-5">
+            <div class="font-sans font-extrabold pb-9">
                 NO WHERE
             </div>
         </div>
-        <div id = "menu_button" class = "absolute right-0">
+        <div id = "menu_button" class = "absolute pt-6 right-0">
             <img class = "h-40 py-10" src="/img/menu.png">
         </div>
 
