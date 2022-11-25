@@ -3,7 +3,7 @@
         <div id = "searchArea" class = "w-full  pb-20">
             <form v-on:submit.prevent="submitForm" >
                 <input v-model="searchWord" type = "text" placeholder="검색어를 입력하세요" autofocus required class = "h-20 w-10/12 float-left border-2 rounded-2xl text-black text-3xl pl-10 outline-none" >
-                <button type="submit" class = "float-right w-28 h-20 text-4xl py-4 px-0.5 border-2 rounded-2xl bg-slate-300">search</button>
+                <button type="submit" class = "float-right w-28 h-20 text-4xl py-4 px-0.5 border-2 rounded-2xl bg-slate-300">Go</button>
                 <div class = clear-both></div>
             </form>
         </div>

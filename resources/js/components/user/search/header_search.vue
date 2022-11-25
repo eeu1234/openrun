@@ -2,7 +2,7 @@
     <div class = "bg-black text-white text-center text-5xl" >
         <div class="float-left w-full">
             <img class = "h-40 m-auto" src="/img/chanel_logo.png">
-            <div class="font-sans pb-5">
+            <div class="font-sans font-extrabold pb-5">
                 NO WHERE
             </div>
         </div>
