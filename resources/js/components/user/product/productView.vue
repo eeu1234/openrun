@@ -23,22 +23,84 @@
             <p class=" items-center m-auto text-3xl font-sans font-light">최근 판매정보 : 2022-08-09 수요일 / 신세계 본점</p>
         </div>
 
-        <div class = "w-100 h-40 content-center text-center items-center py-4">
-            <div class = "flex w-3/4 h-fit content-center text-left items-left">
-                <p class="w-full h-fit text-4xl font-sans font-bold py-5 pl-16">Chanel</p>
-                <p class="w-full h-fit text-4xl font-sans font-bold py-5 pl-16">Classic Medium Handbag</p>
+        <div class = "relative w-100 h-45 content-center text-center items-center pt-4">
+            <div class = "flex w-3/5 h-15 content-center text-left items-left">
+                <p class="w-full h-fit text-4xl font-sans font-bold pt-5 pl-16">Chanel</p>
+            </div>
+            <div class = "flex w-3/5 h-15 content-center text-left items-left">
+                <p class="w-full h-fit text-4xl font-sans font-medium pb-5 pl-16">Classic Medium Handbag</p>
+            </div>
+            <div class = "flex w-3/5 h-15 content-center text-left items-left">
+                <p class="w-full h-fit text-4xl font-sans font-semilight pb-5 pl-16 text-slate-600">블랙 / 캐비어 / 금장</p>
+            </div>
+            <div class = "absolute right-0 top-0 flex w-2/5 h-full content-center align-middle py-6 px-28">
+                <div class = "relative flex w-full h-full content-center text-left items-left bg-black rounded-2xl align-middle pt-12">
+                    <p class="w-full h-full text-5xl font-sans font-bold text-white text-center align-middle">+1</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class = "w-full h-full relative">
+        <div class="flex justify-center">
+            <div class="mb-3 xl:w-96">
+                <select class="form-select form-select-lg mb-3
+      appearance-none
+      block
+      w-full
+      px-4
+      py-2
+      text-xl
+      font-normal
+      text-gray-700
+      bg-white bg-clip-padding bg-no-repeat
+      border border-solid border-gray-300
+      rounded
+      transition
+      ease-in-out
+      m-0
+      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label=".form-select-lg example">
+                    <option selected>Open this select menu</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+
+                <select class="form-select form-select-sm
+    appearance-none
+    block
+    w-full
+    px-2
+    py-1
+    text-sm
+    font-normal
+    text-gray-700
+    bg-white bg-clip-padding bg-no-repeat
+    border border-solid border-gray-300
+    rounded
+    transition
+    ease-in-out
+    m-0
+    focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label=".form-select-sm example">
+                    <option selected>Open this select menu</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-
+import vSelect from "vue-select";
+import datepicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css';
 
 
 export default {
     components: {
-
+        datepicker
     },
 
     setup: () => ({
@@ -47,7 +109,68 @@ export default {
 
     data: () => ({
         hello : "",
+        format:"dd/MM/yyy",
+        startDate:date_week,
+        endDate:date_today,
+        selectTerm : "",
+        dateSelect : [{title : "", value : "i18n.myoffice.Select"},
+            {title : "today", value : "i18n.search.today"},
+            {title : "week", value : "i18n.search.week"},
+            {title : "current_month", value : "i18n.search.thisMonth"},
+            {title : "before_1month", value : "i18n.search.before1month"},
+            {title : "before_2month", value : "i18n.search.before2month"},
+            {title : "before_3month", value : "i18n.search.before3month"},
+            {title : "all_date", value : "i18n.search.allday"}],
+        date_type_list : [],
+        date_type_list1 : [{title : "register", value : "i18n.myoffice.RegistrationDate"},
+            {title : "update", value : "i18n.myoffice.UpdateDate"}],
+        date_type_list2 : [{title : "order", value : "i18n.myoffice.Order.orderDate"},
+            {title : "accept", value : "i18n.myoffice.Order.depositdate"}],
+
     }),
+    props:{
+        s_date : "",
+        e_date : "",
+        is_view: false,
+        date_type: "",
+        start_plusday : "",
+        title_hide : false,
+    },
+    watch : {
+        startDate(s_date){
+            this.set_s_date(s_date);
+        },
+        endDate(e_date){
+            this.set_e_date(e_date);
+        },
+        date_type(date_type){
+            this.set_date_type(date_type);
+        },
+        selectTerm : function (){
+            //console.log(this.selectTerm);
+            if(this.selectTerm == "today"){
+                this.today();
+            }
+            if(this.selectTerm == "week"){
+                this.week();
+            }
+            if(this.selectTerm == "current_month"){
+                this.current_month();
+            }
+            if(this.selectTerm == "before_1month"){
+                this.before_1month();
+            }
+            if(this.selectTerm == "before_2month"){
+                this.before_2month();
+            }
+            if(this.selectTerm == "before_3month"){
+                this.before_3month();
+            }
+            if(this.selectTerm == "all_date"){
+                this.all_date();
+            }
+        }
+    },
 
     created() {
 
