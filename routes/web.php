@@ -26,7 +26,6 @@ Route::any('/search','\App\Http\Controllers\Controller@searchPage');
 Route::any('/admin','\App\Http\Controllers\Admin\AdminController@main');
 
 /*사용자 페이지*/
-Route::post('/search','\App\Http\Controllers\User\SearchController@main');
 Route::any('/productView','\App\Http\Controllers\User\ProductController@main');
 
 

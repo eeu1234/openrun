@@ -93,7 +93,7 @@
 </template>
 
 <script>
-import vSelect from "vue-select";
+
 import datepicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
 

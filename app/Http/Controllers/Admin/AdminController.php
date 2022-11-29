@@ -18,7 +18,7 @@ class AdminController extends Controller
         $user = Store::where('STORECODE', 1)->get('STORENAME');
         \Log::info([$user]);
 
-        return view('welcome', ['user' => $user]);
+        return view('search', ['user' => $user]);
     }
     //
 }
