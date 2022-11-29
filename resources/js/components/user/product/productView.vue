@@ -17,7 +17,11 @@
             <div class = "clear-both"></div>
         </div>
         <div id="productImg" class="w-full">
-            <img class = "w-full h-fit " src="/img/classic_medium_bag.jpg">
+            <swiper :modules="[EffectFade]" effect="fade">
+                <swiper-slide> <img class = "w-full h-fit " src="/img/classic_medium_bag.jpg"></swiper-slide>
+                <swiper-slide><img class = "w-full h-fit " src="/img/boy_medium.PNG"></swiper-slide>
+                <swiper-slide><img class = "w-full h-fit " src="/img/woc.PNG"></swiper-slide>
+            </swiper>
         </div>
         <div class = "w-100 h-34 content-center text-center items-center py-4">
             <p class=" items-center m-auto text-3xl font-sans font-light">최근 판매정보 : 2022-08-09 수요일 / 신세계 본점</p>
@@ -96,22 +100,29 @@
 
 import datepicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
+import { EffectFade } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/vue';
 
+import 'swiper/css';
+import 'swiper/css/effect-fade';
 
 export default {
     components: {
-        datepicker
+        datepicker,
+        Swiper,
+        SwiperSlide,
     },
 
-    setup: () => ({
-        hello: '안녕하세요!!'
-    }),
-
+    setup() {
+        return {
+            EffectFade,
+        };
+    },
     data: () => ({
         hello : "",
         format:"dd/MM/yyy",
-        startDate:date_week,
-        endDate:date_today,
+        //startDate:date_week,
+        //endDate:date_today,
         selectTerm : "",
         dateSelect : [{title : "", value : "i18n.myoffice.Select"},
             {title : "today", value : "i18n.search.today"},

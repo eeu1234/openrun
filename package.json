@@ -25,6 +25,8 @@
         "@vue-hero-icons/outline": "^1.7.2",
         "@vuepic/vue-datepicker": "^3.5.3",
         "i": "^0.3.7",
-        "vue-cli": "^2.9.6"
+        "swiper": "^8.4.5",
+        "vue-cli": "^2.9.6",
+        "vue-select-3": "^1.0.1"
     }
 }

@@ -5,6 +5,7 @@ import '../css/app.css'
 import Datepicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 
+
 //검색 관련 뷰파일
 import header_search from "./components/user/search/header_search.vue";
 import sideMenu from "./components/user/search/sideMenu.vue";
