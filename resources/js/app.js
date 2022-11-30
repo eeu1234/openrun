@@ -13,6 +13,8 @@ import search_main from "./components/user/search/search_main.vue";
 
 //상세피이지
 import productView from './components/user/product/productView.vue';
+//체크박스 검색페이지
+import checkSearch from './components/user/search/checkSearch.vue';
 
 
 // const app = createApp({});
@@ -23,8 +25,8 @@ import productView from './components/user/product/productView.vue';
 createApp(header_search).mount("#header");
 createApp(search_main).mount("#searchMain");
 createApp(sideMenu).mount("#sideMenu");
-
-
 createApp(productView).mount("#productView");
+createApp(checkSearch).mount("#checkSearch");
+
 
 

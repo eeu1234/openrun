@@ -14,10 +14,7 @@ class SearchController extends Controller
 
     public function main()
     {
-        $user = Store::where('STORECODE', 1)->get('STORENAME');
-        \Log::info([$user]);
-
-        return view('search', ['user' => $user]);
+        return view('checkSearch');
     }
     //
 }

@@ -19,13 +19,15 @@ use Illuminate\Support\Facades\Route;
 Route::any('/','\App\Http\Controllers\Controller@index');
 Route::any('/store','\App\Http\Controllers\Controller@storeList');
 
-//검색페이지
+//검색페이지 검색 acxios 메서도 호출
 Route::any('/search','\App\Http\Controllers\Controller@searchPage');
 
 /*관리자 페이지*/
 Route::any('/admin','\App\Http\Controllers\Admin\AdminController@main');
 
 /*사용자 페이지*/
+Route::any('/productView','\App\Http\Controllers\User\ProductController@main');
+/*체크박스 검색페이지*/
 Route::any('/productView','\App\Http\Controllers\User\ProductController@main');
 
 
