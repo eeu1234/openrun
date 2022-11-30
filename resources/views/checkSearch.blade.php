@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -8,7 +7,7 @@
 </head>
 <body class="antialiased">
 <div id="header"></div>
-<div id="checkSeach" class = "w-full h-full"></div>
+<div id="checkSearch" class = "w-full h-full"></div>
 <div id="sideMenu" class = "absolute right-0 top-0" ></div>
 </body>
 

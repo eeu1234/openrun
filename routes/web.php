@@ -28,7 +28,7 @@ Route::any('/admin','\App\Http\Controllers\Admin\AdminController@main');
 /*사용자 페이지*/
 Route::any('/productView','\App\Http\Controllers\User\ProductController@main');
 /*체크박스 검색페이지*/
-Route::any('/productView','\App\Http\Controllers\User\ProductController@main');
+Route::any('/checkSearch','\App\Http\Controllers\User\SearchController@main');
 
 
 
