@@ -48,49 +48,16 @@
     <div class = "w-full h-full relative">
         <div class="flex justify-center">
             <div class="mb-3 xl:w-96">
-                <select class="form-select form-select-lg mb-3
-      appearance-none
-      block
-      w-full
-      px-4
-      py-2
-      text-xl
-      font-normal
-      text-gray-700
-      bg-white bg-clip-padding bg-no-repeat
-      border border-solid border-gray-300
-      rounded
-      transition
-      ease-in-out
-      m-0
-      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label=".form-select-lg example">
-                    <option selected>Open this select menu</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                </select>
+                <section class="flex_box">
+                    <div class="w-full">
+                        <!--<vSelect :options="list_temp_str" label="value" :reduce="value => value.title"   :clearable="false" v-model="category"  ></vSelect>-->
+                        <vSelect :options="books" label="title"></vSelect>
+                    </div>
 
-                <select class="form-select form-select-sm
-    appearance-none
-    block
-    w-full
-    px-2
-    py-1
-    text-sm
-    font-normal
-    text-gray-700
-    bg-white bg-clip-padding bg-no-repeat
-    border border-solid border-gray-300
-    rounded
-    transition
-    ease-in-out
-    m-0
-    focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label=".form-select-sm example">
-                    <option selected>Open this select menu</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                </select>
+                    <div class="myo_search_box">
+                        <input type="text" class="myo_search_input" name="search_text" v-model="search_text">
+                    </div>
+                </section>
             </div>
         </div>
     </div>
@@ -103,6 +70,9 @@ import '@vuepic/vue-datepicker/dist/main.css';
 import { EffectFade } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 
+import vSelect from "vue-select";
+import "vue-select/dist/vue-select.css";
+
 import 'swiper/css';
 import 'swiper/css/effect-fade';
 
@@ -111,6 +81,7 @@ export default {
         datepicker,
         Swiper,
         SwiperSlide,
+        vSelect
     },
 
     setup() {
@@ -119,6 +90,16 @@ export default {
         };
     },
     data: () => ({
+            books: [
+                { title: "Old Man's War" },
+                { title: "The Lock Artist" },
+                { title: "HTML5" },
+                { title: "Right Ho Jeeves" },
+                { title: "The Code of the Wooster" },
+                { title: "Thank You Jeeves" }
+            ],
+        list_temp_str : [],
+        category : ["1","2","3"],
         hello : "",
         format:"dd/MM/yyy",
         //startDate:date_week,
@@ -189,7 +170,7 @@ export default {
     },
 
     methods: {
-
+        list_temp_str : [1,2,3]
 
     },
 

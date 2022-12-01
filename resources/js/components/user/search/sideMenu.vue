@@ -1,5 +1,5 @@
 <template>
-    <div id = "sideBar" class =  "w-full h-full absolute hidden" style = "background-color:rgba(164,168,176,1);">
+    <div id = "sideBar" class =  "w-full h-full absolute hidden z-50" style = "background-color:rgba(164,168,176,1);">
         <div id = "topArae" class = "w-full h-40">
             <div id = "closeButton" class = "mt-5 mx-7  float-left">
                 <img class = "h-12" src="/img/exit.png">

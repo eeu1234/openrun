@@ -59,7 +59,7 @@ export default {
     }),
     created() {
         this.getStoreList();
-        console.log(this.getStoreList());
+        //console.log(this.getStoreList());
     },
     methods: {
         getStoreList() {
