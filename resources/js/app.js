@@ -29,4 +29,3 @@ createApp(productView).mount("#productView");
 createApp(checkSearch).mount("#checkSearch");
 
 
-

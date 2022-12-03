@@ -59,13 +59,11 @@ export default {
     }),
     created() {
         this.getStoreList();
-        //console.log(this.getStoreList());
     },
     methods: {
         getStoreList() {
             axios.post('./store', {}
             ).then(response => {
-                console.log(response.data);
                 this.stores = response.data;
 
             });
