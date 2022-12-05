@@ -8,6 +8,7 @@
 <body class="antialiased">
 <div id="header"></div>
 <div id="productView" class = "w-full h-full"></div>
+<div id="checkSearch" class = "w-full h-full"></div>
 <div id="sideMenu" class = "absolute right-0 top-0" ></div>
 </body>
 

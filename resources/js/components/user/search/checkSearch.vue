@@ -7,8 +7,10 @@
             <img class = "h-10 float-right mr-5" src="/img/down.png">
             <div class = "clear-both"></div>
         </div>
-        <div class = "w-4/5 h-16 bg-gray-200 m-auto"></div>
-        <div id = "selectperiod" class = "w-4/5 m-auto text-center text-3xl mt-5 hidden">
+        <div class = "w-4/5 h-16 m-auto">
+            <Datepicker v-model="date" :value="date" @update:modelValue="handleDate"  class="w-full bg-gray-200" range ></Datepicker>
+        </div>
+        <div id = "selectperiod" class = "w-4/5 m-auto text-center text-3xl mt-5">
             <div class = "float-left w-1/4">
                 <div class = "w-11/12 m-auto border-2 rounded-xl py-6">당월</div>
             </div>
@@ -44,7 +46,12 @@
 </template>
 
 <script>
-    $(document).ready(function(){
+import Datepicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css'
+import { ref } from 'vue';
+
+
+$(document).ready(function(){
         $('#selectperiodButton').click(function(){
             if ($('#selectperiod').is(':hidden')){
                 $('#selectperiod').slideDown();
@@ -64,13 +71,14 @@
     });
 
 
-
-
-    export default {
+export default {
         setup: () => ({
+
         }),
+        components: { Datepicker },
         data: () => ({
             storeList: [],
+            date: null,
         }),
         created() {
             this.loadData();

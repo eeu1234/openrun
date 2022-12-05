@@ -29,13 +29,13 @@
 
         <div class = "relative w-100 h-45 content-center text-center items-center pt-4">
             <div class = "flex w-3/5 h-15 content-center text-left items-left">
-                <p class="w-full h-fit text-4xl font-sans font-bold pt-5 pl-16">Chanel</p>
+                <p class="w-full h-fit text-4xl font-sans font-bold pt-5 pl-24">Chanel</p>
             </div>
             <div class = "flex w-3/5 h-15 content-center text-left items-left">
-                <p class="w-full h-fit text-4xl font-sans font-medium pb-5 pl-16">Classic Medium Handbag</p>
+                <p class="w-full h-fit text-4xl font-sans font-medium pb-5 pl-24">Classic Medium Handbag</p>
             </div>
             <div class = "flex w-3/5 h-15 content-center text-left items-left">
-                <p class="w-full h-fit text-4xl font-sans font-semilight pb-5 pl-16 text-slate-600">블랙 / 캐비어 / 금장</p>
+                <p class="w-full h-fit text-4xl font-sans font-semilight pb-5 pl-24 text-slate-600">블랙 / 캐비어 / 금장</p>
             </div>
             <div class = "absolute right-0 top-0 flex w-2/5 h-full content-center align-middle py-6 px-28">
                 <div class = "relative flex w-full h-full content-center text-left items-left bg-black rounded-2xl align-middle pt-12">
@@ -45,22 +45,6 @@
         </div>
     </div>
 
-    <div class = "w-full h-full relative">
-        <div class="flex justify-center">
-            <div class="mb-3 xl:w-96">
-                <section class="flex_box">
-                    <div class="w-full">
-                        <!--<vSelect :options="list_temp_str" label="value" :reduce="value => value.title"   :clearable="false" v-model="category"  ></vSelect>-->
-                        <vSelect :options="books" label="title"></vSelect>
-                    </div>
-
-                    <div class="myo_search_box">
-                        <input type="text" class="myo_search_input" name="search_text" v-model="search_text">
-                    </div>
-                </section>
-            </div>
-        </div>
-    </div>
 </template>
 
 <script>
