@@ -2,7 +2,7 @@
     <div class="w-40 h-40">
     </div>
     <form v-on:submit.prevent="submitForm">
-        <div id = "selectperiodButton"  class = "w-4/5 text-4xl border-b-4 mt-14 mb-7 m-auto" >
+        <div id = "selectperiodButton"  class = "w-4/5 text-4xl border-b-4 mt-14 mb-7 m-auto" @click="slideUpDown">
             <div class = "w-48 float-left">검색기간</div>
             <img class = "h-10 float-right mr-5" src="/img/down.png">
             <div class = "clear-both"></div>
@@ -30,7 +30,7 @@
             <div class = "clear-both"></div>
         </div>
         <div class = "w-4/5 h-16 bg-gray-200 m-auto mb-3 py-4 pl-4">
-            <input type = "checkbox" class = "w-7 h-7 float-left mr-2" name = "allchk" id = "allchk" />
+            <input type = "checkbox" class = "w-7 h-7 float-left mr-2" name = "allchk" id = "allchk" @click="allChk"/>
             <span class = "text-xl float-left">전체선택</span>
             <div class =  "clear-both"></div>
         </div>
@@ -51,25 +51,6 @@ import '@vuepic/vue-datepicker/dist/main.css'
 import { ref } from 'vue';
 
 
-$(document).ready(function(){
-        $('#selectperiodButton').click(function(){
-            if ($('#selectperiod').is(':hidden')){
-                $('#selectperiod').slideDown();
-            } else{
-                $('#selectperiod').slideUp();
-            }
-        });
-
-        $("input[name=allchk]").click(function() {
-            if($('input[name=allchk]').is(':checked')){
-                $(".chk").prop("checked", true);
-            }
-            else{
-                $(".chk").prop("checked", false);
-            }
-        });
-    });
-
 
 export default {
         setup: () => ({
@@ -84,6 +65,21 @@ export default {
             this.loadData();
         },
         methods: {
+            slideUpDown : function(){//달력 슬라이드업다운
+                if ($('#selectperiod').is(':hidden')){
+                    $('#selectperiod').slideDown();
+                } else{
+                    $('#selectperiod').slideUp();
+                }
+            },
+            allChk : function(){//전체선택 체크
+                if($('input[name=allchk]').is(':checked')){
+                    $(".chk").prop("checked", true);
+                }
+                else{
+                    $(".chk").prop("checked", false);
+                }
+            },
             submitForm: function() {
                 axios.post('./checkSearch/searchData', data
                 ).then(response => {
