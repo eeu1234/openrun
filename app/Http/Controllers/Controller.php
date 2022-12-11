@@ -22,7 +22,7 @@ class Controller extends \Illuminate\Routing\Controller
     public function index()
     {
 
-        return view('search');
+        return view('main');
     }
 
     public function storeList(){

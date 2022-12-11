@@ -9,8 +9,9 @@
 <!--            </div>-->
             <div class = "clear-both"></div>
         </div>
-        <div id = "menuIndex" class = "m-auto w-8/12 my-5 text-xl font-sans "><a href="./search" class="">메인페이지</a></div>
-        <div id = "menuIndex" class = "m-auto w-8/12 my-5 text-xl font-sans">검색</div>
+        <div id = "menuIndex" class = "m-auto w-8/12 my-5 text-xl font-sans "><a href="/" class="">메인페이지</a></div>
+        <div id = "menuIndex" class = "m-auto w-8/12 my-5 text-xl font-sans"><a href="./search" class="">검색</a></div>
+        <div id = "menuIndex" class = "m-auto w-8/12 my-5 text-xl font-sans"><a href="./productView" class="">상세페이지</a></div>
     </div>
 </template>
 
