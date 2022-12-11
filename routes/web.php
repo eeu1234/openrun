@@ -26,7 +26,7 @@ Route::any('/search','\App\Http\Controllers\Controller@searchPage');
 Route::any('/admin','\App\Http\Controllers\Admin\AdminController@main');
 
 /*사용자 페이지*/
-Route::any('/productView','\App\Http\Controllers\User\ProductController@main');
+Route::get('/productView/{productCode?}','\App\Http\Controllers\User\ProductController@main');
 Route::any('/salesList','\App\Http\Controllers\User\ProductController@salesLog');
 Route::any('/salesTimeline','\App\Http\Controllers\User\ProductController@timelineLog');
 /*체크박스 검색페이지*/
