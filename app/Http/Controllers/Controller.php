@@ -67,7 +67,8 @@ class Controller extends \Illuminate\Routing\Controller
 
     public function searchPage(Request $request)
     {
-        $searchWord = $request->input('searchWord');
+
+        $searchWord = $request->input('searchWord') ?? "";
        /* $productInfo = DB::table('PRODUCT_DETAIL')
             ->where('FINALPRODUCTNAME', 'like', '%' . $searchWord . '%')
             ->get();

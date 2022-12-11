@@ -22,18 +22,7 @@ class Product_Detail extends Model
     protected $connection = 'mysql';
     protected $table ='PRODUCT_DETAIL';
     // 컬럼명
-    protected $fillable = [
-        'FINALPRODUCTCODE',
-        'FINALPRODUCTNAME',
-        'SEASONCHECK',
-        'SIZE',
-        'COLOR',
-        'COLOR2',
-        'PATTERN',
-        'MATERIAL',
-        'IMG',
-        'PRODUCTCODE'
-    ];
+
 
     public function productName(){
 
