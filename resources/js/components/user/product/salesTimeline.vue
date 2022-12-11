@@ -11,7 +11,7 @@
         <div class ="flex float-left w-2/4 h-full items-center content-center text-center">
             <div class="relative m-auto">
                 <button class='ml-8' @click="selectType" type="button">
-                        <span class="float-left text-4xl font-sans font-semibold">판매기록</span>
+                        <span class="float-left text-4xl font-sans font-semibold">타임라인</span>
                         <span class="float-left h-full">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="mt-1 ml-2 w-8 h-8">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75l3 3m0 0l3-3m-3 3v-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -20,7 +20,7 @@
                         <span class = "clear-both"></span>
                 </button>
                 <div id='selectTypeBox' class="absolute top-14 bg-gray-50 w-full border-2 hidden ">
-                    <p class="text-2xl pt-4 pb-4" @click="goTimeline">타임라인</p>
+                    <p class="text-2xl pt-4 pb-4" @click="goSalesLog">판매기록</p>
                 </div>
             </div>
         </div>
@@ -31,39 +31,28 @@
             <p class="w-full mb-2 text-xl">검색 기간 2022-02-04 ~ 2022-03-08</p>
             <p class="w-full text-xl ">선택 장소 : 전체선택</p>
         </div>
-        <!--타임라인-->
-        <div id="timelineBox" class="w-full mt-14">
-            <div class = "w-4/5 m-auto mb-12">
-                  <div class = "float-left w-1/5 ">
-                    <div class = "w-full h-12 text-4xl text-gray-500 text-center m-auto">AUG</div>
-                    <div class = "w-full h-36 mx-0.5 content-center text-left items-left bg-black rounded-2xl align-middle pt-12">
-                        <p class="w-full h-full text-5xl font-sans font-bold text-white text-center align-middle">27</p>
-                    </div>
-                 </div>
-                  <div class = "float-left w-4/5 h-full">
-                    <div class = "w-full h-12  m-auto"></div>
-                        <div class="h-16 text-6xl text-gray-800 text-left pl-5" >현대백화점</div>
-                        <div class="h-16 text-3xl text-gray-500 text-left pl-6 pt-1">압구정현대점</div>
-                  </div>
-            <div class = "clear-both"></div>
-            </div>
-
-            <div class = "w-4/5 m-auto mb-6">
-                  <div class = "float-left w-1/5 ">
-                    <div class = "w-full h-12 text-4xl text-gray-500 text-center m-auto">AUG</div>
-                    <div class = "w-full h-36 mx-0.5 content-center text-left items-left bg-black rounded-2xl align-middle pt-12">
-                        <p class="w-full h-full text-5xl font-sans font-bold text-white text-center align-middle">26</p>
-                    </div>
-                 </div>
-                  <div class = "float-left w-4/5 h-full">
-                    <div class = "w-full h-12  m-auto"></div>
-                        <div class="h-16 text-6xl text-gray-800 text-left pl-5" >롯데백화점</div>
-                        <div class="h-16 text-3xl text-gray-500 text-left pl-6 pt-1">명동본점</div>
-                  </div>
-            <div class = "clear-both"></div>
-            </div>
+        <div class="w-4/5 font-bold bg-white mt-10 p-2 m-auto text-gray-800 border-b-2">
+            <p class="w-full  text-xl">총 50회</p>
         </div>
+        <div class="w-4/5 p-2 m-auto">
 
+            <div class="w-full bg-white p-2">
+                <div class="w-full">
+                    <div class="float-left text-gray-800 text-xl">신세계백화점 강남점</div>
+                    <div class="float-right w-1/10 text-gray-800 text-xl">7회</div>
+                    <div class = "clear-both"></div>
+                </div>
+            </div>
+
+            <div class="w-full bg-white p-2">
+                <div class="w-full">
+                    <div class="float-left text-gray-800 text-xl">신세계백화점 본점</div>
+                    <div class="float-right w-1/10 text-gray-800 text-xl">5회</div>
+                    <div class = "clear-both"></div>
+                </div>
+            </div>
+
+        </div>
     </div>
 
 </template>
@@ -114,8 +103,8 @@ export default {
         back : function(){
             history.back();
         },
-        goTimeline : function(){
-           location.href='./salesTimeline'
+        goSalesLog : function(){
+           location.href='./salesList'
         },
         selectType : function(){
             if ($('#selectTypeBox').is(':hidden')){

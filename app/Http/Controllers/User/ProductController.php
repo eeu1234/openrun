@@ -18,6 +18,16 @@ class ProductController extends Controller
 
         return view('productView');
     }
+    public function salesLog()
+    {
+
+        return view('salesList');
+    }
+    public function timelineLog()
+    {
+
+        return view('salesTimeline');
+    }
 
     //Vue 에서 axios 호출에 값을 반환 해줄 메소드들을 선언함
      public function productMainImg()

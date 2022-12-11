@@ -44,8 +44,8 @@
                 </div>
             </div>
         </div>
-        <div class="w-full h-fit text-center py-12 ">
-            <button class="w-1/5 h-20 bg-gray-300  text-white m-auto rounded-3xl text-4xl font-sans">
+        <div class="w-4/5 m-auto h-fit text-center py-12 ">
+            <button class="w-full h-20 bg-gray-700  text-white m-auto rounded-2xl text-4xl font-sans" @click="goSalesList">
                 기록조회
             </button>
         </div>
@@ -95,6 +95,9 @@ export default {
                 else{
                     $(".chk").prop("checked", false);
                 }
+            },
+            goSalesList : function(){//전체선택 체크
+                location.href='./salesList'
             },
             submitForm: function() {
                 axios.post('./checkSearch/searchData', data

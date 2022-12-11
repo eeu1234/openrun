@@ -1,7 +1,7 @@
 <template>
     <body className="bg-gray-200 min-h-screen dark:bg-gray-900">
     <div className="flex items-center justify-center py-8 px-4">
-        <div className="w-full max-w-sm w-full shadow-lg">
+        <div className="w-11/12 shadow-lg m-auto">
             <div className="md:p-8 p-5 dark:bg-gray-800 bg-white rounded-t">
                 <div className="px-4 flex items-center justify-between">
             <span
@@ -70,7 +70,7 @@
                     </div>
                 </div>
                 <div className="flex items-center justify-between pt-12 overflow-x-auto">
-                    <table className="w-full">
+                    <table className="w-full ">
                         <thead>
                         <tr>
                             <th>
@@ -178,8 +178,8 @@
                             <td className="pt-6">
                                 <div
                                     className="
-                        px-2
-                        py-2
+                        px-10
+                        py-10
                         cursor-pointer
                         flex
                         w-full
@@ -190,8 +190,8 @@
                             <td className="pt-6">
                                 <div
                                     className="
-                        px-2
-                        py-2
+                        px-10
+                        py-10
                         cursor-pointer
                         flex
                         w-full
@@ -202,8 +202,8 @@
                             <td>
                                 <div
                                     className="
-                        px-2
-                        py-2
+                        px-10
+                        py-10
                         cursor-pointer
                         flex
                         w-full
@@ -214,8 +214,8 @@
                             <td className="pt-6">
                                 <div
                                     className="
-                        px-2
-                        py-2
+                        px-10
+                        py-10
                         cursor-pointer
                         flex
                         w-full
@@ -236,8 +236,8 @@
                             <td className="pt-6">
                                 <div
                                     className="
-                        px-2
-                        py-2
+                        px-10
+                        py-10
                         cursor-pointer
                         flex
                         w-full
@@ -258,8 +258,8 @@
                             <td className="pt-6">
                                 <div
                                     className="
-                        px-2
-                        py-2
+                        px-10
+                        py-10
                         cursor-pointer
                         flex
                         w-full
@@ -274,8 +274,8 @@
                             <td className="pt-6">
                                 <div
                                     className="
-                        px-2
-                        py-2
+                        px-10
+                        py-10
                         cursor-pointer
                         flex
                         w-full
@@ -292,8 +292,8 @@
                             <td>
                                 <div
                                     className="
-                        px-2
-                        py-2
+                        px-10
+                        py-10
                         cursor-pointer
                         flex
                         w-full
@@ -314,8 +314,8 @@
                             <td>
                                 <div
                                     className="
-                        px-2
-                        py-2
+                        px-10
+                        py-10
                         cursor-pointer
                         flex
                         w-full
@@ -336,8 +336,8 @@
                             <td>
                                 <div
                                     className="
-                        px-2
-                        py-2
+                        px-10
+                        py-10
                         cursor-pointer
                         flex
                         w-full
@@ -396,8 +396,8 @@
                             <td>
                                 <div
                                     className="
-                        px-2
-                        py-2
+                        px-10
+                        py-10
                         cursor-pointer
                         flex
                         w-full
@@ -418,8 +418,8 @@
                             <td>
                                 <div
                                     className="
-                        px-2
-                        py-2
+                        px-10
+                        py-10
                         cursor-pointer
                         flex
                         w-full
@@ -434,8 +434,8 @@
                             <td>
                                 <div
                                     className="
-                        px-2
-                        py-2
+                        px-10
+                        py-10
                         cursor-pointer
                         flex
                         w-full
@@ -452,8 +452,8 @@
                             <td>
                                 <div
                                     className="
-                        px-2
-                        py-2
+                        px-10
+                        py-10
                         cursor-pointer
                         flex
                         w-full
@@ -474,8 +474,8 @@
                             <td>
                                 <div
                                     className="
-                        px-2
-                        py-2
+                        px-10
+                        py-10
                         cursor-pointer
                         flex
                         w-full
@@ -496,8 +496,8 @@
                             <td>
                                 <div
                                     className="
-                        px-2
-                        py-2
+                        px-10
+                        py-10
                         cursor-pointer
                         flex
                         w-full
@@ -518,8 +518,8 @@
                             <td>
                                 <div
                                     className="
-                        px-2
-                        py-2
+                        px-10
+                        py-10
                         cursor-pointer
                         flex
                         w-full
@@ -540,8 +540,8 @@
                             <td>
                                 <div
                                     className="
-                        px-2
-                        py-2
+                        px-10
+                        py-10
                         cursor-pointer
                         flex
                         w-full
@@ -562,8 +562,8 @@
                             <td>
                                 <div
                                     className="
-                        px-2
-                        py-2
+                        px-10
+                        py-10
                         cursor-pointer
                         flex
                         w-full
@@ -578,8 +578,8 @@
                             <td>
                                 <div
                                     className="
-                        px-2
-                        py-2
+                        px-10
+                        py-10
                         cursor-pointer
                         flex
                         w-full
@@ -596,8 +596,8 @@
                             <td>
                                 <div
                                     className="
-                        px-2
-                        py-2
+                        px-10
+                        py-10
                         cursor-pointer
                         flex
                         w-full
@@ -618,8 +618,8 @@
                             <td>
                                 <div
                                     className="
-                        px-2
-                        py-2
+                        px-10
+                        py-10
                         cursor-pointer
                         flex
                         w-full
@@ -640,8 +640,8 @@
                             <td>
                                 <div
                                     className="
-                        px-2
-                        py-2
+                        px-10
+                        py-10
                         cursor-pointer
                         flex
                         w-full
@@ -662,8 +662,8 @@
                             <td>
                                 <div
                                     className="
-                        px-2
-                        py-2
+                        px-10
+                        py-10
                         cursor-pointer
                         flex
                         w-full
@@ -684,8 +684,8 @@
                             <td>
                                 <div
                                     className="
-                        px-2
-                        py-2
+                        px-10
+                        py-10
                         cursor-pointer
                         flex
                         w-full
@@ -706,8 +706,8 @@
                             <td>
                                 <div
                                     className="
-                        px-2
-                        py-2
+                        px-10
+                        py-10
                         cursor-pointer
                         flex
                         w-full
@@ -722,8 +722,8 @@
                             <td>
                                 <div
                                     className="
-                        px-2
-                        py-2
+                        px-10
+                        py-10
                         cursor-pointer
                         flex
                         w-full
@@ -740,8 +740,8 @@
                             <td>
                                 <div
                                     className="
-                        px-2
-                        py-2
+                        px-10
+                        py-10
                         cursor-pointer
                         flex
                         w-full
@@ -762,8 +762,8 @@
                             <td>
                                 <div
                                     className="
-                        px-2
-                        py-2
+                        px-10
+                        py-10
                         cursor-pointer
                         flex
                         w-full
@@ -784,8 +784,8 @@
                             <td>
                                 <div
                                     className="
-                        px-2
-                        py-2
+                        px-10
+                        py-10
                         cursor-pointer
                         flex
                         w-full
@@ -806,8 +806,8 @@
                             <td>
                                 <div
                                     className="
-                        px-2
-                        py-2
+                        px-10
+                        py-10
                         cursor-pointer
                         flex
                         w-full
@@ -828,8 +828,8 @@
                             <td>
                                 <div
                                     className="
-                        px-2
-                        py-2
+                        px-10
+                        py-10
                         cursor-pointer
                         flex
                         w-full

@@ -2,9 +2,11 @@
     <div class = "w-full h-full ">
         <div class = "w-100 h-28 content-center text-center items-center">
             <div class ="flex float-left w-1/4 h-full text-center">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="m-auto mr-32 w-16 h-16">
-                    <path fill-rule="evenodd" d="M7.72 12.53a.75.75 0 010-1.06l7.5-7.5a.75.75 0 111.06 1.06L9.31 12l6.97 6.97a.75.75 0 11-1.06 1.06l-7.5-7.5z" clip-rule="evenodd" />
-                </svg>
+                <button class='ml-8' @click="back" type="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="m-auto mr-32 w-16 h-16">
+                        <path fill-rule="evenodd" d="M7.72 12.53a.75.75 0 010-1.06l7.5-7.5a.75.75 0 111.06 1.06L9.31 12l6.97 6.97a.75.75 0 11-1.06 1.06l-7.5-7.5z" clip-rule="evenodd" />
+                    </svg>
+                </button>
             </div>
             <div class ="flex float-left w-2/4 h-full items-center content-center text-center">
                 <p class=" items-center m-auto text-4xl font-sans font-semibold">상세페이지</p></div>
@@ -156,7 +158,9 @@ export default {
     },
 
     methods: {
-        list_temp_str : [1,2,3]
+        back : function(){
+            history.back();
+        },
 
     },
 
