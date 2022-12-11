@@ -27,8 +27,6 @@ Route::any('/admin','\App\Http\Controllers\Admin\AdminController@main');
 
 /*사용자 페이지*/
 Route::any('/productView','\App\Http\Controllers\User\ProductController@main');
-Route::any('/salesList','\App\Http\Controllers\User\ProductController@salesLog');
-Route::any('/salesTimeline','\App\Http\Controllers\User\ProductController@timelineLog');
 /*체크박스 검색페이지*/
 Route::any('/searchMain','\App\Http\Controllers\User\SearchController@main'); // 사용자가 페이지 접근시
 Route::any('/checkSearch/searchData','\App\Http\Controllers\User\SearchController@searchData'); //사용자가 검색버튼을 누를 때 데이터 불러옴
