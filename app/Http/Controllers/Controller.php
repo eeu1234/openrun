@@ -24,6 +24,10 @@ class Controller extends \Illuminate\Routing\Controller
 
         return view('main');
     }
+    public function sendProductPage()
+    {
+        return view('search');
+    }
 
     public function storeList(){
         $store = Store::select()->get();

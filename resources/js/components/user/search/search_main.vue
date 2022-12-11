@@ -16,9 +16,9 @@
                 <span>검색결과: 총 {{totalCnt}}건</span>
             </div>
             <div v-for = "result in results">
-                <div id = "repeatComponent" class = "mx-5">
-                    <div id = "repeatComponent" class = "w-full h-44 my-4">
-                        <div id="productImg" class = "float-left w-1/4 h-full">
+                <div class = "repeatComponent mx-5" @click="sendInfoPage(result.FINALPRODUCTCODE, $event)">
+                    <div class = "w-full h-44 my-4">
+                        <div class = "float-left w-1/4 h-full">
                             <img class = "h-full" src="/img/classic_medium_bag.jpg">
                         </div>
                         <div id="productInfo" class = "float-left pl-12 w-3/4 h-full">
@@ -50,7 +50,6 @@ export default {
         totalCnt: 0,
     }),
     created() {
-        console.log("이몸 등장이올시다.");
     },
     methods: {
         submitForm: function() {
@@ -66,6 +65,12 @@ export default {
             });
 
         },
+        sendInfoPage:function(productCode, event) {
+            console.log(productCode);
+            axios.post('./productView/loadData',
+            ).then(response => {
+            });
+        }
 
     }
 }

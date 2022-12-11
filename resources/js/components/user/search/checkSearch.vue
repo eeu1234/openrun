@@ -103,7 +103,7 @@ export default {
                 });
             },
             loadData(){
-                axios.post('./checkSearch/loadData', {}
+                axios.post('/checkSearch/loadData', {}
                 ).then(response => {
                     console.log(response.data);
                     this.storeList = response.data;
