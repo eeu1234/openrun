@@ -2,7 +2,7 @@
     <div class="w-40 h-40">
     </div>
     <form v-on:submit.prevent="submitForm">
-        <div id = "selectperiodButton"  class = "w-4/5 text-4xl border-b-4 mt-14 mb-7 m-auto" @click="slideUpDown">
+        <div id = "selectperiodButton"  class = "w-4/5 text-4xl border-b-4 mt-14 mb-7 m-auto py-2" @click="slideUpDown('period')">
             <div class = "w-48 float-left">검색기간</div>
             <img class = "h-10 float-right mr-5" src="/img/down.png">
             <div class = "clear-both"></div>
@@ -25,23 +25,30 @@
             </div>
             <div class = "clear-both"></div>
         </div>
-        <div class = "w-4/5 text-4xl border-b-4 my-14 m-auto" >
+        <div class = "w-4/5 text-4xl border-b-4 my-14 m-auto py-2" @click="slideUpDown('place')">
             <div class = "w-48 float-left">장소</div>
+            <img class = "h-10 float-right mr-5" src="/img/down.png">
             <div class = "clear-both"></div>
         </div>
-        <div class = "w-4/5 h-16 bg-gray-200 m-auto mb-3 py-4 pl-4">
-            <input type = "checkbox" class = "w-7 h-7 float-left mr-2" name = "allchk" id = "allchk" @click="allChk"/>
-            <span class = "text-xl float-left">전체선택</span>
-            <div class =  "clear-both"></div>
-        </div>
-        <div v-for ="store in storeList" class = "w-4/5 my-3 m-auto pl-4" >
-            <div>
-                <input type = "checkbox" v-bind:value= "store.STORECODE" class = "w-7 h-7 float-left mr-2 chk" />
-                <span class = "text-xl float-left">{{store.STORENAME}}({{store.STORELOCATION}})</span>
+        <div id="selectPlace" class="w-full">
+            <div class = "w-4/5 h-16 bg-gray-200 m-auto mb-3 py-4 pl-4">
+                <input type = "checkbox" class = "w-7 h-7 float-left mr-2" name = "allchk" id = "allchk" @click="allChk"/>
+                <span class = "text-xl float-left">전체선택</span>
                 <div class =  "clear-both"></div>
             </div>
+            <div v-for ="store in storeList" class = "w-4/5 my-3 m-auto pl-4" >
+                <div>
+                    <input type = "checkbox" v-bind:value= "store.STORECODE" class = "w-7 h-7 float-left mr-2 chk" />
+                    <span class = "text-xl float-left">{{store.STORENAME}}({{store.STORELOCATION}})</span>
+                    <div class =  "clear-both"></div>
+                </div>
+            </div>
         </div>
-
+        <div class="w-full h-fit text-center py-12 ">
+            <button class="w-1/5 h-20 bg-gray-300  text-white m-auto rounded-3xl text-4xl font-sans">
+                기록조회
+            </button>
+        </div>
     </form>
 </template>
 
@@ -65,12 +72,21 @@ export default {
             this.loadData();
         },
         methods: {
-            slideUpDown : function(){//달력 슬라이드업다운
-                if ($('#selectperiod').is(':hidden')){
-                    $('#selectperiod').slideDown();
-                } else{
-                    $('#selectperiod').slideUp();
+            slideUpDown : function(type){//달력 슬라이드업다운
+                if(type =='period'){
+                    if ($('#selectperiod').is(':hidden')){
+                        $('#selectperiod').slideDown();
+                    } else{
+                        $('#selectperiod').slideUp();
+                    }
+                }else if(type == 'place'){
+                    if ($('#selectPlace').is(':hidden')){
+                        $('#selectPlace').slideDown();
+                    } else{
+                        $('#selectPlace').slideUp();
+                    }
                 }
+
             },
             allChk : function(){//전체선택 체크
                 if($('input[name=allchk]').is(':checked')){

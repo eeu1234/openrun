@@ -18,6 +18,7 @@ import search_main from "./components/user/search/search_main.vue";
 import calender from './components/calender.vue';
 //상세피이지
 import productView from './components/user/product/productView.vue';
+import salesLog from './components/user/product/salesLog.vue';
 //체크박스 검색페이지
 import checkSearch from './components/user/search/checkSearch.vue';
 
@@ -32,6 +33,7 @@ createApp(calender).mount("#calender");
 createApp(search_main).mount("#searchMain");
 createApp(sideMenu).mount("#sideMenu");
 createApp(productView).mount("#productView");
+createApp(salesLog).mount("#salesLog");
 createApp(checkSearch).mount("#checkSearch");
 
 

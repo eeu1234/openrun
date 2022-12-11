@@ -7,8 +7,7 @@
 </head>
 <body class="antialiased max-w-5xl mg-">
 <div id="header"></div>
-<div id="productView" ></div>
-<div id="checkSearch"></div>
+<div id="salesLog"></div>
 <div id="sideMenu" class = "absolute right-0 top-0" ></div>
 </body>
 

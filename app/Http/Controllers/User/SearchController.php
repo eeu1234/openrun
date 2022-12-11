@@ -15,7 +15,7 @@ class SearchController extends Controller
 
     public function main()
     {
-        return view('checkSearch');
+        return view('search');
     }
     public function loadData()
     {
