@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product_Detail;
 use App\Models\Store;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -27,8 +28,13 @@ class ProductController extends Controller
         \Log::info($productInfo);
         return view('productView', ['info' => $productInfo]);
     }
-    public function loadData(){
+    public function loadData(Request $request){
+        $productInfo = Product_Detail::with(['productName'])
+            ->where('FINALPRODUCTCODE',$request->finalProductCode )
+            ->get();
 
+        \Log::info([$productInfo]);
+        return response()->json($productInfo);
     }
     public function salesLog()
     {

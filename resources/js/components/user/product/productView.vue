@@ -36,7 +36,7 @@
                 <p class="w-full h-fit text-4xl font-sans font-bold pt-5 pl-24">Chanel</p>
             </div>
             <div class = "flex w-3/5 h-15 content-center text-left items-left">
-                <p class="w-full h-fit text-4xl font-sans font-medium pb-5 pl-24">Classic Medium Handbag</p>
+                <p class="w-full h-fit text-4xl font-sans font-medium pb-5 pl-24"> 클래식 미디움</p>
             </div>
             <div class = "flex w-3/5 h-15 content-center text-left items-left">
                 <p class="w-full h-fit text-4xl font-sans font-semilight pb-5 pl-24 text-slate-600">블랙 / 캐비어 / 금장</p>
@@ -77,8 +77,18 @@ export default {
             EffectFade,
         };
     },
+    props:{
+        s_date : "",
+        e_date : "",
+        is_view: false,
+        date_type: "",
+        start_plusday : "",
+        title_hide : false,
+    },
     data: () => ({
-            books: [
+
+        data : '',
+        books: [
                 { title: "Old Man's War" },
                 { title: "The Lock Artist" },
                 { title: "HTML5" },
@@ -108,14 +118,7 @@ export default {
             {title : "accept", value : "i18n.myoffice.Order.depositdate"}],
 
     }),
-    props:{
-        s_date : "",
-        e_date : "",
-        is_view: false,
-        date_type: "",
-        start_plusday : "",
-        title_hide : false,
-    },
+
     watch : {
         startDate(s_date){
             this.set_s_date(s_date);
@@ -156,11 +159,26 @@ export default {
 
 
     },
-
+    mounted(){
+        this.sendInfoPage ();
+    },
     methods: {
         back : function(){
             history.back();
         },
+        sendInfoPage:function() {
+            //console.log(this.productCode);
+            axios({
+                method: 'post',
+                url: './loadData',
+                data: {
+                    finalProductCode: this.productCode,
+                }
+            }).then(function (response) {
+
+            });
+        },
+
 
     },
 

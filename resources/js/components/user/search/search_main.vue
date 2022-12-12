@@ -17,7 +17,7 @@
             </div>
             <div v-for = "result in results">
                 <div class = "repeatComponent mx-5" @click="sendInfoPage(result.FINALPRODUCTCODE, $event)">
-                    <div class = "w-full h-44 my-4">
+                    <div class = "w-full h-44 my-4" @click="goDetail(result.FINALPRODUCTCODE, $event)">
                         <div class = "float-left w-1/4 h-full">
                             <img class = "h-full" src="/img/classic_medium_bag.jpg">
                         </div>
@@ -48,29 +48,36 @@ export default {
         results: [],
         searchWord: '',
         totalCnt: 0,
+        productCode: '',
     }),
     created() {
     },
     methods: {
         submitForm: function() {
-            console.log(this.searchWord)
+            //console.log(this.searchWord)
             var data = {
                 searchWord: this.searchWord
             }
             axios.post('./search', data
             ).then(response => {
-                console.log(response.data);
+                //console.log(response.data);
                 this.results = response.data;
                 this.totalCnt = response.data.length;
             });
 
         },
         sendInfoPage:function(productCode, event) {
-            console.log(productCode);
+            //console.log(productCode);
             axios.post('./productView/loadData',
             ).then(response => {
             });
+        },
+        goDetail:function(productCode, event) {//상세페이지로 이동
+            this.productCode = productCode;
+            //console.log(productCode);
+            location.href='./productView/'+productCode;
         }
+
 
     }
 }
