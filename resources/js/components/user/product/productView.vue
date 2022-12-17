@@ -170,7 +170,7 @@ export default {
             //console.log(this.productCode);
             axios({
                 method: 'post',
-                url: './loadData',
+                url: '/productView/loadData',
                 data: {
                     finalProductCode: this.productCode,
                 }

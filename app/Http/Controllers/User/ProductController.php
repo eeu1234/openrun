@@ -33,6 +33,7 @@ class ProductController extends Controller
             ->where('FINALPRODUCTCODE',$request->finalProductCode )
             ->get();
 
+        \Log::info("dddddddd");
         \Log::info([$productInfo]);
         return response()->json($productInfo);
     }

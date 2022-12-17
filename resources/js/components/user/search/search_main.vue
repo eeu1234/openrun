@@ -68,7 +68,7 @@ export default {
         },
         sendInfoPage:function(productCode, event) {
             //console.log(productCode);
-            axios.post('./productView/loadData',
+            axios.post('/productView/loadData',
             ).then(response => {
             });
         },

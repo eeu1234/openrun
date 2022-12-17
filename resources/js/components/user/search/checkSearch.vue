@@ -98,16 +98,17 @@ export default {
                 }
             },
             goSalesList : function(){//전체선택 체크
-                location.href='./salesList'
+                location.href='/salesList'
             },
             submitForm: function() {
-                axios.post('./checkSearch/searchData', data
+                axios.post('/checkSearch/searchData', data
                 ).then(response => {
                     console.log(response.data);
                 });
             },
             loadData(){
-                axios.post('/checkSearch/loadData', {}
+                axios.post('/checkSearch/loadData', {
+                    }
                 ).then(response => {
                     console.log(response.data);
                     this.storeList = response.data;

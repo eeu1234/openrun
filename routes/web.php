@@ -33,7 +33,7 @@ Route::any('/salesTimeline','\App\Http\Controllers\User\ProductController@timeli
 /*체크박스 검색페이지*/
 Route::any('/searchMain','\App\Http\Controllers\User\SearchController@main'); // 사용자가 페이지 접근시
 Route::any('/checkSearch/searchData','\App\Http\Controllers\User\SearchController@searchData'); //사용자가 검색버튼을 누를 때 데이터 불러옴
-Route::any('/checkSearch/loadData','\App\Http\Controllers\User\ProductController@loadData'); //사용자가 페이지 접근시 데이터 불러옴
+Route::any('/checkSearch/loadData','\App\Http\Controllers\User\SearchController@loadData'); //사용자가 페이지 접근시 데이터 불러옴
 
 
 
