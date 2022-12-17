@@ -26,7 +26,7 @@ Route::any('/search','\App\Http\Controllers\Controller@searchPage');
 Route::any('/admin','\App\Http\Controllers\Admin\AdminController@main');
 
 /*사용자 페이지*/
-Route::get('/productView/{productCode?}','\App\Http\Controllers\User\ProductController@main');
+Route::get('/productView/{productCode}','\App\Http\Controllers\User\ProductController@main')->name('productView');
 Route::any('/productView/loadData','\App\Http\Controllers\User\ProductController@loadData'); //사용자가 페이지 접근시 데이터 불러옴
 Route::any('/salesList','\App\Http\Controllers\User\ProductController@salesLog');
 Route::any('/salesTimeline','\App\Http\Controllers\User\ProductController@timelineLog');

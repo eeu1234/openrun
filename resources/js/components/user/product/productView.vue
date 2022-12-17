@@ -28,7 +28,7 @@
             </swiper>
         </div>
         <div class = "w-100 h-34 content-center text-center items-center py-4">
-            <p class=" items-center m-auto text-3xl font-sans font-light">최근 판매정보 : 2022-08-09 수요일 / 신세계 본점</p>
+            <p class=" items-center m-auto text-3xl font-sans font-light">최근 판매정보 : {{ info }} / 신세계 본점</p>
         </div>
 
         <div class = "relative w-100 h-45 content-center text-center items-center pt-4">
@@ -156,13 +156,16 @@ export default {
     },
 
     created() {
-
-
+        this.test();
     },
     mounted(){
-        this.sendInfoPage ();
+        this.sendInfoPage();
     },
     methods: {
+        test:function(){
+
+            console.log(window.location);
+        },
         back : function(){
             history.back();
         },

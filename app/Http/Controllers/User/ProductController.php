@@ -16,8 +16,14 @@ class ProductController extends Controller
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     //페이지별로 펑션제작 1.메인 2.수정페이지 3. 작성페이지 등 (단, 여기서는 보여주는 페이지 뿐이라 메인만 있음)
-    public function main(Request $request)
+    public function main()
     {
+        return view('productView');
+    }
+    public function loadData_yg(Request $request)
+    {
+        $finalProductCode = $request->input('finalProductCode');
+        \Log::info($finalProductCode);
         $productInfo = DB::table('SALES_LOG')
             ->join('STORE', 'SALES_LOG.STORECODE', '=', 'STORE.STORECODE')
             ->join('PRODUCT_DETAIL', 'SALES_LOG.FINALPRODUCTCODE', '=', 'PRODUCT_DETAIL.FINALPRODUCTCODE')
@@ -26,15 +32,17 @@ class ProductController extends Controller
             ->orderBy('SALES_LOG.SOLDDATE','desc')
             ->get();
         \Log::info($productInfo);
-        return view('productView', ['info' => $productInfo]);
+
+        return response()->json($productInfo);
     }
+
     public function loadData(Request $request){
         $productInfo = Product_Detail::with(['productName'])
             ->where('FINALPRODUCTCODE',$request->finalProductCode )
             ->get();
 
         \Log::info("dddddddd");
-        \Log::info([$productInfo]);
+        \Log::info($productInfo);
         return response()->json($productInfo);
     }
     public function salesLog()
