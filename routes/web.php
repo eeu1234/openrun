@@ -35,7 +35,7 @@ Route::any('/productView/{no}',function($no){
 });
 
 
-Route::any('/productView/loadData','\App\Http\Controllers\User\ProductController@loadData'); //사용자가 페이지 접근시 데이터 불러옴
+Route::any('/loadData','\App\Http\Controllers\User\ProductController@loadData'); //사용자가 페이지 접근시 데이터 불러옴
 Route::any('/salesList','\App\Http\Controllers\User\ProductController@salesLog');
 Route::any('/salesTimeline','\App\Http\Controllers\User\ProductController@timelineLog');
 /*체크박스 검색페이지*/

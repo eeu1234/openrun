@@ -82,7 +82,7 @@ export default {
 
     data: () => ({
         finalProductCode : '',
-        data : '',
+        productInfo : [],
         books: [
                 { title: "Old Man's War" },
                 { title: "The Lock Artist" },
@@ -152,26 +152,22 @@ export default {
 
     created() {
         console.log(this.no);
-
-
+        this.sendInfoPage();
     },
     mounted(){
-        this.sendInfoPage ();
     },
     methods: {
         back : function(){
             history.back();
         },
         sendInfoPage:function() {
-            //console.log(this.productCode);
-            axios({
-                method: 'post',
-                url: '/productView/loadData',
-                data: {
-                    finalProductCode: this.productCode,
-                }
-            }).then(function (response) {
-
+            console.log(this.productCode);
+            axios.post('/loadData',
+                {finalProductCode: this.no}
+            ).then(response => {
+                this.productInfo = response.data;
+                console.log('반환데이터'+response.data);
+                console.log(this.productInfo);
             });
         },
 
