@@ -1,50 +1,50 @@
 <template>
-    <div class="pt-40">
+    <div class="pt-4">
         <form v-on:submit.prevent="submitForm">
-            <div id = "selectperiodButton"  class = "w-4/5 text-4xl border-b-4 mt-14 mb-7 m-auto py-2" @click="slideUpDown('period')">
-                <div class = "w-48 float-left">검색기간</div>
-                <img class = "h-10 float-right mr-5" src="/img/down.png">
+            <div id = "selectperiodButton"  class = "w-4/5 text-sm border-b-4 mt-4 mb-2 m-auto py-2" @click="slideUpDown('period')">
+                <div class = "w-14 float-left">검색기간</div>
+                <img class = "h-4 float-right mr-5" src="/img/down.png">
                 <div class = "clear-both"></div>
             </div>
-            <div class = "w-4/5 h-16 m-auto">
+            <div class = "w-4/5 h-fit m-auto">
                 <Datepicker v-model="date" :value="date" @update:modelValue="handleDate"  class="w-full bg-gray-200" range ></Datepicker>
             </div>
-            <div id = "selectperiod" class = "w-4/5 m-auto text-center text-3xl mt-5">
+            <div id = "selectperiod" class = "w-4/5 m-auto text-center text-base mt-2">
                 <div class = "float-left w-1/4">
-                    <div class = "w-11/12 m-auto border-2 rounded-xl py-6">당월</div>
+                    <div class = "w-11/12 m-auto border-2 rounded-xl py-2">당월</div>
                 </div>
                 <div class = "float-left w-1/4 h-10">
-                    <div class = "w-11/12 m-auto border-2 rounded-xl py-6">1개월</div>
+                    <div class = "w-11/12 m-auto border-2 rounded-xl py-2">1개월</div>
                 </div>
                 <div class = "float-left w-1/4 h-10">
-                    <div class = "w-11/12 m-auto border-2 rounded-xl py-6">3개월</div>
+                    <div class = "w-11/12 m-auto border-2 rounded-xl py-2">3개월</div>
                 </div>
                 <div class = "float-left w-1/4 h-10">
-                    <div class = "w-11/12 m-auto border-2 rounded-xl py-6">직접입력</div>
+                    <div class = "w-11/12 m-auto border-2 rounded-xl py-2">직접입력</div>
                 </div>
                 <div class = "clear-both"></div>
             </div>
-            <div class = "w-4/5 text-4xl border-b-4 my-14 m-auto py-2" @click="slideUpDown('place')">
-                <div class = "w-48 float-left">장소</div>
-                <img class = "h-10 float-right mr-5" src="/img/down.png">
+            <div class = "w-4/5 text-sm border-b-4 mt-6 mb-2 m-auto py-2"  @click="slideUpDown('place')">
+                <div class = "w-14 float-left">장소</div>
+                <img class = "h-4 float-right mr-5" src="/img/down.png">
                 <div class = "clear-both"></div>
             </div>
             <div id="selectPlace" class="w-full">
-                <div class = "w-4/5 h-16 bg-gray-200 m-auto mb-3 py-4 pl-4">
-                    <input type = "checkbox" class = "w-7 h-7 float-left mr-2" name = "allchk" id = "allchk" @click="allChk"/>
-                    <span class = "text-xl float-left">전체선택</span>
+                <div class = "w-4/5 h-fit bg-gray-200 m-auto py-2 pl-4">
+                    <input type = "checkbox" class = "w-4 h-4 float-left mr-2" name = "allchk" id = "allchk" @click="allChk"/>
+                    <span class = "text-xs float-left">전체선택</span>
                     <div class =  "clear-both"></div>
                 </div>
-                <div v-for ="store in storeList" class = "w-4/5 my-3 m-auto pl-4" >
+                <div v-for ="store in storeList" class = "w-4/5 mt-2 m-auto pl-4" >
                     <div>
-                        <input type = "checkbox" v-bind:value= "store.STORECODE" class = "w-7 h-7 float-left mr-2 chk" />
-                        <span class = "text-xl float-left">{{store.STORENAME}}({{store.STORELOCATION}})</span>
+                        <input type = "checkbox" v-bind:value= "store.STORECODE" class = "w-4 h-4 float-left mr-2 chk" />
+                        <span class = "text-xs float-left">{{store.STORENAME}}({{store.STORELOCATION}})</span>
                         <div class =  "clear-both"></div>
                     </div>
                 </div>
             </div>
-            <div class="w-4/5 m-auto h-fit text-center py-12 ">
-                <button class="w-full h-20 bg-gray-700  text-white m-auto rounded-2xl text-4xl font-sans" @click="goSalesList">
+            <div class="w-4/5 m-auto h-fit text-center mt-6 py-2 ">
+                <button class="w-full h-10 bg-gray-700  text-white m-auto rounded-2xl text-base font-sans" @click="goSalesList">
                     기록조회
                 </button>
             </div>

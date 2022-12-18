@@ -18,14 +18,15 @@ class ProductController extends Controller
     //페이지별로 펑션제작 1.메인 2.수정페이지 3. 작성페이지 등 (단, 여기서는 보여주는 페이지 뿐이라 메인만 있음)
     public function main(Request $request)
     {
+
         $productInfo = DB::table('SALES_LOG')
             ->join('STORE', 'SALES_LOG.STORECODE', '=', 'STORE.STORECODE')
             ->join('PRODUCT_DETAIL', 'SALES_LOG.FINALPRODUCTCODE', '=', 'PRODUCT_DETAIL.FINALPRODUCTCODE')
             ->select('PRODUCT_DETAIL.FINALPRODUCTCODE', 'PRODUCT_DETAIL.COLOR','PRODUCT_DETAIL.COLOR2','PRODUCT_DETAIL.MATERIAL','SALES_LOG.SOLDDATE','STORE.STORENAME','STORE.STORELOCATION')
-            ->where('PRODUCT_DETAIL.FINALPRODUCTCODE', $request->productCode)
+            ->where('PRODUCT_DETAIL.FINALPRODUCTCODE', '81')
             ->orderBy('SALES_LOG.SOLDDATE','desc')
             ->get();
-        \Log::info($productInfo);
+        \Log::info([$productInfo]);
         return view('productView', ['info' => $productInfo]);
     }
     public function loadData(Request $request){

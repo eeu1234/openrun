@@ -16,7 +16,9 @@ use Illuminate\Support\Facades\Route;
 //Route::get('/', function () {
 //    return view('welcome') ;
 //});
-Route::any('/','\App\Http\Controllers\Controller@index');
+Route::get('/', function () {
+    return view('main');
+})->name('home');   // 변경하지 말것
 Route::any('/store','\App\Http\Controllers\Controller@storeList');
 
 //검색페이지 검색 axios 메서도 호출
@@ -26,7 +28,12 @@ Route::any('/search','\App\Http\Controllers\Controller@searchPage');
 Route::any('/admin','\App\Http\Controllers\Admin\AdminController@main');
 
 /*사용자 페이지*/
-Route::get('/productView/{productCode?}','\App\Http\Controllers\User\ProductController@main');
+//Route::get('/productView/{productCode?}','\App\Http\Controllers\User\ProductController@main');
+Route::any('/productView/{no}',function($no){
+    return view('productView',['no' => $no]);
+});
+
+
 Route::any('/productView/loadData','\App\Http\Controllers\User\ProductController@loadData'); //사용자가 페이지 접근시 데이터 불러옴
 Route::any('/salesList','\App\Http\Controllers\User\ProductController@salesLog');
 Route::any('/salesTimeline','\App\Http\Controllers\User\ProductController@timelineLog');
