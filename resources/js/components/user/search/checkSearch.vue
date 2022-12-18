@@ -6,21 +6,22 @@
                 <img class = "h-4 float-right mr-5" src="/img/down.png">
                 <div class = "clear-both"></div>
             </div>
-            <div class = "w-4/5 h-fit m-auto">
-                <Datepicker v-model="date" :value="date" @update:modelValue="handleDate"  class="w-full bg-gray-200" range ></Datepicker>
+            <div class = "w-4/5 h-16 m-auto">
+                <Datepicker ref="datepicker" v-model="dateRange" type="date" range placeholder="Select date range" class="w-full bg-gray-200"
+                            default-value="defaultValue"></Datepicker>
             </div>
-            <div id = "selectperiod" class = "w-4/5 m-auto text-center text-base mt-2">
+            <div id = "selectperiod" class = "w-4/5 m-auto text-center text-3xl mt-5">
                 <div class = "float-left w-1/4">
-                    <div class = "w-11/12 m-auto border-2 rounded-xl py-2">당월</div>
+                    <div class = "w-11/12 m-auto border-2 rounded-xl py-6" @click = "clickperiod_1">당월</div>
                 </div>
                 <div class = "float-left w-1/4 h-10">
-                    <div class = "w-11/12 m-auto border-2 rounded-xl py-2">1개월</div>
+                    <div class = "w-11/12 m-auto border-2 rounded-xl py-6" @click = "clickperiod_2">1개월</div>
                 </div>
                 <div class = "float-left w-1/4 h-10">
-                    <div class = "w-11/12 m-auto border-2 rounded-xl py-2">3개월</div>
+                    <div class = "w-11/12 m-auto border-2 rounded-xl py-6" @click = "clickperiod_3">3개월</div>
                 </div>
                 <div class = "float-left w-1/4 h-10">
-                    <div class = "w-11/12 m-auto border-2 rounded-xl py-2">직접입력</div>
+                    <div class = "w-11/12 m-auto border-2 rounded-xl py-6" @click = "clickperiod_4">직접입력</div>
                 </div>
                 <div class = "clear-both"></div>
             </div>
@@ -67,12 +68,41 @@ export default {
         components: { Datepicker },
         data: () => ({
             storeList: [],
-            date: null,
+            dateRange: [],
+            // datepicker:'',
         }),
         created() {
             this.loadData();
+            this.clickperiod_1();
+        },
+        mounted(){
+            const datepicker = this.$refs.datepicker;
+            // this.datepicker = datepicker;
         },
         methods: {
+            clickperiod_1:function(){
+                var endDay = new Date();
+                var startDay = new Date();
+                startDay.setDate(1);
+                this.dateRange = [startDay,endDay];
+            },
+            clickperiod_2:function(){
+                var now = new Date();
+                var endDay = new Date();
+                var startDay = new Date(now.setMonth(now.getMonth() - 1));
+                this.dateRange = [startDay,endDay];
+            },
+            clickperiod_3:function(){
+                var now = new Date();
+                var endDay = new Date();
+                var startDay = new Date(now.setMonth(now.getMonth() - 3));
+                this.dateRange = [startDay,endDay];
+            },
+            clickperiod_4:function(){
+                this.dateRange=[];
+                console.log(this.datepicker);
+                this.datepicker.openMenu();
+            },
             slideUpDown : function(type){//달력 슬라이드업다운
                 if(type =='period'){
                     if ($('#selectperiod').is(':hidden')){
