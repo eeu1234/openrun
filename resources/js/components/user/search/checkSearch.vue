@@ -31,13 +31,13 @@
             </div>
             <div id="selectPlace" class="w-full">
                 <div class = "w-4/5 h-fit bg-gray-200 m-auto py-2 pl-4">
-                    <input type = "checkbox" class = "w-4 h-4 float-left mr-2" name = "allchk" id = "allchk" @click="allChk"/>
+                    <input type = "checkbox" class = "w-4 h-4 float-left mr-2" name = "allchk" id = "allchk" @click="allChk" checked/>
                     <span class = "text-xs float-left">전체선택</span>
                     <div class =  "clear-both"></div>
                 </div>
                 <div v-for ="store in storeList" class = "w-4/5 mt-2 m-auto pl-4" >
                     <div>
-                        <input type = "checkbox" v-bind:value= "store.STORECODE" class = "w-4 h-4 float-left mr-2 chk" />
+                        <input type = "checkbox" v-bind:value= "store.STORECODE" class = "w-4 h-4 float-left mr-2 chk" checked />
                         <span class = "text-xs float-left">{{store.STORENAME}}({{store.STORELOCATION}})</span>
                         <div class =  "clear-both"></div>
                     </div>

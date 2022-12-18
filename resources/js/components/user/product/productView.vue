@@ -31,18 +31,18 @@
             <p class=" items-center m-auto text-xs font-sans font-light">최근 판매정보 : 2022-08-09 수요일 / 신세계 본점</p>
         </div>
 
-        <div class = "relative w-100 h-45 content-center text-center items-center pt-1">
+        <div class = "relative w-100 h-42 content-center text-center items-center mt-3 pt-1 pl-10">
             <div class = "flex w-3/5 h-15 content-center text-left items-left">
-                <p class="w-full h-fit text-base font-sans font-bold pt-3 pl-8">Chanel</p>
+                <p class="w-full h-fit text-base font-sans font-bold pt-3 ">Chanel</p>
             </div>
-            <div class = "flex w-3/5 h-15 content-center text-left items-left">
-                <p class="w-full h-fit text-base font-sans font-medium pb-1 pl-8"> 클래식 미디움</p>
+            <div class = "flex w-3/5 h-6 content-center text-left items-left">
+                <p class="w-full h-fit text-base font-sans font-medium pb-1 "> 클래식 미디움</p>
             </div>
-            <div class = "flex w-3/5 h-15 content-center text-left items-left">
-                <p class="w-full h-fit text-sm font-sans font-semilight pb-1 pl-8 text-slate-600">블랙 / 캐비어 / 금장</p>
+            <div class = "flex w-3/5 h-10 content-center text-left items-left">
+                <p class="w-full h-fit text-xs font-sans font-semilight pb-1  text-slate-600">블랙 / 캐비어 / 금장</p>
             </div>
-            <div class = "absolute right-0 top-0 flex  content-center align-middle mt-4 mr-4 ">
-                <div class = "relative flex w-full h-full content-center text-left items-left bg-black rounded-xl align-middle py-4 px-5 ">
+            <div class = "absolute right-0 top-0 flex  content-center align-middle mt-4 mr-10 ">
+                <div class = "relative flex w-full h-full content-center text-left items-left bg-black rounded-xl align-middle pt-3 pb-4 px-4">
                     <p class="text-3xl font-sans font-bold text-white text-center align-middle  m-auto">+1</p>
                 </div>
             </div>

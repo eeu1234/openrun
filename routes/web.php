@@ -29,6 +29,7 @@ Route::any('/admin','\App\Http\Controllers\Admin\AdminController@main');
 
 /*사용자 페이지*/
 //Route::get('/productView/{productCode?}','\App\Http\Controllers\User\ProductController@main');
+Route::any('/productView',function () { return view('productView');});
 Route::any('/productView/{no}',function($no){
     return view('productView',['no' => $no]);
 });
