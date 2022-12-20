@@ -14,7 +14,7 @@ import search_main from "./components/user/search/search_main.vue";
 
 
 //메인페이지
-import calender from './components/calender.vue';
+import calender from './components/user/calender.vue';
 //상세피이지
 import productView from './components/user/product/productView.vue';
 import salesLog from './components/user/product/salesLog.vue';
