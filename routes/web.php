@@ -33,6 +33,9 @@ Route::any('/productView',function () { return view('productView');});
 Route::any('/productView/{no}',function($no){
     return view('productView',['no' => $no]);
 });
+Route::any('/salesData/{no}',function($no){
+    return view('salesData',['no' => $no]);
+});
 
 
 Route::any('/loadData','\App\Http\Controllers\User\ProductController@loadData'); //사용자가 페이지 접근시 데이터 불러옴
@@ -42,6 +45,8 @@ Route::any('/salesTimeline','\App\Http\Controllers\User\ProductController@timeli
 Route::any('/searchMain','\App\Http\Controllers\User\SearchController@main'); // 사용자가 페이지 접근시
 Route::any('/checkSearch/searchData','\App\Http\Controllers\User\SearchController@searchData'); //사용자가 검색버튼을 누를 때 데이터 불러옴
 Route::any('/checkSearch/loadData','\App\Http\Controllers\User\SearchController@loadData'); //사용자가 페이지 접근시 데이터 불러옴
+
+Route::any('/checkSearch/getStoreList','\App\Http\Controllers\User\SearchController@getStoreList'); //사용자가 페이지 접근시 데이터 불러옴
 
 
 

@@ -10,9 +10,9 @@
             </div>
             <div class ="flex float-left w-2/4  items-center content-center text-center">
                 <div class="relative m-auto">
-                    <button class='ml-4' @click="selectType" type="button">
-                        <span class="float-left text-base font-sans font-semibold m-auto" v-if="!toggleLogType">타임라인</span>
-                        <span class="float-left text-base font-sans font-semibold m-auto" v-if="toggleLogType">판매기록</span>
+                    <button class='ml-4' @click="salesDataToggleVar = !salesDataToggleVar" type="button">
+                        <span class="float-left text-base font-sans font-semibold m-auto" v-show="!toggleLogTypeVar">타임라인</span>
+                        <span class="float-left text-base font-sans font-semibold m-auto" v-show="toggleLogTypeVar">판매기록</span>
                         <span class="float-left h-full">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="mt-1 ml-2 w-4 h-4">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75l3 3m0 0l3-3m-3 3v-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -20,9 +20,9 @@
                         </span>
                         <span class = "clear-both"></span>
                     </button>
-                    <div id='selectTypeBox' class="absolute top-6 left-2 bg-gray-50 w-full border-2 hidden ">
-                        <p class="text-base pt-2 pb-2" @click="toggleLogType = !toggleLogType" v-if="toggleLogType">타임라인</p>
-                        <p class="text-base pt-2 pb-2" @click="toggleLogType = !toggleLogType" v-if="!toggleLogType">판매기록</p>
+                    <div class="absolute top-6 left-2 bg-gray-50 w-full border-2" v-show="salesDataToggleVar">
+                        <p class="text-base pt-2 pb-2" @click="toggleLogTypeFn" v-show="toggleLogTypeVar">타임라인</p>
+                        <p class="text-base pt-2 pb-2" @click="toggleLogTypeFn" v-show="!toggleLogTypeVar">판매기록</p>
                     </div>
                 </div>
             </div>
@@ -38,48 +38,50 @@
         </div>
     </div>
     <div class="pt-4">
-        <div id = "selectperiodButton"  class = "w-4/5 text-sm border-b-4 mt-4 mb-2 m-auto py-2" @click="slideUpDown('period')">
+        <div class = "w-4/5 text-sm border-b-4 mt-4 mb-2 m-auto py-2" @click="hideAndShow_1 =!hideAndShow_1">
             <div class = "w-14 float-left">검색기간</div>
             <img class = "h-4 float-right mr-5" src="/img/down.png">
             <div class = "clear-both"></div>
         </div>
-        <div id = "selectperiod" class="hidden">
-            <div class = "w-4/5 h-16 m-auto">
+        <div class="" v-show="hideAndShow_1">
+            <div class = "w-4/5 h-14 m-auto">
                 <Datepicker ref="datepicker" v-model="dateRange" type="date" range placeholder="Select date range" class="w-full bg-gray-200"
                             default-value="defaultValue"></Datepicker>
             </div>
-            <div class = "w-4/5 m-auto text-center  mt-2">
+            <div  class = "w-4/5 m-auto text-center text-base">
                 <div class = "float-left w-1/4">
-                    <div class = "w-11/12 m-auto border-2 rounded-xl py-1 text-sm">당월</div>
+                    <div class = "w-11/12 m-auto border-2 rounded-base py-2" @click = "clickperiod_1">당월</div>
                 </div>
                 <div class = "float-left w-1/4 h-10">
-                    <div class = "w-11/12 m-auto border-2 rounded-xl py-1 text-sm">1개월</div>
+                    <div class = "w-11/12 m-auto border-2 rounded-base py-2" @click = "clickperiod_2">1개월</div>
                 </div>
                 <div class = "float-left w-1/4 h-10">
-                    <div class = "w-11/12 m-auto border-2 rounded-xl py-1 text-sm">3개월</div>
+                    <div class = "w-11/12 m-auto border-2 rounded-base py-2" @click = "clickperiod_3">3개월</div>
                 </div>
                 <div class = "float-left w-1/4 h-10">
-                    <div class = "w-11/12 m-auto border-2 rounded-xl py-1 text-sm">직접입력</div>
+                    <div class = "w-11/12 m-auto border-2 rounded-base py-2" @click = "clickperiod_4">직접입력</div>
                 </div>
                 <div class = "clear-both"></div>
             </div>
         </div>
-        <div class = "w-4/5 text-sm border-b-4 mt-6 mb-2 m-auto py-2"  @click="slideUpDown('place')">
-            <div class = "w-14 float-left">장소</div>
-            <img class = "h-4 float-right mr-5" src="/img/down.png">
-            <div class = "clear-both"></div>
-        </div>
-        <div id="selectPlace" class="w-full hidden">
-            <div class = "w-4/5 h-fit bg-gray-200 m-auto py-2 pl-4">
-                <input type = "checkbox" class = "w-4 h-4 float-left mr-2" name = "allchk" id="allchk" @click="allChk" checked/>
-                <span class = "text-xs float-left">전체선택</span>
-                <div class =  "clear-both"></div>
+        <div>
+            <div class = "w-4/5 text-sm border-b-4 mt-6 mb-2 m-auto py-2" @click="hideAndShow_2 =!hideAndShow_2">
+                <div class = "w-14 float-left">장소</div>
+                <img class = "h-4 float-right mr-5" src="/img/down.png">
+                <div class = "clear-both"></div>
             </div>
-            <div v-for ="store in storeList" class = "w-4/5 mt-2 m-auto pl-4" >
-                <div>
-                    <input type = "checkbox" v-bind:value= "store.STORECODE" class = "w-4 h-4 float-left mr-2 chk" checked />
-                    <span class = "text-xs float-left">{{store.STORENAME}}({{store.STORELOCATION}})</span>
+            <div class="w-full" v-show="hideAndShow_2">
+                <div class = "w-4/5 h-fit bg-gray-200 m-auto py-2 pl-4">
+                    <input type = "checkbox" class = "w-4 h-4 float-left mr-2" name = "allchk" id = "allchk" @click="allChk" checked/>
+                    <span class = "text-xs float-left">전체선택</span>
                     <div class =  "clear-both"></div>
+                </div>
+                <div v-for ="store in storeList" class = "w-4/5 mt-2 m-auto pl-4" >
+                    <div>
+                        <input type = "checkbox" v-bind:value= "store.STORECODE" class = "w-4 h-4 float-left mr-2 chk" checked />
+                        <span class = "text-xs float-left">{{store.STORENAME}}({{store.STORELOCATION}})</span>
+                        <div class =  "clear-both"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -88,53 +90,76 @@
     </div>
 
 
-    <salesLog/>
-    <salesTimeline :toggleLogType="false"/>
+    <salesLog v-show="toggleLogTypeVar"/>
+    <salesTimeline v-show="!toggleLogTypeVar "/>
 </template>
 
 <script>
 import Datepicker from '@vuepic/vue-datepicker';
-import '@vuepic/vue-datepicker/dist/main.css';
-
-
-//import { ref } from 'vue';
+import '@vuepic/vue-datepicker/dist/main.css'
+import { ref } from 'vue';
 
 
 
 export default {
-    setup: () => ({
+        setup: () => ({
 
-    }),
-    components: {
-        Datepicker,
-
-
-    },
-    data: () => ({
-        storeList: [],
-        date: null,
-        toggleLogType : false,
-    }),
-    created() {
-        this.getStoreList();
-    },
-    methods: {
-        slideUpDown : function(type){//달력 슬라이드업다운
-            if(type =='period'){
-                if ($('#selectperiod').is(':hidden')){
-                    $('#selectperiod').slideDown();
-                } else{
-                    $('#selectperiod').slideUp();
-                }
-            }else if(type == 'place'){
-                if ($('#selectPlace').is(':hidden')){
-                    $('#selectPlace').slideDown();
-                } else{
-                    $('#selectPlace').slideUp();
-                }
-            }
+        }),
+        components: { Datepicker },
+        data: () => ({
+            hideAndShow_1 : false,
+            hideAndShow_2 : false,
+            toggleLogTypeVar : false,
+            salesDataToggleVar : false,
+            storeList: [],
+            dateRange: [],
+            // datepicker:'',
+        }),
+        created() {
+            this.getStoreList();
+            this.clickperiod_1();
+        },
+        mounted(){
+            const datepicker = this.$refs.datepicker;
+            // this.datepicker = datepicker;
+        },
+        watch(){
+            hideAndShow_1;
+            hideAndShow_2;
+            this.toggleLogTypeVar;
+            salesDataToggleVar;
 
         },
+        methods: {
+            toggleLogTypeFn : function(){
+                this.toggleLogTypeVar = !this.toggleLogTypeVar;
+                this.salesDataToggleVar = !this.salesDataToggleVar;
+            },
+
+            clickperiod_1:function(){
+                var endDay = new Date();
+                var startDay = new Date();
+                startDay.setDate(1);
+                this.dateRange = [startDay,endDay];
+            },
+            clickperiod_2:function(){
+                var now = new Date();
+                var endDay = new Date();
+                var startDay = new Date(now.setMonth(now.getMonth() - 1));
+                this.dateRange = [startDay,endDay];
+            },
+            clickperiod_3:function(){
+                var now = new Date();
+                var endDay = new Date();
+                var startDay = new Date(now.setMonth(now.getMonth() - 3));
+                this.dateRange = [startDay,endDay];
+            },
+            clickperiod_4:function(){
+                this.dateRange=[];
+                console.log(this.datepicker);
+                this.datepicker.openMenu();
+            },
+
         getStoreList(){
             axios.post('/checkSearch/getStoreList', {
                 }
@@ -159,16 +184,8 @@ export default {
         back : function(){
             history.back();
         },
-        toggleLog : function(){
-            location.href='./salesTimeline'
-        },
-        selectType : function(){
-            if ($('#selectTypeBox').is(':hidden')){
-                $('#selectTypeBox').slideDown();
-            } else{
-                $('#selectTypeBox').slideUp();
-            }
-        },
+
+
 
     }
 }

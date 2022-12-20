@@ -1,5 +1,5 @@
 <template>
-    <div id="logBox" class="w-full mt-14 my-20" v-if="!toggleLogType">
+    <div id="logBox" class="w-full mt-14 my-20">
         <div class="w-4/5 font-bold bg-white mt-10 p-2 m-auto text-gray-800 border-b-2">
             <p class="w-full  text-xl">총 50회</p>
         </div>

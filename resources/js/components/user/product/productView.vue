@@ -47,6 +47,11 @@
                 </div>
             </div>
         </div>
+        <div class="w-4/5 m-auto h-fit text-center mt-6 py-2 ">
+            <button class="w-full h-10 bg-gray-700  text-white m-auto rounded-2xl text-base font-sans" @click="goSalesData(no)">
+                기록조회
+            </button>
+        </div>
     </div>
 
 </template>
@@ -169,6 +174,9 @@ export default {
                 console.log('반환데이터'+response.data);
                 console.log(this.productInfo);
             });
+        },
+        goSalesData:function(finalProductCode) {
+            location.href='/salesData/'+finalProductCode;
         },
 
 
