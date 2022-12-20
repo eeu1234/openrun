@@ -1,67 +1,22 @@
 <template>
-    <!--타임라인,로그 박스-->
-    <div class = "w-100 h-28 content-center text-center items-center">
-        <div class ="flex float-left w-1/4 h-full text-center">
-            <button class='ml-8' @click="main" type="button">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="m-auto mr-32 w-16 h-16">
-                    <path fill-rule="evenodd" d="M7.72 12.53a.75.75 0 010-1.06l7.5-7.5a.75.75 0 111.06 1.06L9.31 12l6.97 6.97a.75.75 0 11-1.06 1.06l-7.5-7.5z" clip-rule="evenodd" />
-                </svg>
-            </button>
-        </div>
-        <div class ="flex float-left w-2/4 h-full items-center content-center text-center">
-            <div class="relative m-auto">
-                <button class='ml-8' @click="selectType" type="button">
-                        <span class="float-left text-4xl font-sans font-semibold">판매기록</span>
-                        <span class="float-left h-full">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="mt-1 ml-2 w-8 h-8">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75l3 3m0 0l3-3m-3 3v-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                        </span>
-                        <span class = "clear-both"></span>
-                </button>
-                <div id='selectTypeBox' class="absolute top-14 bg-gray-50 w-full border-2 hidden ">
-                    <p class="text-2xl pt-4 pb-4" @click="goTimeline">타임라인</p>
-                </div>
-            </div>
-        </div>
-        <div class = "clear-both"></div>
-    </div>
-    <div id="logBox" class="w-full mt-14 my-20">
-        <div class="w-4/5 bg-gray-200 rounded-2xl p-4 m-auto text-gray-500">
-            <p class="w-full mb-2 text-xl">검색 기간 2022-02-04 ~ 2022-03-08</p>
-            <p class="w-full text-xl ">선택 장소 : 전체선택</p>
-        </div>
+    <div id="logBox" class="w-full mt-14 my-20" v-if="toggleLogType">
         <!--타임라인-->
-        <div id="timelineBox" class="w-full mt-14">
-            <div class = "w-4/5 m-auto mb-12">
+        <div id="timelineBox" class="w-full mt-14 ml-2">
+            <div class = "w-4/5 h-12 m-auto mb-12">
                   <div class = "float-left w-1/5 ">
-                    <div class = "w-full h-12 text-4xl text-gray-500 text-center m-auto">AUG</div>
-                    <div class = "w-full h-36 mx-0.5 content-center text-left items-left bg-black rounded-2xl align-middle pt-12">
-                        <p class="w-full h-full text-5xl font-sans font-bold text-white text-center align-middle">27</p>
+                    <div class = "w-full h-6 text-base text-gray-500 text-center m-auto">AUG</div>
+                    <div class = "w-full h-14 mx-0.5 content-center text-left items-left bg-black rounded-xl align-middle pt-3">
+                        <p class="w-full h-full text-xl font-sans font-bold text-white text-center align-middle">27</p>
                     </div>
                  </div>
-                  <div class = "float-left w-4/5 h-full">
-                    <div class = "w-full h-12  m-auto"></div>
-                        <div class="h-16 text-6xl text-gray-800 text-left pl-5" >현대백화점</div>
-                        <div class="h-16 text-3xl text-gray-500 text-left pl-6 pt-1">압구정현대점</div>
+                  <div class = "float-left w-4/5 pl-1">
+                    <div class = "w-full h-6 m-auto"></div>
+                        <div class="h-6 text-xl text-gray-800 text-left pl-5" >현대백화점</div>
+                        <div class="h-6 text-2xl text-gray-500 text-left pl-5">압구정현대점</div>
                   </div>
             <div class = "clear-both"></div>
             </div>
 
-            <div class = "w-4/5 m-auto mb-6">
-                  <div class = "float-left w-1/5 ">
-                    <div class = "w-full h-12 text-4xl text-gray-500 text-center m-auto">AUG</div>
-                    <div class = "w-full h-36 mx-0.5 content-center text-left items-left bg-black rounded-2xl align-middle pt-12">
-                        <p class="w-full h-full text-5xl font-sans font-bold text-white text-center align-middle">26</p>
-                    </div>
-                 </div>
-                  <div class = "float-left w-4/5 h-full">
-                    <div class = "w-full h-12  m-auto"></div>
-                        <div class="h-16 text-6xl text-gray-800 text-left pl-5" >롯데백화점</div>
-                        <div class="h-16 text-3xl text-gray-500 text-left pl-6 pt-1">명동본점</div>
-                  </div>
-            <div class = "clear-both"></div>
-            </div>
         </div>
 
     </div>
@@ -82,15 +37,17 @@ export default {
         };
     },
     data: () => ({
-
-        radioCondition : "1",
+        type : false,
 
     }),
     props:{
-
+        props: ['toggleLogType'],
     },
     watch : {
-
+        toggleLogType(){
+            this.type = this.toggleLogType();
+            console.log(this.type);
+        },
     },
 
     created() {
@@ -100,14 +57,6 @@ export default {
 
     methods: {
 
-        slideUpDown : function(){// 슬라이드업다운
-                if ($('#logBox').is(':hidden')){
-                    $('#logBox').slideDown();
-                } else{
-                    $('#logBox').slideUp();
-                }
-
-        },
         main : function(){
             location.href='/productView'
         },

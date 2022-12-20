@@ -1,149 +1,175 @@
 <template>
-    <div class="pt-4">
-        <form v-on:submit.prevent="submitForm">
-            <div id = "selectperiodButton"  class = "w-4/5 text-sm border-b-4 mt-4 mb-2 m-auto py-2" @click="slideUpDown('period')">
-                <div class = "w-14 float-left">검색기간</div>
-                <img class = "h-4 float-right mr-5" src="/img/down.png">
-                <div class = "clear-both"></div>
+    <div class = "w-full ">
+        <div class = "w-100 h-18 content-center text-center items-center mt-3 mb-1">
+            <div class ="flex float-left w-1/4  text-center ">
+                <button class='ml-8' @click="back" type="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="m-auto mr-28 w-6 h-6">
+                        <path fill-rule="evenodd" d="M7.72 12.53a.75.75 0 010-1.06l7.5-7.5a.75.75 0 111.06 1.06L9.31 12l6.97 6.97a.75.75 0 11-1.06 1.06l-7.5-7.5z" clip-rule="evenodd" />
+                    </svg>
+                </button>
             </div>
+            <div class ="flex float-left w-2/4  items-center content-center text-center">
+                <div class="relative m-auto">
+                    <button class='ml-4' @click="selectType" type="button">
+                        <span class="float-left text-base font-sans font-semibold m-auto" v-if="!toggleLogType">타임라인</span>
+                        <span class="float-left text-base font-sans font-semibold m-auto" v-if="toggleLogType">판매기록</span>
+                        <span class="float-left h-full">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="mt-1 ml-2 w-4 h-4">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75l3 3m0 0l3-3m-3 3v-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </span>
+                        <span class = "clear-both"></span>
+                    </button>
+                    <div id='selectTypeBox' class="absolute top-6 left-2 bg-gray-50 w-full border-2 hidden ">
+                        <p class="text-base pt-2 pb-2" @click="toggleLogType = !toggleLogType" v-if="toggleLogType">타임라인</p>
+                        <p class="text-base pt-2 pb-2" @click="toggleLogType = !toggleLogType" v-if="!toggleLogType">판매기록</p>
+                    </div>
+                </div>
+            </div>
+            <div class ="flex float-left w-1/4">
+                <a href="/" class="m-auto ml-32 w-8 h-8">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" >
+                        <path d="M12.75 12.75a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM7.5 15.75a.75.75 0 100-1.5.75.75 0 000 1.5zM8.25 17.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM9.75 15.75a.75.75 0 100-1.5.75.75 0 000 1.5zM10.5 17.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12 15.75a.75.75 0 100-1.5.75.75 0 000 1.5zM12.75 17.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM14.25 15.75a.75.75 0 100-1.5.75.75 0 000 1.5zM15 17.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM16.5 15.75a.75.75 0 100-1.5.75.75 0 000 1.5zM15 12.75a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM16.5 13.5a.75.75 0 100-1.5.75.75 0 000 1.5z" />
+                        <path fill-rule="evenodd" d="M6.75 2.25A.75.75 0 017.5 3v1.5h9V3A.75.75 0 0118 3v1.5h.75a3 3 0 013 3v11.25a3 3 0 01-3 3H5.25a3 3 0 01-3-3V7.5a3 3 0 013-3H6V3a.75.75 0 01.75-.75zm13.5 9a1.5 1.5 0 00-1.5-1.5H5.25a1.5 1.5 0 00-1.5 1.5v7.5a1.5 1.5 0 001.5 1.5h13.5a1.5 1.5 0 001.5-1.5v-7.5z" clip-rule="evenodd" />
+                    </svg>
+                </a>
+            </div>
+            <div class = "clear-both"></div>
+        </div>
+    </div>
+    <div class="pt-4">
+        <div id = "selectperiodButton"  class = "w-4/5 text-sm border-b-4 mt-4 mb-2 m-auto py-2" @click="slideUpDown('period')">
+            <div class = "w-14 float-left">검색기간</div>
+            <img class = "h-4 float-right mr-5" src="/img/down.png">
+            <div class = "clear-both"></div>
+        </div>
+        <div id = "selectperiod" class="hidden">
             <div class = "w-4/5 h-16 m-auto">
                 <Datepicker ref="datepicker" v-model="dateRange" type="date" range placeholder="Select date range" class="w-full bg-gray-200"
                             default-value="defaultValue"></Datepicker>
             </div>
-            <div id = "selectperiod" class = "w-4/5 m-auto text-center text-3xl mt-5">
+            <div class = "w-4/5 m-auto text-center  mt-2">
                 <div class = "float-left w-1/4">
-                    <div class = "w-11/12 m-auto border-2 rounded-xl py-6" @click = "clickperiod_1">당월</div>
+                    <div class = "w-11/12 m-auto border-2 rounded-xl py-1 text-sm">당월</div>
                 </div>
                 <div class = "float-left w-1/4 h-10">
-                    <div class = "w-11/12 m-auto border-2 rounded-xl py-6" @click = "clickperiod_2">1개월</div>
+                    <div class = "w-11/12 m-auto border-2 rounded-xl py-1 text-sm">1개월</div>
                 </div>
                 <div class = "float-left w-1/4 h-10">
-                    <div class = "w-11/12 m-auto border-2 rounded-xl py-6" @click = "clickperiod_3">3개월</div>
+                    <div class = "w-11/12 m-auto border-2 rounded-xl py-1 text-sm">3개월</div>
                 </div>
                 <div class = "float-left w-1/4 h-10">
-                    <div class = "w-11/12 m-auto border-2 rounded-xl py-6" @click = "clickperiod_4">직접입력</div>
+                    <div class = "w-11/12 m-auto border-2 rounded-xl py-1 text-sm">직접입력</div>
                 </div>
                 <div class = "clear-both"></div>
             </div>
-            <div class = "w-4/5 text-sm border-b-4 mt-6 mb-2 m-auto py-2"  @click="slideUpDown('place')">
-                <div class = "w-14 float-left">장소</div>
-                <img class = "h-4 float-right mr-5" src="/img/down.png">
-                <div class = "clear-both"></div>
+        </div>
+        <div class = "w-4/5 text-sm border-b-4 mt-6 mb-2 m-auto py-2"  @click="slideUpDown('place')">
+            <div class = "w-14 float-left">장소</div>
+            <img class = "h-4 float-right mr-5" src="/img/down.png">
+            <div class = "clear-both"></div>
+        </div>
+        <div id="selectPlace" class="w-full hidden">
+            <div class = "w-4/5 h-fit bg-gray-200 m-auto py-2 pl-4">
+                <input type = "checkbox" class = "w-4 h-4 float-left mr-2" name = "allchk" id="allchk" @click="allChk" checked/>
+                <span class = "text-xs float-left">전체선택</span>
+                <div class =  "clear-both"></div>
             </div>
-            <div id="selectPlace" class="w-full">
-                <div class = "w-4/5 h-fit bg-gray-200 m-auto py-2 pl-4">
-                    <input type = "checkbox" class = "w-4 h-4 float-left mr-2" name = "allchk" id = "allchk" @click="allChk" checked/>
-                    <span class = "text-xs float-left">전체선택</span>
+            <div v-for ="store in storeList" class = "w-4/5 mt-2 m-auto pl-4" >
+                <div>
+                    <input type = "checkbox" v-bind:value= "store.STORECODE" class = "w-4 h-4 float-left mr-2 chk" checked />
+                    <span class = "text-xs float-left">{{store.STORENAME}}({{store.STORELOCATION}})</span>
                     <div class =  "clear-both"></div>
                 </div>
-                <div v-for ="store in storeList" class = "w-4/5 mt-2 m-auto pl-4" >
-                    <div>
-                        <input type = "checkbox" v-bind:value= "store.STORECODE" class = "w-4 h-4 float-left mr-2 chk" checked />
-                        <span class = "text-xs float-left">{{store.STORENAME}}({{store.STORELOCATION}})</span>
-                        <div class =  "clear-both"></div>
-                    </div>
-                </div>
             </div>
-            <div class="w-4/5 m-auto h-fit text-center mt-6 py-2 ">
-                <button class="w-full h-10 bg-gray-700  text-white m-auto rounded-2xl text-base font-sans" @click="goSalesList">
-                    기록조회
-                </button>
-            </div>
-        </form>
+        </div>
+
+
     </div>
 
+
+    <salesLog/>
+    <salesTimeline :toggleLogType="false"/>
 </template>
 
 <script>
 import Datepicker from '@vuepic/vue-datepicker';
-import '@vuepic/vue-datepicker/dist/main.css'
-import { ref } from 'vue';
+import '@vuepic/vue-datepicker/dist/main.css';
+
+
+//import { ref } from 'vue';
 
 
 
 export default {
-        setup: () => ({
+    setup: () => ({
 
-        }),
-        components: { Datepicker },
-        data: () => ({
-            storeList: [],
-            dateRange: [],
-            // datepicker:'',
-        }),
-        created() {
-            this.loadData();
-            this.clickperiod_1();
-        },
-        mounted(){
-            const datepicker = this.$refs.datepicker;
-            // this.datepicker = datepicker;
-        },
-        methods: {
-            clickperiod_1:function(){
-                var endDay = new Date();
-                var startDay = new Date();
-                startDay.setDate(1);
-                this.dateRange = [startDay,endDay];
-            },
-            clickperiod_2:function(){
-                var now = new Date();
-                var endDay = new Date();
-                var startDay = new Date(now.setMonth(now.getMonth() - 1));
-                this.dateRange = [startDay,endDay];
-            },
-            clickperiod_3:function(){
-                var now = new Date();
-                var endDay = new Date();
-                var startDay = new Date(now.setMonth(now.getMonth() - 3));
-                this.dateRange = [startDay,endDay];
-            },
-            clickperiod_4:function(){
-                this.dateRange=[];
-                console.log(this.datepicker);
-                this.datepicker.openMenu();
-            },
-            slideUpDown : function(type){//달력 슬라이드업다운
-                if(type =='period'){
-                    if ($('#selectperiod').is(':hidden')){
-                        $('#selectperiod').slideDown();
-                    } else{
-                        $('#selectperiod').slideUp();
-                    }
-                }else if(type == 'place'){
-                    if ($('#selectPlace').is(':hidden')){
-                        $('#selectPlace').slideDown();
-                    } else{
-                        $('#selectPlace').slideUp();
-                    }
-                }
+    }),
+    components: {
+        Datepicker,
 
-            },
-            allChk : function(){//전체선택 체크
-                if($('input[name=allchk]').is(':checked')){
-                    $(".chk").prop("checked", true);
+
+    },
+    data: () => ({
+        storeList: [],
+        date: null,
+        toggleLogType : false,
+    }),
+    created() {
+        this.getStoreList();
+    },
+    methods: {
+        slideUpDown : function(type){//달력 슬라이드업다운
+            if(type =='period'){
+                if ($('#selectperiod').is(':hidden')){
+                    $('#selectperiod').slideDown();
+                } else{
+                    $('#selectperiod').slideUp();
                 }
-                else{
-                    $(".chk").prop("checked", false);
+            }else if(type == 'place'){
+                if ($('#selectPlace').is(':hidden')){
+                    $('#selectPlace').slideDown();
+                } else{
+                    $('#selectPlace').slideUp();
                 }
-            },
-            goSalesList : function(){//전체선택 체크
-                location.href='/salesList'
-            },
-            submitForm: function() {
-                axios.post('/checkSearch/searchData', data
-                ).then(response => {
-                    console.log(response.data);
-                });
-            },
-            loadData(){
-                axios.post('/checkSearch/loadData', {
-                    }
-                ).then(response => {
-                    console.log(response.data);
-                    this.storeList = response.data;
-                });
-            },
-        }
+            }
+
+        },
+        getStoreList(){
+            axios.post('/checkSearch/getStoreList', {
+                }
+            ).then(response => {
+                console.log(response.data);
+                this.storeList = response.data;
+            });
+        },
+        allChk : function(){//전체선택 체크
+            if($('input[name=allchk]').is(':checked')){
+                $(".chk").prop("checked", true);
+            }
+            else{
+                $(".chk").prop("checked", false);
+            }
+        },
+
+
+        main : function(){
+            location.href='/productView'
+        },
+        back : function(){
+            history.back();
+        },
+        toggleLog : function(){
+            location.href='./salesTimeline'
+        },
+        selectType : function(){
+            if ($('#selectTypeBox').is(':hidden')){
+                $('#selectTypeBox').slideDown();
+            } else{
+                $('#selectTypeBox').slideUp();
+            }
+        },
+
     }
+}
 </script>

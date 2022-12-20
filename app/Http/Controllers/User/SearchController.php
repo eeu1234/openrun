@@ -17,7 +17,7 @@ class SearchController extends Controller
     {
         return view('search');
     }
-    public function loadData()
+    public function getStoreList()
     {
         $storeList = Store::select('STORECODE','STORENAME','STORELOCATION')
             ->get();
