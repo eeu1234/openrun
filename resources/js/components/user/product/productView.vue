@@ -36,10 +36,10 @@
                 <p class="w-full h-fit text-base font-sans font-bold pt-3 ">Chanel</p>
             </div>
             <div class = "flex w-3/5 h-6 content-center text-left items-left">
-                <p class="w-full h-fit text-base font-sans font-medium pb-1 "> 클래식 미디움</p>
+                <p class="w-full h-fit text-base font-sans font-medium pb-1 "> {{product.product_name.PRODUCTNAME}} {{product.FINALPRODUCTNAME}} {{product.SIZE}}</p>
             </div>
             <div class = "flex w-3/5 h-10 content-center text-left items-left">
-                <p class="w-full h-fit text-xs font-sans font-semilight pb-1  text-slate-600">{{product.COLOR}} / 캐비어 / 금장</p>
+                <p class="w-full h-fit text-xs font-sans font-semilight pb-1  text-slate-600">{{product.COLOR}} / {{product.MATERIAL}} / {{product.COLOR2}}</p>
             </div>
             <div class = "absolute right-0 top-0 flex  content-center align-middle mt-4 mr-10 ">
                 <div class = "relative flex w-full h-full content-center text-left items-left bg-black rounded-xl align-middle pt-3 pb-4 px-4">
