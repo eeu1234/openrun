@@ -337,7 +337,7 @@
                             <a tabIndex="0" className="w-25 h-10 focus:outline-none text-sm font-medium leading-5 text-gray-800 dark:text-gray-100 mt-2">명동본점</a>
                         </div>
                         <div class="w-50 float-left">
-                            <p className="pl-4 text-base pt-2 leading-4 leading-none text-gray-600 dark:text-gray-300">
+                            <p className="pl-4 text-xs pt-2 leading-4 leading-none text-gray-600 dark:text-gray-300">
                                 클래식 미디움 캐비어 금장 블랙
                             </p>
                         </div>

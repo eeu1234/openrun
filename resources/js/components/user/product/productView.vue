@@ -31,7 +31,7 @@
             <p class=" items-center m-auto text-xs font-sans font-light">최근 판매정보 : 2022-08-09 수요일 / 신세계 본점</p>
         </div>
 
-        <div class = "relative w-100 h-42 content-center text-center items-center mt-3 pt-1 pl-10">
+        <div class = "relative w-100 h-42 content-center text-center items-center mt-3 pt-1 pl-10" v-for="product in productInfo" >
             <div class = "flex w-3/5 h-15 content-center text-left items-left">
                 <p class="w-full h-fit text-base font-sans font-bold pt-3 ">Chanel</p>
             </div>
@@ -39,7 +39,7 @@
                 <p class="w-full h-fit text-base font-sans font-medium pb-1 "> 클래식 미디움</p>
             </div>
             <div class = "flex w-3/5 h-10 content-center text-left items-left">
-                <p class="w-full h-fit text-xs font-sans font-semilight pb-1  text-slate-600">블랙 / 캐비어 / 금장</p>
+                <p class="w-full h-fit text-xs font-sans font-semilight pb-1  text-slate-600">{{product.COLOR}} / 캐비어 / 금장</p>
             </div>
             <div class = "absolute right-0 top-0 flex  content-center align-middle mt-4 mr-10 ">
                 <div class = "relative flex w-full h-full content-center text-left items-left bg-black rounded-xl align-middle pt-3 pb-4 px-4">
@@ -69,10 +69,11 @@ import "vue-select/dist/vue-select.css";
 import 'swiper/css';
 import 'swiper/css/effect-fade';
 
+import {reactive} from 'vue'
+
 export default {
     name: "productView",
     components: {
-        datepicker,
         Swiper,
         SwiperSlide,
         vSelect
@@ -88,71 +89,12 @@ export default {
     data: () => ({
         finalProductCode : '',
         productInfo : [],
-        books: [
-                { title: "Old Man's War" },
-                { title: "The Lock Artist" },
-                { title: "HTML5" },
-                { title: "Right Ho Jeeves" },
-                { title: "The Code of the Wooster" },
-                { title: "Thank You Jeeves" }
-            ],
-        list_temp_str : [],
-        category : ["1","2","3"],
-        hello : "",
-        format:"dd/MM/yyy",
-        //startDate:date_week,
-        //endDate:date_today,
-        selectTerm : "",
-        dateSelect : [{title : "", value : "i18n.myoffice.Select"},
-            {title : "today", value : "i18n.search.today"},
-            {title : "week", value : "i18n.search.week"},
-            {title : "current_month", value : "i18n.search.thisMonth"},
-            {title : "before_1month", value : "i18n.search.before1month"},
-            {title : "before_2month", value : "i18n.search.before2month"},
-            {title : "before_3month", value : "i18n.search.before3month"},
-            {title : "all_date", value : "i18n.search.allday"}],
-        date_type_list : [],
-        date_type_list1 : [{title : "register", value : "i18n.myoffice.RegistrationDate"},
-            {title : "update", value : "i18n.myoffice.UpdateDate"}],
-        date_type_list2 : [{title : "order", value : "i18n.myoffice.Order.orderDate"},
-            {title : "accept", value : "i18n.myoffice.Order.depositdate"}],
+
 
     }),
 
     watch : {
-        startDate(s_date){
-            this.set_s_date(s_date);
-        },
-        endDate(e_date){
-            this.set_e_date(e_date);
-        },
-        date_type(date_type){
-            this.set_date_type(date_type);
-        },
-        selectTerm : function (){
-            //console.log(this.selectTerm);
-            if(this.selectTerm == "today"){
-                this.today();
-            }
-            if(this.selectTerm == "week"){
-                this.week();
-            }
-            if(this.selectTerm == "current_month"){
-                this.current_month();
-            }
-            if(this.selectTerm == "before_1month"){
-                this.before_1month();
-            }
-            if(this.selectTerm == "before_2month"){
-                this.before_2month();
-            }
-            if(this.selectTerm == "before_3month"){
-                this.before_3month();
-            }
-            if(this.selectTerm == "all_date"){
-                this.all_date();
-            }
-        }
+
     },
 
     created() {
@@ -166,12 +108,11 @@ export default {
             history.back();
         },
         sendInfoPage:function() {
-            console.log(this.productCode);
             axios.post('/loadData',
                 {finalProductCode: this.no}
             ).then(response => {
                 this.productInfo = response.data;
-                console.log('반환데이터'+response.data);
+
                 console.log(this.productInfo);
             });
         },
