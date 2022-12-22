@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product_Detail;
+use App\Models\Sale_Log;
 use App\Models\Store;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -25,17 +26,28 @@ class ProductController extends Controller
             ->where('PRODUCT_DETAIL.FINALPRODUCTCODE', $request->finalProductCode)
             ->orderBy('SALES_LOG.SOLDDATE','desc')
             ->get();
-        \Log::info($productInfo);
-        return response()->json($productInfo);
-    }
-    public function loadData(Request $request){
-        $productInfo = Product_Detail::with(['productName'])
-            ->where('FINALPRODUCTCODE',$request->finalProductCode )
-            ->get();
 
-        \Log::info($productInfo);
         return response()->json($productInfo);
     }
+    public function getProductDetail(Request $request){
+        $productInfo = [];
+        $productInfo['productInfo'] = Product_Detail::with(['productName'])
+            ->where('FINALPRODUCTCODE',$request->finalProductCode )
+            ->first();
+
+        $productInfo['productInfo']->salesLog = Sale_Log::with(['productLastSalesLog'])
+            ->where('FINALPRODUCTCODE',$request->finalProductCode )
+            ->orderBy("SOLDDATE","DESC")
+            ->first();
+
+
+        \Log::info([$productInfo]);
+        //\Log::info($productLastSalesInfo);
+        return response()->json($productInfo);
+    }
+
+
+
     public function salesLog()
     {
 

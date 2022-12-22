@@ -1,5 +1,5 @@
 <template>
-    <div class = "w-full ">
+    <div class = "w-full " v-for="product in productInfo">
         <div class = "w-100 h-18 content-center text-center items-center mt-3 mb-1">
             <div class ="flex float-left w-1/4  text-center ">
                 <button class='ml-8' @click="back" type="button">
@@ -28,10 +28,10 @@
             </swiper>
         </div>
         <div class = "w-100 h-12 content-center text-center items-center py-2">
-            <p class=" items-center m-auto text-xs font-sans font-light">최근 판매정보 : 2022-08-09 수요일 / 신세계 본점</p>
+            <p class=" items-center m-auto text-xs font-sans font-light">최근 판매정보 : {{product.salesLog.SOLDDATE}} 수요일 / {{product.salesLog.product_last_sales_log.STORENAME}}{{product.salesLog.product_last_sales_log.STORELOCATION}}</p>
         </div>
 
-        <div class = "relative w-100 h-42 content-center text-center items-center mt-3 pt-1 pl-10" v-for="product in productInfo" >
+        <div class = "relative w-100 h-42 content-center text-center items-center mt-3 pt-1 pl-10"  >
             <div class = "flex w-3/5 h-15 content-center text-left items-left">
                 <p class="w-full h-fit text-base font-sans font-bold pt-3 ">Chanel</p>
             </div>
@@ -108,13 +108,14 @@ export default {
             history.back();
         },
         sendInfoPage:function() {
-            axios.post('/loadData',
+            axios.post('/getProductDetail',
                 {finalProductCode: this.no}
             ).then(response => {
                 this.productInfo = response.data;
 
                 console.log(this.productInfo);
             });
+
         },
         goSalesData:function(finalProductCode) {
             location.href='/salesData/'+finalProductCode;

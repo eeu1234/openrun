@@ -29,5 +29,10 @@ class Product_Detail extends Model
             return $this->hasOne(Product::class,'PRODUCTCODE','PRODUCTCODE');
     }
 
+    public function productLastSalesLog(){
+
+            return $this->hasOne(Sale_Log::class,'FINALPRODUCTCODE','FINALPRODUCTCODE')->orderBy('SOLDDATE','desc');
+    }
+
 
 }
