@@ -1,14 +1,18 @@
 <template>
     <div class = "bg-black text-white text-center text-xl" >
-        <div class="w-full pt-2">
-            <img class = "h-14 m-auto" src="/img/chanel_logo.png">
-            <div class="font-sans font-extrabold pb-3">
-                NO WHERE
+        <div class="w-full pt-2 h-28">
+            <div class = "float-left ml-36 w-2/6 ">
+                <img class = "h-14 m-auto" src="/img/chanel_logo.png">
+                <div class="font-sans font-extrabold pb-3">
+                    NO WHERE
+                </div>
             </div>
+            <button id = "menu_button" class = "float-right w-2/12 pt-8" @click="toggleSideMenu = !toggleSideMenu">
+                <img class = "h-8" src="/img/menu.png">
+            </button>
+            <div class = "clear-both"></div>
         </div>
-        <button id = "menu_button" class = "absolute pt-2 top-8 right-4" @click="toggleSideMenu = !toggleSideMenu">
-            <img class = "h-8" src="/img/menu.png">
-        </button>
+
     </div>
 
     <div id = "sideBar" class =  "w-3/5 h-full absolute z-50 bg-gray-200 top-0 right-0" v-if="toggleSideMenu">

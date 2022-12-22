@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
-<body class="antialiased max-w-5xl mg-">
+<body class="antialiased max-w-5xl mg-" style = "min-width:410px;">
 <div id="app" class="w-full max-w-md m-auto">
     <div><header_search/></div>
     @yield('content')
