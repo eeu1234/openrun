@@ -35,11 +35,10 @@ class Sale_Log extends Model
 
         return $this->hasMany(Store::class,'STORECODE','STORECODE');
     }
-    /*
-    public function schedule(){
-        return $this->hasManyThrough(Product_Detail::class, Store::class,
-            'STORECODE','FINALPRODUCTNAME','FINALPRODUCTNAME','STORECODE');
+
+    public function productLastSalesLog(){
+
+        return $this->hasOne(Store::class,'STORECODE','STORECODE');
     }
-    */
 
 }
