@@ -28,7 +28,7 @@
             </swiper>
         </div>
         <div class = "w-100 h-12 content-center text-center items-center py-2">
-            <p class=" items-center m-auto text-xs font-sans font-light">최근 판매정보 : {{product.salesLog.SOLDDATE}} 수요일 / {{product.salesLog.product_last_sales_log.STORENAME}}{{product.salesLog.product_last_sales_log.STORELOCATION}}</p>
+            <p class=" items-center m-auto text-xs font-sans font-light">최근 판매정보 : {{product.salesLog.SOLDDATE}} {{getDay(product.salesLog.SOLDDATE)}}요일 / {{product.salesLog.product_last_sales_log.STORENAME}}{{product.salesLog.product_last_sales_log.STORELOCATION}}</p>
         </div>
 
         <div class = "relative w-100 h-42 content-center text-center items-center mt-3 pt-1 pl-10"  >
@@ -43,7 +43,7 @@
             </div>
             <div class = "absolute right-0 top-0 flex  content-center align-middle mt-4 mr-10 ">
                 <div class = "relative flex w-full h-full content-center text-left items-left bg-black rounded-xl align-middle pt-3 pb-4 px-4">
-                    <p class="text-3xl font-sans font-bold text-white text-center align-middle  m-auto">+1</p>
+                    <p class="text-2xl font-sans font-bold text-white text-center align-middle  m-auto">{{getDayDiff(product.salesLog.SOLDDATE)}}</p>
                 </div>
             </div>
         </div>
@@ -68,7 +68,7 @@ import "vue-select/dist/vue-select.css";
 
 import 'swiper/css';
 import 'swiper/css/effect-fade';
-
+import dayjs from "dayjs";
 import {reactive} from 'vue'
 
 export default {
@@ -104,8 +104,15 @@ export default {
     mounted(){
     },
     methods: {
+        getDayDiff : function(soldDate){
+            let today = dayjs();
+            let expired_at = dayjs(soldDate);
+            let result = expired_at.diff(today, "day", true);
+            return Math.floor(result);
+
+        },
         back : function(){
-            history.back();
+            location.href='/searchMain';
         },
         sendInfoPage:function() {
             axios.post('/getProductDetail',
@@ -120,6 +127,11 @@ export default {
         goSalesData:function(finalProductCode) {
             location.href='/salesData/'+finalProductCode;
         },
+
+        getDay(date){
+            const week = ['일', '월', '화', '수', '목', '금', '토'];
+            return week[new Date(date).getDay()];
+        }
 
 
     },

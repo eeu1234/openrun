@@ -17,10 +17,10 @@ import search_main from "./components/user/search/search_main.vue";
 import calender from './components/user/calender.vue';
 //상세피이지
 import productView from './components/user/product/productView.vue';
-import salesLog from './components/user/product/salesLog.vue';
-import salesTimeline from './components/user/product/salesTimeline.vue';
+import salesLog from './components/user/sales/salesLog.vue';
+import salesTimeline from './components/user/sales/salesTimeline.vue';
 //체크박스 검색페이지
-import checkSearch from './components/user/search/checkSearch.vue';
+import checkSearch from './components/user/sales/checkSearch.vue';
 
 
 // const app = createApp({});

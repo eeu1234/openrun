@@ -1,15 +1,16 @@
 <template>
     <div class = "bg-black text-white text-center text-xl" >
-        <div class="w-full pt-2 h-28">
-            <div class = "float-left ml-36 w-2/6 ">
+        <div class="w-full pt-2 h-28 px-14 relative">
+            <div class = "float-left w-72 ">
                 <img class = "h-14 m-auto" src="/img/chanel_logo.png">
                 <div class="font-sans font-extrabold pb-3">
                     NO WHERE
                 </div>
+                <button id = "menu_button" class = "absolute top-0 right-0 w-2/12 pt-8 mr-6" @click="toggleSideMenu = !toggleSideMenu">
+                    <img class = "h-8" src="/img/menu.png">
+                </button>
             </div>
-            <button id = "menu_button" class = "float-right w-2/12 pt-8" @click="toggleSideMenu = !toggleSideMenu">
-                <img class = "h-8" src="/img/menu.png">
-            </button>
+
             <div class = "clear-both"></div>
         </div>
 

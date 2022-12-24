@@ -27,7 +27,7 @@
                 </div>
             </div>
             <div class ="flex float-left w-1/4">
-                <a href="/" class="m-auto ml-32 w-8 h-8">
+                <a href="/public" class="m-auto ml-32 w-8 h-8">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" >
                         <path d="M12.75 12.75a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM7.5 15.75a.75.75 0 100-1.5.75.75 0 000 1.5zM8.25 17.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM9.75 15.75a.75.75 0 100-1.5.75.75 0 000 1.5zM10.5 17.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12 15.75a.75.75 0 100-1.5.75.75 0 000 1.5zM12.75 17.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM14.25 15.75a.75.75 0 100-1.5.75.75 0 000 1.5zM15 17.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM16.5 15.75a.75.75 0 100-1.5.75.75 0 000 1.5zM15 12.75a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM16.5 13.5a.75.75 0 100-1.5.75.75 0 000 1.5z" />
                         <path fill-rule="evenodd" d="M6.75 2.25A.75.75 0 017.5 3v1.5h9V3A.75.75 0 0118 3v1.5h.75a3 3 0 013 3v11.25a3 3 0 01-3 3H5.25a3 3 0 01-3-3V7.5a3 3 0 013-3H6V3a.75.75 0 01.75-.75zm13.5 9a1.5 1.5 0 00-1.5-1.5H5.25a1.5 1.5 0 00-1.5 1.5v7.5a1.5 1.5 0 001.5 1.5h13.5a1.5 1.5 0 001.5-1.5v-7.5z" clip-rule="evenodd" />
@@ -73,12 +73,12 @@
             <div class="w-full" v-show="hideAndShow_2">
                 <div class = "w-4/5 h-fit bg-gray-200 m-auto py-2 pl-4">
                     <input type = "checkbox" class = "w-4 h-4 float-left mr-2" name = "allchk" id = "allchk" @click="allChk" checked/>
-                    <span class = "text-xs float-left">전체선택</span>
+                    <span class = "text-xs float-left">전체선택</span>{{this.chkStoreList}}
                     <div class =  "clear-both"></div>
                 </div>
                 <div v-for ="store in storeList" class = "w-4/5 mt-2 m-auto pl-4" >
                     <div>
-                        <input type = "checkbox" v-bind:value= "store.STORECODE" class = "w-4 h-4 float-left mr-2 chk" checked />
+                        <input type = "checkbox" v-bind:value= "store.STORECODE" class = "w-4 h-4 float-left mr-2 chk" v-model="chkStoreList"  />
                         <span class = "text-xs float-left">{{store.STORENAME}}({{store.STORELOCATION}})</span>
                         <div class =  "clear-both"></div>
                     </div>
@@ -90,8 +90,8 @@
     </div>
 
 
-    <salesLog v-show="toggleLogTypeVar"/>
-    <salesTimeline v-show="!toggleLogTypeVar "/>
+    <salesLog v-show="toggleLogTypeVar" :no="this.no" @storeList="this.chkStoreList"/>
+    <salesTimeline v-show="!toggleLogTypeVar" :no="this.no" @storeList="this.chkStoreList"/>
 </template>
 
 <script>
@@ -113,11 +113,14 @@ export default {
             salesDataToggleVar : false,
             storeList: [],
             dateRange: [],
+            chkStoreList:[],
             // datepicker:'',
         }),
         created() {
             this.getStoreList();
             this.clickperiod_1();
+
+
         },
         mounted(){
             const datepicker = this.$refs.datepicker;
@@ -128,8 +131,10 @@ export default {
             hideAndShow_2;
             this.toggleLogTypeVar;
             salesDataToggleVar;
+            this.chkStoreList;
 
         },
+        props:['no'],
         methods: {
             toggleLogTypeFn : function(){
                 this.toggleLogTypeVar = !this.toggleLogTypeVar;
@@ -164,17 +169,17 @@ export default {
             axios.post('/checkSearch/getStoreList', {
                 }
             ).then(response => {
-                console.log(response.data);
+                // console.log(response.data);
                 this.storeList = response.data;
+                for(var i=0;i < response.data.length;i++){
+                    this.chkStoreList[i] = response.data[i].STORECODE;//전체리스트 선택
+                }
+                //console.log(this.chkStoreList);
+
             });
         },
         allChk : function(){//전체선택 체크
-            if($('input[name=allchk]').is(':checked')){
-                $(".chk").prop("checked", true);
-            }
-            else{
-                $(".chk").prop("checked", false);
-            }
+            this.getStoreList();
         },
 
 
@@ -182,7 +187,7 @@ export default {
             location.href='/productView'
         },
         back : function(){
-            history.back();
+            location.href='/productView/'+this.no;
         },
 
 

@@ -33,14 +33,17 @@ Route::any('/productView',function () { return view('productView');});
 Route::any('/productView/{no}',function($no){
     return view('productView',['no' => $no]);
 });
+/*제품 상세페이지*/
+Route::any('/getProductDetail','\App\Http\Controllers\User\ProductController@getProductDetail'); //사용자가 페이지 접근시 데이터 불러옴
+/*판매기록 데이터*/
 Route::any('/salesData/{no}',function($no){
     return view('salesData',['no' => $no]);
 });
+Route::any('/getSalesData','\App\Http\Controllers\User\SalesController@getSalesData');
+Route::any('/getSalesTimelineData','\App\Http\Controllers\User\SalesController@getSalesTimelineData');
 
 
-Route::any('/getProductDetail','\App\Http\Controllers\User\ProductController@getProductDetail'); //사용자가 페이지 접근시 데이터 불러옴
-Route::any('/salesList','\App\Http\Controllers\User\ProductController@salesLog');
-Route::any('/salesTimeline','\App\Http\Controllers\User\ProductController@timelineLog');
+
 /*체크박스 검색페이지*/
 Route::any('/searchMain','\App\Http\Controllers\User\SearchController@main'); // 사용자가 페이지 접근시
 Route::any('/checkSearch/searchData','\App\Http\Controllers\User\SearchController@searchData'); //사용자가 검색버튼을 누를 때 데이터 불러옴
