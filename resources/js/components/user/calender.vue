@@ -81,12 +81,12 @@
                             <td v-for="day in calender">
                                 <div v-if="day != 0 && day != dayData.day"
                                     className="px-2 py-2 cursor-pointer flex w-full justify-center">
-                                    <p  className="text-base text-gray-500 dark:text-gray-100 font-medium" >
+                                    <p v-bind:id="day" @click = "setSendDay($event)" className="text-base text-gray-500 dark:text-gray-100 font-medium" >
                                         {{day}}
                                     </p>
                                 </div>
                                 <div v-if="day != 0 && day == dayData.day" className="flex items-center justify-center w-full rounded-full cursor-pointer">
-                                    <a role="link" tabIndex="0" className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:bg-indigo-500 hover:bg-indigo-500 text-base w-9 h-9 flex items-center justify-center font-medium text-white bg-indigo-700 rounded-full">{{day}}</a>
+                                    <a v-bind:id= "day" @click = "setSendDay($event)" role="link" tabIndex="0" className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:bg-indigo-500 hover:bg-indigo-500 text-base w-9 h-9 flex items-center justify-center font-medium text-white bg-indigo-700 rounded-full">{{day}}</a>
                                 </div>
                             </td>
                         </tr>
@@ -144,7 +144,7 @@ export default {
             dayData:[],
             calenders:[],
             shortMonth:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
-            calMonth:'',// 인덱스 번지를 확인하기 위한 변수
+            sendDay:'',
         };
     },
     created() {
@@ -152,6 +152,11 @@ export default {
         this.setDate();
     },
     methods: {
+        setSendDay:function(event){
+            let day = event.currentTarget.id;
+            this.sendDay = this.dayData.year+'-'+(this.dayData.month+1)+'-'+day;
+            console.log(this.sendDay);
+        },
         preMonth:function (){
             this.dayData.month -=1;
             if(this.dayData.month <0){
