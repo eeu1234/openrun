@@ -6,13 +6,13 @@
                 <div className="px-4 flex items-center justify-between">
             <span tabIndex="0" className=" focus:outline-none text-xl font-bold dark:text-gray-100 text-gray-800">{{ dayData.year}} {{shortMonth[dayData.month%12]}}</span>
                     <div className="flex items-center">
-                        <button aria-label="calendar backward" className="focus:text-gray-400 hover:text-gray-400 text-gray-800 dark:text-gray-100">
+                        <button @click = "preMonth" aria-label="calendar backward" className="focus:text-gray-400 hover:text-gray-400 text-gray-800 dark:text-gray-100">
                             <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                                 <polyline points="15 6 9 12 15 18"/>
                             </svg>
                         </button>
-                        <button aria-label="calendar forward" className="focus:text-gray-400 hover:text-gray-400 ml-3 text-gray-800 dark:text-gray-100">
+                        <button @click = "nextMonth" aria-label="calendar forward" className="focus:text-gray-400 hover:text-gray-400 ml-3 text-gray-800 dark:text-gray-100">
                             <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-chevron-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                                 <polyline points="9 6 15 12 9 18"/>
@@ -143,14 +143,32 @@ export default {
         return {
             dayData:[],
             calenders:[],
-            shortMonth:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
+            shortMonth:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+            calMonth:'',// 인덱스 번지를 확인하기 위한 변수
         };
     },
     created() {
+        this.setToday();
         this.setDate();
     },
     methods: {
-        setDate:function(){
+        preMonth:function (){
+            this.dayData.month -=1;
+            if(this.dayData.month <0){
+                this.dayData.month = 11;
+                this.dayData.year -= 1;
+            }
+            this.setDate();
+        },
+        nextMonth:function (){
+            this.dayData.month +=1;
+            if(this.dayData.month >11){
+                this.dayData.month = 0;
+                this.dayData.year += 1;
+            }
+            this.setDate();
+        },
+        setToday:function (){
             var nowTime = new Date();
             var timeData = {
                 year:nowTime.getFullYear(),
@@ -159,9 +177,11 @@ export default {
                 week:nowTime.getDay(),
             };
             this.dayData = timeData;
-            var fristweek = new Date(timeData.year,timeData.month,1).getDay(); //해당월 첫날 요일
-            var LastDay = new Date(timeData.year,timeData.month+1,0).getDate(); // 해달월 마지막날.
-
+            this.calMonth = timeData.month;
+        },
+        setDate:function(){
+            var fristweek = new Date(this.dayData.year,this.dayData.month,1).getDay(); //해당월 첫날 요일
+            var LastDay = new Date(this.dayData.year,this.dayData.month+1,0).getDate(); // 해달월 마지막날.
             var monthData = []
             let startDay = 1;
 
