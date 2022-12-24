@@ -73,7 +73,7 @@
             <div class="w-full" v-show="hideAndShow_2">
                 <div class = "w-4/5 h-fit bg-gray-200 m-auto py-2 pl-4">
                     <input type = "checkbox" class = "w-4 h-4 float-left mr-2" name = "allchk" id = "allchk" @click="allChk" checked/>
-                    <span class = "text-xs float-left">전체선택</span>{{this.chkStoreList}}
+                    <span class = "text-xs float-left">전체선택</span>
                     <div class =  "clear-both"></div>
                 </div>
                 <div v-for ="store in storeList" class = "w-4/5 mt-2 m-auto pl-4" >
@@ -114,6 +114,7 @@ export default {
             storeList: [],
             dateRange: [],
             chkStoreList:[],
+            allChkFlag: true,
             // datepicker:'',
         }),
         created() {
@@ -179,7 +180,12 @@ export default {
             });
         },
         allChk : function(){//전체선택 체크
-            this.getStoreList();
+            this.allChkFlag = !this.allChkFlag;
+            if(this.allChkFlag){
+                this.getStoreList();
+            }else{
+                this.chkStoreList =[];
+            }
         },
 
 
