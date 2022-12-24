@@ -16,7 +16,7 @@
 
     </div>
 
-    <div id = "sideBar" class =  "w-3/5 h-full absolute z-50 bg-gray-200 top-0 right-0" v-if="toggleSideMenu">
+    <div id = "sideBar" class =  "w-52 h-full absolute z-50 bg-gray-200 top-0 right-0" v-if="toggleSideMenu">
         <div id = "topArae" class = "w-full text-lg mt-4 ml-4">
             <button id = "closeButton" class = "mt-5 mb-5 " @click="toggleSideMenu = !toggleSideMenu">
                 <img class = "h-8" src="/img/exit.png">
