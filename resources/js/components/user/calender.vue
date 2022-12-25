@@ -20,7 +20,7 @@
                         </button>
                     </div>
                 </div>
-                <div className="max-w-sm flex items-center justify-between pt-12 overflow-x-auto">
+                <div className="max-w-sm flex items-center justify-between pt-12 overflow-x-auto" >
                     <table className="w-full ">
                         <thead>
                         <tr>
@@ -80,12 +80,12 @@
                         <tr v-for="calender in calenders">
                             <td v-for="day in calender">
                                 <div v-if="day != 0 && day != dayData.day" className="px-2 py-2 cursor-pointer flex w-full justify-center">
-                                    <p v-bind:id="day" @click = "setSendDay($event)" className="text-base text-gray-500 dark:text-gray-100 font-medium" >
+                                    <p v-bind:id="day" @click = "setSendDate($event)" className="text-base text-gray-500 dark:text-gray-100 font-medium" >
                                         {{day}}
                                     </p>
                                 </div>
                                 <div v-if="day != 0 && day == dayData.day" className="flex items-center justify-center w-full rounded-full cursor-pointer">
-                                    <p v-bind:id= "day" @click = "setSendDay($event)" role="link"  className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:bg-indigo-500 hover:bg-indigo-500 text-base w-8 h-8 flex items-center justify-center font-medium text-white bg-indigo-700 rounded-full">{{day}}</p>
+                                    <p v-bind:id= "day" @click = "setSendDate($event)" role="link"  className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:bg-indigo-500 hover:bg-indigo-500 text-base w-8 h-8 flex items-center justify-center font-medium text-white bg-indigo-700 rounded-full">{{day}}</p>
                                 </div>
                             </td>
                         </tr>
@@ -94,32 +94,18 @@
                 </div>
             </div>
 
-            <div className="dark:bg-gray-700 bg-gray-50 rounded-b">
+            <div className="dark:bg-gray-700 bg-gray-50 rounded-b" v-for="salesInfo in salesList">
                 <div className="px-4">
                     <div className="h-14 border-b py-2 border-gray-400 border-dashed">
                         <div class="w-24 h-10 pr-4 pt-1 float-left border-r-2 border-r-blue-600">
                             <p className=" text-xs font-light leading-3 text-gray-500 dark:text-gray-300">
-                                현대백화점
+                                {{salesInfo.storeInfo.STORENAME}}
                             </p>
-                            <a tabIndex="0" className="h-10 focus:outline-none text-sm font-medium leading-5 text-gray-800 dark:text-gray-100 mt-2">압구정 본점</a>
-                        </div>
-                        <div class="w-50 float-left">
-                            <p className="pl-4 text-base pt-2 leading-4 leading-none text-gray-600 dark:text-gray-300">
-                                코코핸들 스몰
-                            </p>
-                        </div>
-                        <div class="clear-both"></div>
-                    </div>
-                    <div className="h-14 border-b py-2 border-gray-400 border-dashed">
-                        <div class="w-24 h-10 pr-4 pt-1 float-left border-r-2 border-r-blue-600">
-                            <p className="w-24 text-xs font-light leading-3 text-gray-500 dark:text-gray-300">
-                                롯데백화점
-                            </p>
-                            <a tabIndex="0" className="w-25 h-10 focus:outline-none text-sm font-medium leading-5 text-gray-800 dark:text-gray-100 mt-2">명동본점</a>
+                            <a tabIndex="0" className="h-10 focus:outline-none text-sm font-medium leading-5 text-gray-800 dark:text-gray-100 mt-2">{{salesInfo.storeInfo.STORELOCATION}}</a>
                         </div>
                         <div class="w-50 float-left">
                             <p className="pl-4 text-xs pt-2 leading-4 leading-none text-gray-600 dark:text-gray-300">
-                                클래식 미디움 캐비어 금장 블랙
+                                {{salesInfo.productInfo.product_name.PRODUCTNAME}} {{salesInfo.productInfo.SIZE}} {{salesInfo.productInfo.MATERIAL}} {{salesInfo.productInfo.PATTERN}} {{salesInfo.productInfo.COLOR}} {{salesInfo.productInfo.COLOR2}}
                             </p>
                         </div>
                         <div class="clear-both"></div>
@@ -143,7 +129,8 @@ export default {
             dayData:[],
             calenders:[],
             shortMonth:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
-            sendDay:'',
+            sendDate:'',
+            salesList:[],
             nowPoint:'',
         };
     },
@@ -163,11 +150,20 @@ export default {
             $('#'+this.nowPoint).parent().removeClass('px-2 py-2 cursor-pointer flex w-full justify-center');
             $('#'+this.nowPoint).parent().addClass('flex items-center justify-center w-full rounded-full cursor-pointer');
         },
-        setSendDay:function(event){
+        setSendDate:function(event){
             let day = event.currentTarget.id;
-            this.sendDay = this.dayData.year+'-'+(this.dayData.month+1)+'-'+day;
-            console.log(this.sendDay);
+            this.sendDate = this.dayData.year+'-'+(this.dayData.month+1)+'-'+day;
+            console.log(this.sendDate);
             this.changePoint(event);
+            axios.post('/getSalesLog',
+                {sendDate: this.sendDate}
+            ).then(response => {
+                this.salesList = response.data;
+                console.log(this.salesList);
+                this.changePoint(event);
+
+
+            });
         },
         preMonth:function (){
             this.dayData.month -=1;
@@ -186,8 +182,8 @@ export default {
             this.setDate();
         },
         setToday:function (){
-            var nowTime = new Date();
-            var timeData = {
+            let nowTime = new Date();
+            let timeData = {
                 year:nowTime.getFullYear(),
                 month:nowTime.getMonth(),
                 day:nowTime.getDate(),
@@ -198,16 +194,16 @@ export default {
 
         },
         setDate:function(){
-            var fristweek = new Date(this.dayData.year,this.dayData.month,1).getDay(); //해당월 첫날 요일
-            var LastDay = new Date(this.dayData.year,this.dayData.month+1,0).getDate(); // 해달월 마지막날.
-            var monthData = []
+            let fristWeek = new Date(this.dayData.year,this.dayData.month,1).getDay(); //해당월 첫날 요일
+            let LastDay = new Date(this.dayData.year,this.dayData.month+1,0).getDate(); // 해달월 마지막날.
+            let monthData = []
             let startDay = 1;
 
-            for(var j = 0; j<6; j++){
-                var temp = []
-                for(var i = 0; i<7; i++){
+            for(let j = 0; j<6; j++){
+                let temp = []
+                for(let i = 0; i<7; i++){
                     if(j == 0){
-                        if(fristweek > i){
+                        if(fristWeek > i){
                             temp[i] = 0;
                         }
                         else{

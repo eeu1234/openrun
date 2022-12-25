@@ -4,9 +4,10 @@ namespace App\Http\Controllers\User;
 
 
 use App\Http\Controllers\Controller;
-use App\Models\Product_Detail;
+
 use App\Models\Sale_Log;
 use App\Models\Store;
+use App\Models\Product_Detail;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -23,7 +24,23 @@ class SalesController extends Controller
     //
     public function getSalesData(Request $request){
         $salesLog = Sale_Log::with(['productLastSalesLog'])->where('FINALPRODUCTCODE',$request->no)->orderBy('SOLDDATE','DESC')->get();
+
         return response()->json($salesLog);
+
+    }
+    public function getSalesLog(Request $request){
+        \Log::info("dddddddddddddddddddddd");
+
+
+        $salesLogCode = Sale_Log::where('SOLDDATE',$request->sendDate)->orderBy('SOLDDATE','DESC')->get();
+        $salesLogInfoArr = [];
+        foreach($salesLogCode as $k){
+            $salesInfo['productInfo'] = Product_Detail::with(['productName'])->where('FINALPRODUCTCODE',$k->FINALPRODUCTCODE)->first();
+            $salesInfo['storeInfo'] = STORE::where('STORECODE',$k->STORECODE)->first(); //스토어정보
+            array_push($salesLogInfoArr,$salesInfo);
+        }
+        \Log::info([$salesLogInfoArr]);
+        return response()->json($salesLogInfoArr);
 
     }
     public function getSalesTimelineData(Request $request){
@@ -33,9 +50,6 @@ class SalesController extends Controller
         $groupStoreInfoArr = [];
         foreach($groupStoreCode as $k){
             $groupStoreCnt = Sale_Log::where('STORECODE',$k->STORECODE)->count();//group by count
-
-
-
             $groupStoreInfo = STORE::where('STORECODE',$k->STORECODE)->first(); //스토어정보
             $groupStoreInfo['STORECNT'] = $groupStoreCnt;
 

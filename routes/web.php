@@ -42,6 +42,8 @@ Route::any('/salesData/{no}',function($no){
 Route::any('/getSalesData','\App\Http\Controllers\User\SalesController@getSalesData');
 Route::any('/getSalesTimelineData','\App\Http\Controllers\User\SalesController@getSalesTimelineData');
 
+Route::any('/getSalesLog','\App\Http\Controllers\User\SalesController@getSalesLog');
+
 
 
 /*체크박스 검색페이지*/
