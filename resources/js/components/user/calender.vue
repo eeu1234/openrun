@@ -1,6 +1,6 @@
 <template>
     <body className="bg-white min-h-screen dark:bg-gray-900">
-    <div className="flex items-center justify-center py-8 px-4">
+    <div  className="flex items-center justify-center py-8 px-4">
         <div className="w-11/12 shadow-lg m-auto">
             <div className="md:p-8 p-5 dark:bg-gray-800 bg-white rounded-t">
                 <div className="px-4 flex items-center justify-between">
@@ -79,14 +79,13 @@
 
                         <tr v-for="calender in calenders">
                             <td v-for="day in calender">
-                                <div v-if="day != 0 && day != dayData.day"
-                                    className="px-2 py-2 cursor-pointer flex w-full justify-center">
+                                <div v-if="day != 0 && day != dayData.day" className="px-2 py-2 cursor-pointer flex w-full justify-center">
                                     <p v-bind:id="day" @click = "setSendDay($event)" className="text-base text-gray-500 dark:text-gray-100 font-medium" >
                                         {{day}}
                                     </p>
                                 </div>
                                 <div v-if="day != 0 && day == dayData.day" className="flex items-center justify-center w-full rounded-full cursor-pointer">
-                                    <a v-bind:id= "day" @click = "setSendDay($event)" role="link" tabIndex="0" className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:bg-indigo-500 hover:bg-indigo-500 text-base w-9 h-9 flex items-center justify-center font-medium text-white bg-indigo-700 rounded-full">{{day}}</a>
+                                    <p v-bind:id= "day" @click = "setSendDay($event)" role="link"  className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:bg-indigo-500 hover:bg-indigo-500 text-base w-9 h-9 flex items-center justify-center font-medium text-white bg-indigo-700 rounded-full">{{day}}</p>
                                 </div>
                             </td>
                         </tr>
@@ -145,6 +144,7 @@ export default {
             calenders:[],
             shortMonth:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
             sendDay:'',
+            nowPoint:'',
         };
     },
     created() {
@@ -152,10 +152,22 @@ export default {
         this.setDate();
     },
     methods: {
+        changePoint:function(event){
+            $('#'+this.nowPoint).removeClass('focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:bg-indigo-500 hover:bg-indigo-500 text-base w-9 h-9 flex items-center justify-center font-medium text-white bg-indigo-700 rounded-full');
+            $('#'+this.nowPoint).addClass('text-base text-gray-500 dark:text-gray-100 font-medium');
+            $('#'+this.nowPoint).parent().removeClass('flex items-center justify-center w-full rounded-full cursor-pointer');
+            $('#'+this.nowPoint).parent().addClass('px-2 py-2 cursor-pointer flex w-full justify-center');
+            this.nowPoint = event.currentTarget.id;
+            $('#'+this.nowPoint).removeClass('text-base text-gray-500 dark:text-gray-100 font-medium');
+            $('#'+this.nowPoint).addClass('focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:bg-indigo-500 hover:bg-indigo-500 text-base w-9 h-9 flex items-center justify-center font-medium text-white bg-indigo-700 rounded-full');
+            $('#'+this.nowPoint).parent().removeClass('px-2 py-2 cursor-pointer flex w-full justify-center');
+            $('#'+this.nowPoint).parent().addClass('flex items-center justify-center w-full rounded-full cursor-pointer');
+        },
         setSendDay:function(event){
             let day = event.currentTarget.id;
             this.sendDay = this.dayData.year+'-'+(this.dayData.month+1)+'-'+day;
             console.log(this.sendDay);
+            this.changePoint(event);
         },
         preMonth:function (){
             this.dayData.month -=1;
@@ -182,7 +194,8 @@ export default {
                 week:nowTime.getDay(),
             };
             this.dayData = timeData;
-            this.calMonth = timeData.month;
+            this.nowPoint = timeData.day;
+
         },
         setDate:function(){
             var fristweek = new Date(this.dayData.year,this.dayData.month,1).getDay(); //해당월 첫날 요일
