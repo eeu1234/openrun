@@ -85,7 +85,7 @@
                                     </p>
                                 </div>
                                 <div v-if="day != 0 && day == dayData.day" className="flex items-center justify-center w-full rounded-full cursor-pointer">
-                                    <p v-bind:id= "day" @click = "setSendDay($event)" role="link"  className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:bg-indigo-500 hover:bg-indigo-500 text-base w-9 h-9 flex items-center justify-center font-medium text-white bg-indigo-700 rounded-full">{{day}}</p>
+                                    <p v-bind:id= "day" @click = "setSendDay($event)" role="link"  className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:bg-indigo-500 hover:bg-indigo-500 text-base w-8 h-8 flex items-center justify-center font-medium text-white bg-indigo-700 rounded-full">{{day}}</p>
                                 </div>
                             </td>
                         </tr>
@@ -153,13 +153,13 @@ export default {
     },
     methods: {
         changePoint:function(event){
-            $('#'+this.nowPoint).removeClass('focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:bg-indigo-500 hover:bg-indigo-500 text-base w-9 h-9 flex items-center justify-center font-medium text-white bg-indigo-700 rounded-full');
+            $('#'+this.nowPoint).removeClass('focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:bg-indigo-500 hover:bg-indigo-500 text-base w-8 h-8 flex items-center justify-center font-medium text-white bg-indigo-700 rounded-full');
             $('#'+this.nowPoint).addClass('text-base text-gray-500 dark:text-gray-100 font-medium');
             $('#'+this.nowPoint).parent().removeClass('flex items-center justify-center w-full rounded-full cursor-pointer');
             $('#'+this.nowPoint).parent().addClass('px-2 py-2 cursor-pointer flex w-full justify-center');
             this.nowPoint = event.currentTarget.id;
             $('#'+this.nowPoint).removeClass('text-base text-gray-500 dark:text-gray-100 font-medium');
-            $('#'+this.nowPoint).addClass('focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:bg-indigo-500 hover:bg-indigo-500 text-base w-9 h-9 flex items-center justify-center font-medium text-white bg-indigo-700 rounded-full');
+            $('#'+this.nowPoint).addClass('focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:bg-indigo-500 hover:bg-indigo-500 text-base w-8 h-8 flex items-center justify-center font-medium text-white bg-indigo-700 rounded-full');
             $('#'+this.nowPoint).parent().removeClass('px-2 py-2 cursor-pointer flex w-full justify-center');
             $('#'+this.nowPoint).parent().addClass('flex items-center justify-center w-full rounded-full cursor-pointer');
         },
