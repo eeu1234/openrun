@@ -21,17 +21,8 @@ class SalesController extends Controller
     public function main(Request $request){
 
     }
-    //
-    public function getSalesData(Request $request){
-        $salesLog = Sale_Log::with(['productLastSalesLog'])->where('FINALPRODUCTCODE',$request->no)->orderBy('SOLDDATE','DESC')->get();
 
-        return response()->json($salesLog);
-
-    }
-    public function getSalesLog(Request $request){
-        \Log::info("dddddddddddddddddddddd");
-
-
+    public function getSalesLog(Request $request){//캘린더 vue에서 판매내역 호출
         $salesLogCode = Sale_Log::where('SOLDDATE',$request->sendDate)->orderBy('SOLDDATE','DESC')->get();
         $salesLogInfoArr = [];
         foreach($salesLogCode as $k){
@@ -39,17 +30,20 @@ class SalesController extends Controller
             $salesInfo['storeInfo'] = STORE::where('STORECODE',$k->STORECODE)->first(); //스토어정보
             array_push($salesLogInfoArr,$salesInfo);
         }
-        \Log::info([$salesLogInfoArr]);
         return response()->json($salesLogInfoArr);
 
     }
-    public function getSalesTimelineData(Request $request){
-//        $salesLog = Sale_Log::with(['productLastSalesLog'])->where('FINALPRODUCTCODE',$request->no)->groupBy('STORECODE')->orderBy('SOLDDATE','DESC')->get();
-        $groupStoreCode = Sale_Log::with(['productLastSalesLog'])->groupBy('STORECODE')->get('STORECODE');
 
+    //
+    public function getSalesTimelineData(Request $request){//타임라인
+        $salesLog = Sale_Log::with(['productLastSalesLog'])->where('FINALPRODUCTCODE',$request->no)->orderBy('SOLDDATE','DESC')->get();
+        return response()->json($salesLog);
+    }
+    public function getSalesData(Request $request){//판매기록
+        $groupStoreCode = Sale_Log::with(['productLastSalesLog'])->whereBetween('SOLDDATE', [$request->startDate, $request->endDate])->groupBy('STORECODE')->get('STORECODE');
         $groupStoreInfoArr = [];
         foreach($groupStoreCode as $k){
-            $groupStoreCnt = Sale_Log::where('STORECODE',$k->STORECODE)->count();//group by count
+            $groupStoreCnt = Sale_Log::where('STORECODE',$k->STORECODE)->count();//Group by count
             $groupStoreInfo = STORE::where('STORECODE',$k->STORECODE)->first(); //스토어정보
             $groupStoreInfo['STORECNT'] = $groupStoreCnt;
 
@@ -57,8 +51,7 @@ class SalesController extends Controller
 
         }
 
-
-//        \Log::info([$groupStoreInfoArr]);
+        //array_multisort 정렬필요
         return response()->json($groupStoreInfoArr);
     }
 

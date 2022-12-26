@@ -43,7 +43,10 @@ export default {
 
     }),
     props: {
-        storeList: {
+        dateRange : {//검색기간
+            type: Array,
+        },
+        storeList: {//체크된 백화점 목록
             type: Array,
         },
         toggleLogType: {
@@ -54,31 +57,38 @@ export default {
         },
     },
     watch : {
-        toggleLogType(){
-            this.type = this.toggleLogType();
-        },
         storeList(){
-            this.getSalesTimeline(this.storeList);
+            this.getSalesTimeline(this.storeList,this.dateRange);
         },
+        dateRange(){//검색기간 선택시
+            this.getSalesTimeline(this.storeList,this.dateRange);
+        },
+
     },
 
     created() {
-        this.getSalesTimeline(this.storeList);
+
     },
 
     methods: {
 
-        getSalesTimeline : function(storeArrData){
+        getSalesTimeline : function(storeArrData,periodArrData){
             const data = {
                 "no" : this.no,
             };
-            axios.post('/getSalesData', data
+            axios.post('/getSalesTimelineData', data
             ).then(response => {
                 const storeInfoArr = [];
                 for (let i = 0; i < response.data.length; i++) {
                     for(let j =0; j<storeArrData.length;j++){
                         if(response.data[i].STORECODE == storeArrData[j]){
-                            storeInfoArr.push(response.data[i]);
+                            let soldDate = dayjs(new Date(response.data[i].SOLDDATE)).format('YYYY-MM-DD');
+                            let start_date = dayjs(new Date(periodArrData[0])).format('YYYY-MM-DD');//기간검색 시작날짜
+                            let end_date = dayjs(new Date(periodArrData[1])).format('YYYY-MM-DD');//기간검색 종료날짜
+                            if(soldDate >= start_date && soldDate <= end_date){ // 기간내 데이터라면
+                                storeInfoArr.push(response.data[i]);
+                            }
+
                         }
                     }
 
@@ -90,12 +100,6 @@ export default {
 
         main : function(){
             location.href='/productView'
-        },
-        back : function(){
-            history.back();
-        },
-        goTimeline : function(){
-            location.href='./salesTimeline'
         },
         getMonthOnly(date){
             return dayjs(new Date(date)).format('MMM');

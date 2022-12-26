@@ -10,9 +10,9 @@
             </div>
             <div class ="flex float-left w-2/4  items-center content-center text-center">
                 <div class="relative m-auto">
-                    <button class='ml-4' @click="salesDataToggleVar = !salesDataToggleVar" type="button">
-                        <span class="float-left text-base font-sans font-semibold m-auto" v-show="!toggleLogTypeVar">타임라인</span>
-                        <span class="float-left text-base font-sans font-semibold m-auto" v-show="toggleLogTypeVar">판매기록</span>
+                    <button class='ml-4' @click="salesDataTogglelet = !salesDataTogglelet" type="button">
+                        <span class="float-left text-base font-sans font-semibold m-auto" v-show="!toggleLogTypelet">타임라인</span>
+                        <span class="float-left text-base font-sans font-semibold m-auto" v-show="toggleLogTypelet">판매기록</span>
                         <span class="float-left h-full">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="mt-1 ml-2 w-4 h-4">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75l3 3m0 0l3-3m-3 3v-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -20,9 +20,9 @@
                         </span>
                         <span class = "clear-both"></span>
                     </button>
-                    <div class="absolute top-6 left-2 bg-gray-50 w-full border-2" v-show="salesDataToggleVar">
-                        <p class="text-base pt-2 pb-2" @click="toggleLogTypeFn" v-show="toggleLogTypeVar">타임라인</p>
-                        <p class="text-base pt-2 pb-2" @click="toggleLogTypeFn" v-show="!toggleLogTypeVar">판매기록</p>
+                    <div class="absolute top-6 left-2 bg-gray-50 w-full border-2" v-show="salesDataTogglelet">
+                        <p class="text-base pt-2 pb-2" @click="toggleLogTypeFn" v-show="toggleLogTypelet">타임라인</p>
+                        <p class="text-base pt-2 pb-2" @click="toggleLogTypeFn" v-show="!toggleLogTypelet">판매기록</p>
                     </div>
                 </div>
             </div>
@@ -45,21 +45,18 @@
         </div>
         <div class="" v-show="hideAndShow_1">
             <div class = "w-4/5 h-14 m-auto">
-                <Datepicker ref="datepicker" v-model="dateRange" type="date" range placeholder="Select date range" class="w-full bg-gray-200"
+                <Datepicker ref="datepicker" v-model="dateRange" range type="date"  :max-date="new Date()" class="w-full bg-gray-200" :enable-time-picker="false"
                             default-value="defaultValue"></Datepicker>
             </div>
             <div  class = "w-4/5 m-auto text-center text-base">
-                <div class = "float-left w-1/4">
+                <div class = "float-left w-1/3">
                     <div class = "w-11/12 m-auto border-2 rounded-base py-2" @click = "clickperiod_1">당월</div>
                 </div>
-                <div class = "float-left w-1/4 h-10">
+                <div class = "float-left w-1/3 h-10">
                     <div class = "w-11/12 m-auto border-2 rounded-base py-2" @click = "clickperiod_2">1개월</div>
                 </div>
-                <div class = "float-left w-1/4 h-10">
+                <div class = "float-left w-1/3 h-10">
                     <div class = "w-11/12 m-auto border-2 rounded-base py-2" @click = "clickperiod_3">3개월</div>
-                </div>
-                <div class = "float-left w-1/4 h-10">
-                    <div class = "w-11/12 m-auto border-2 rounded-base py-2" @click = "clickperiod_4">직접입력</div>
                 </div>
                 <div class = "clear-both"></div>
             </div>
@@ -78,7 +75,7 @@
                 </div>
                 <div v-for ="store in storeList" class = "w-4/5 mt-2 m-auto pl-4" >
                     <div>
-                        <input type = "checkbox" v-bind:value= "store.STORECODE" class = "w-4 h-4 float-left mr-2 chk" v-model="chkStoreList"  />
+                        <input type = "checkbox" v-bind:value="store.STORECODE" class = "w-4 h-4 float-left mr-2 chk" v-model="chkStoreList"/>
                         <span class = "text-xs float-left">{{store.STORENAME}}({{store.STORELOCATION}})</span>
                         <div class =  "clear-both"></div>
                     </div>
@@ -90,27 +87,39 @@
     </div>
 
 
-    <salesLog v-show="toggleLogTypeVar" :no="this.no" v-bind:storeList="this.chkStoreList"/>
-    <salesTimeline v-show="!toggleLogTypeVar" :no="this.no" v-bind:storeList="this.chkStoreList"/>
+    <salesLog v-show="toggleLogTypelet" :no="this.no" v-bind:storeList="this.chkStoreList" v-bind:dateRange="this.dateRange"/>
+    <salesTimeline v-show="!toggleLogTypelet" :no="this.no" v-bind:storeList="this.chkStoreList" v-bind:dateRange="this.dateRange"/>
 </template>
 
 <script>
 import Datepicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 
 
 
 export default {
-        setup: () => ({
+        setup() {
+            const date = ref();
 
-        }),
+            // For demo purposes assign range from the current date
+            onMounted(() => {
+                const startDate = new Date();
+                const endDate = new Date(new Date().setDate(startDate.getDate() + 7));
+                date.value = [startDate, endDate];
+
+            })
+            return {
+                date,
+
+            }
+        },
         components: { Datepicker },
         data: () => ({
             hideAndShow_1 : false,
             hideAndShow_2 : false,
-            toggleLogTypeVar : false,
-            salesDataToggleVar : false,
+            toggleLogTypelet : false,
+            salesDataTogglelet : false,
             storeList: [],
             dateRange: [],
             chkStoreList:[],
@@ -121,61 +130,55 @@ export default {
             this.getStoreList();
             this.clickperiod_1();
 
-
         },
         mounted(){
             const datepicker = this.$refs.datepicker;
-            // this.datepicker = datepicker;
         },
-        watch(){
-            hideAndShow_1;
-            hideAndShow_2;
-            this.toggleLogTypeVar;
-            salesDataToggleVar;
-            this.chkStoreList;
+        watch : {
+            dateRange(value){//검색기간 선택시
+                if(value[1] == null ){
+                    value[1] = new Date();//endDate 없으면 오늘날짜로
+                }
+                this.dateRange = [value[0],value[1]];
+
+            },
 
         },
         props:['no'],
         methods: {
             toggleLogTypeFn : function(){
-                this.toggleLogTypeVar = !this.toggleLogTypeVar;
-                this.salesDataToggleVar = !this.salesDataToggleVar;
+                this.toggleLogTypelet = !this.toggleLogTypelet;
+                this.salesDataTogglelet = !this.salesDataTogglelet;
             },
 
-            clickperiod_1:function(){
-                var endDay = new Date();
-                var startDay = new Date();
+            clickperiod_1:function(){//검색기간 > 당월선택
+                let endDay = new Date();
+                let startDay = new Date();
                 startDay.setDate(1);
                 this.dateRange = [startDay,endDay];
             },
-            clickperiod_2:function(){
-                var now = new Date();
-                var endDay = new Date();
-                var startDay = new Date(now.setMonth(now.getMonth() - 1));
+            clickperiod_2:function(){//검색기간 > 1개월 선택
+                let now = new Date();
+                let endDay = new Date();
+                let startDay = new Date(now.setMonth(now.getMonth() - 1));
                 this.dateRange = [startDay,endDay];
             },
-            clickperiod_3:function(){
-                var now = new Date();
-                var endDay = new Date();
-                var startDay = new Date(now.setMonth(now.getMonth() - 3));
+            clickperiod_3:function(){//검색기간 > 3개월 선택
+                let now = new Date();
+                let endDay = new Date();
+                let startDay = new Date(now.setMonth(now.getMonth() - 3));
                 this.dateRange = [startDay,endDay];
-            },
-            clickperiod_4:function(){
-                this.dateRange=[];
-                console.log(this.datepicker);
-                this.datepicker.openMenu();
             },
 
-        getStoreList(){
+        getStoreList(){//백화점 목록 가져오기
             axios.post('/checkSearch/getStoreList', {
                 }
             ).then(response => {
                 // console.log(response.data);
                 this.storeList = response.data;
-                for(var i=0;i < response.data.length;i++){
+                for(let i=0;i < response.data.length;i++){
                     this.chkStoreList[i] = response.data[i].STORECODE;//전체리스트 선택
                 }
-                //console.log(this.chkStoreList);
 
             });
         },
@@ -187,7 +190,6 @@ export default {
                 this.chkStoreList =[];
             }
         },
-
 
         main : function(){
             location.href='/productView'

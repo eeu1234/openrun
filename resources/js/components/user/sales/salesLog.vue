@@ -19,6 +19,8 @@
 <script>
 
 
+import dayjs from "dayjs";
+
 export default {
     components: {
 
@@ -37,7 +39,10 @@ export default {
     }),
 
     props: {
-        storeList: {
+        dateRange : {//검색기간
+          type: Array,
+        },
+        storeList: {//체크된 백화점 목록
             type: Array,
         },
         toggleLogType: {
@@ -49,18 +54,17 @@ export default {
     },
 
     watch : {
-        toggleLogType(){
-            this.type = this.toggleLogType();
-        },
         storeList(){
-            this.getSalesData(this.storeList);
+            this.getSalesData(this.storeList,this.dateRange);
         },
-
+        dateRange(){//검색기간 선택시
+            this.getSalesData(this.storeList,this.dateRange);
+        },
 
     },
 
     created() {
-        this.getSalesData(this.storeList);
+
 
     },
     mounted() {
@@ -68,19 +72,20 @@ export default {
 
 
     methods: {
-        getSalesData : function(storeArrData){
-
+        getSalesData : function(storeArrData,periodArrData){
             const data = {
                 "no" : this.no,
+                "startDate" : dayjs(new Date(this.dateRange[0])).format('YYYY-MM-DD'),
+                "endDate" : dayjs(new Date(this.dateRange[1])).format('YYYY-MM-DD'),
             };
 
-            axios.post('/getSalesTimelineData', data
+            axios.post('/getSalesData', data
             ).then(response => {
                 const storeInfoArr = [];
                 for (let i = 0; i < response.data.length; i++) {
                     for(let j =0; j<storeArrData.length;j++){
                         if(response.data[i].STORECODE == storeArrData[j]){
-                            storeInfoArr.push(response.data[i]);
+                                storeInfoArr.push(response.data[i]);
                         }
                     }
 
@@ -101,12 +106,6 @@ export default {
 
         main : function(){
             location.href='/productView/'+this.no;
-        },
-        back : function(){
-            history.back();
-        },
-        goSalesLog : function(){
-            location.href='./salesList'
         },
 
 
