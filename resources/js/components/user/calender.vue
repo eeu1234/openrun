@@ -161,8 +161,6 @@ export default {
             ).then(response => {
                 this.salesList = response.data;
                 console.log(this.salesList);
-                this.changePoint(event);
-
 
             });
         },
