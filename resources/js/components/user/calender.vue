@@ -94,7 +94,7 @@
                 </div>
             </div>
 
-            <div className="dark:bg-gray-700 bg-gray-50 rounded-b" v-for="salesInfo in salesList">
+            <div className="dark:bg-gray-700 bg-gray-50 rounded-b pb-2" v-for="salesInfo in salesList">
                 <div className="px-4">
                     <div className="h-14 border-b py-2 border-gray-400 border-dashed">
                         <div class="w-24 h-10 pr-4 pt-1 float-left border-r-2 border-r-blue-600">
@@ -104,7 +104,7 @@
                             <a tabIndex="0" className="h-10 focus:outline-none text-sm font-medium leading-5 text-gray-800 dark:text-gray-100 mt-2">{{salesInfo.storeInfo.STORELOCATION}}</a>
                         </div>
                         <div class="w-50 float-left">
-                            <p className="pl-4 text-xs pt-2 leading-4 leading-none text-gray-600 dark:text-gray-300">
+                            <p className="pl-4 text-xs pt-2 leading-4 leading-none text-gray-600 dark:text-gray-300" @click="goDetail(salesInfo.productInfo.FINALPRODUCTCODE)">
                                 {{salesInfo.productInfo.product_name.PRODUCTNAME}} {{salesInfo.productInfo.SIZE}} {{salesInfo.productInfo.MATERIAL}} {{salesInfo.productInfo.PATTERN}} {{salesInfo.productInfo.COLOR}} {{salesInfo.productInfo.COLOR2}}
                             </p>
                         </div>
@@ -126,6 +126,7 @@
 export default {
     data: function () {
         return {
+            productCode:0,
             dayData:[],
             calenders:[],
             shortMonth:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
@@ -192,6 +193,7 @@ export default {
             this.dayData = timeData;
             this.nowPoint = timeData.day;
 
+
         },
         setDate:function(){
             let fristWeek = new Date(this.dayData.year,this.dayData.month,1).getDay(); //해당월 첫날 요일
@@ -227,6 +229,11 @@ export default {
             }
 
             this.calenders = monthData;
+
+        },
+        //제품상세페이지로 이동한다.
+        goDetail:function(productCode) {
+            location.href='./productView/'+productCode;
 
         },
     },

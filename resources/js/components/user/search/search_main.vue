@@ -16,7 +16,7 @@
             </div>
 
                 <div v-for = "(result,idx) in results"  :key="idx" class="w-full">
-                        <button class = "repeatComponent " v-on:click="goDetail(result.FINALPRODUCTCODE)">
+                        <button class = "repeatComponent " @click="goDetail(result.FINALPRODUCTCODE)">
                             <div class = "w-full h-18 mt-4 my-2">
                                 <div class = "float-left w-1/4">
                                     <img class = "h-full" src="/img/classic_medium_bag.jpg">
