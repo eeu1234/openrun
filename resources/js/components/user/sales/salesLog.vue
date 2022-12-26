@@ -36,21 +36,31 @@ export default {
 
     }),
 
-    props: ['toggleLogType','no'],
+    props: {
+        storeList: {
+            type: Array,
+        },
+        toggleLogType: {
+            type: Boolean,
+        },
+        no: {
+            type: String,
+        },
+    },
 
     watch : {
         toggleLogType(){
             this.type = this.toggleLogType();
         },
+        storeList(){
+            this.getSalesData(this.storeList);
+        },
+
 
     },
 
     created() {
-        this.getSalesData();
-
-
-
-
+        this.getSalesData(this.storeList);
 
     },
     mounted() {
@@ -58,7 +68,7 @@ export default {
 
 
     methods: {
-        getSalesData : function(){
+        getSalesData : function(storeArrData){
 
             const data = {
                 "no" : this.no,
@@ -66,10 +76,22 @@ export default {
 
             axios.post('/getSalesTimelineData', data
             ).then(response => {
-                this.salesArr = response.data;
+                const storeInfoArr = [];
+                for (let i = 0; i < response.data.length; i++) {
+                    for(let j =0; j<storeArrData.length;j++){
+                        if(response.data[i].STORECODE == storeArrData[j]){
+                            storeInfoArr.push(response.data[i]);
+                        }
+                    }
+
+                }
+                this.salesArr = storeInfoArr;
+                this.totalCnt = 0;//총 판매횟수 초기화
                 this.salesArr.forEach((item) => {
-                    this.totalCnt += parseInt(item.STORECNT);
+                    this.totalCnt += parseInt(item.STORECNT);//총 판매횟수 합계
                 });
+
+
 
 
 

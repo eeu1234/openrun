@@ -24,7 +24,7 @@
 
             <div id = "menuIndex" class = " w-8/12 mb-2 font-sans "><a href="/" class="">메인페이지</a></div>
             <div id = "menuIndex" class = " w-8/12 mb-2 font-sans"><a href="./searchMain" class="">검색</a></div>
-            <div id = "menuIndex" class = " w-8/12 mb-2 font-sans"><a href="./productView" class="">상세페이지</a></div>
+<!--            <div id = "menuIndex" class = " w-8/12 mb-2 font-sans"><a href="./productView" class="">상세페이지</a></div>-->
 
         </div>
 

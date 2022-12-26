@@ -42,30 +42,49 @@ export default {
         salesArr : [],
 
     }),
-
-    props: ['toggleLogType','no','storeList'],
-
+    props: {
+        storeList: {
+            type: Array,
+        },
+        toggleLogType: {
+            type: Boolean,
+        },
+        no: {
+            type: String,
+        },
+    },
     watch : {
         toggleLogType(){
             this.type = this.toggleLogType();
         },
-
+        storeList(){
+            this.getSalesTimeline(this.storeList);
+        },
     },
 
     created() {
-        this.getSalesTimeline();
-
+        this.getSalesTimeline(this.storeList);
     },
 
     methods: {
 
-        getSalesTimeline : function(no,s_date,e_date,placeArr){
+        getSalesTimeline : function(storeArrData){
             const data = {
                 "no" : this.no,
             };
             axios.post('/getSalesData', data
             ).then(response => {
-                this.salesArr = response.data;
+                const storeInfoArr = [];
+                for (let i = 0; i < response.data.length; i++) {
+                    for(let j =0; j<storeArrData.length;j++){
+                        if(response.data[i].STORECODE == storeArrData[j]){
+                            storeInfoArr.push(response.data[i]);
+                        }
+                    }
+
+                }
+                this.salesArr = storeInfoArr;
+
             });
         },
 

@@ -90,8 +90,8 @@
     </div>
 
 
-    <salesLog v-show="toggleLogTypeVar" :no="this.no" @storeList="this.chkStoreList"/>
-    <salesTimeline v-show="!toggleLogTypeVar" :no="this.no" @storeList="this.chkStoreList"/>
+    <salesLog v-show="toggleLogTypeVar" :no="this.no" v-bind:storeList="this.chkStoreList"/>
+    <salesTimeline v-show="!toggleLogTypeVar" :no="this.no" v-bind:storeList="this.chkStoreList"/>
 </template>
 
 <script>
