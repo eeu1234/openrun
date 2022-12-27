@@ -10,9 +10,9 @@
             </div>
             <div class ="flex float-left w-2/4  items-center content-center text-center">
                 <div class="relative m-auto">
-                    <button class='ml-4' @click="salesDataTogglelet = !salesDataTogglelet" type="button">
-                        <span class="float-left text-base font-sans font-semibold m-auto" v-show="!toggleLogTypelet">타임라인</span>
-                        <span class="float-left text-base font-sans font-semibold m-auto" v-show="toggleLogTypelet">판매기록</span>
+                    <button class='ml-4' @click="salesDataToggle = !salesDataToggle" type="button">
+                        <span class="float-left text-base font-sans font-semibold m-auto" v-show="!toggleLogType">타임라인</span>
+                        <span class="float-left text-base font-sans font-semibold m-auto" v-show="toggleLogType">판매기록</span>
                         <span class="float-left h-full">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="mt-1 ml-2 w-4 h-4">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75l3 3m0 0l3-3m-3 3v-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -20,9 +20,9 @@
                         </span>
                         <span class = "clear-both"></span>
                     </button>
-                    <div class="absolute top-6 left-2 bg-gray-50 w-full border-2" v-show="salesDataTogglelet">
-                        <p class="text-base pt-2 pb-2" @click="toggleLogTypeFn" v-show="toggleLogTypelet">타임라인</p>
-                        <p class="text-base pt-2 pb-2" @click="toggleLogTypeFn" v-show="!toggleLogTypelet">판매기록</p>
+                    <div class="absolute top-6 left-2 bg-gray-50 w-full border-2" v-show="salesDataToggle">
+                        <p class="text-base pt-2 pb-2" @click="toggleLogTypeFn" v-show="toggleLogType">타임라인</p>
+                        <p class="text-base pt-2 pb-2" @click="toggleLogTypeFn" v-show="!toggleLogType">판매기록</p>
                     </div>
                 </div>
             </div>
@@ -43,12 +43,12 @@
             <img class = "h-4 float-right mr-5" src="/img/down.png">
             <div class = "clear-both"></div>
         </div>
-        <div class="" v-show="hideAndShow_1">
+        <div class="" >
             <div class = "w-4/5 h-14 m-auto">
                 <Datepicker ref="datepicker" v-model="dateRange" range type="date"  :max-date="new Date()" class="w-full bg-gray-200" :enable-time-picker="false"
                             default-value="defaultValue"></Datepicker>
             </div>
-            <div  class = "w-4/5 m-auto text-center text-base">
+            <div  class = "w-4/5 m-auto text-center text-base " v-show="hideAndShow_1">
                 <div class = "float-left w-1/3">
                     <div class = "w-11/12 m-auto border-2 rounded-base py-2" @click = "clickperiod_1">당월</div>
                 </div>
@@ -86,9 +86,8 @@
 
     </div>
 
-
-    <salesLog v-show="toggleLogTypelet" :no="this.no" v-bind:storeList="this.chkStoreList" v-bind:dateRange="this.dateRange"/>
-    <salesTimeline v-show="!toggleLogTypelet" :no="this.no" v-bind:storeList="this.chkStoreList" v-bind:dateRange="this.dateRange"/>
+    <salesLog v-show="toggleLogType" :no="this.no" v-bind:storeList="this.chkStoreList" v-bind:dateRange="this.dateRange"/>
+    <salesTimeline v-show="!toggleLogType" :no="this.no" v-bind:storeList="this.chkStoreList" v-bind:dateRange="this.dateRange"/>
 </template>
 
 <script>
@@ -118,8 +117,8 @@ export default {
         data: () => ({
             hideAndShow_1 : false,
             hideAndShow_2 : false,
-            toggleLogTypelet : false,
-            salesDataTogglelet : false,
+            toggleLogType : false,
+            salesDataToggle : false,
             storeList: [],
             dateRange: [],
             chkStoreList:[],
@@ -147,8 +146,8 @@ export default {
         props:['no'],
         methods: {
             toggleLogTypeFn : function(){
-                this.toggleLogTypelet = !this.toggleLogTypelet;
-                this.salesDataTogglelet = !this.salesDataTogglelet;
+                this.toggleLogType = !this.toggleLogType;
+                this.salesDataToggle = !this.salesDataToggle;
             },
 
             clickperiod_1:function(){//검색기간 > 당월선택

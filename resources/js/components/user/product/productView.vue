@@ -11,7 +11,7 @@
             <div class ="flex float-left w-2/4  items-center content-center text-center">
                 <p class=" items-center m-auto text-base font-sans font-semibold">상세페이지</p>
             </div>
-            <div class ="flex float-left w-1/4 pl-16">
+            <div class ="flex float-left w-1/4 pl-10">
                 <a href="/" class="  w-8 h-8">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="m-auto  w-6 h-6" >
                         <path d="M12.75 12.75a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM7.5 15.75a.75.75 0 100-1.5.75.75 0 000 1.5zM8.25 17.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM9.75 15.75a.75.75 0 100-1.5.75.75 0 000 1.5zM10.5 17.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12 15.75a.75.75 0 100-1.5.75.75 0 000 1.5zM12.75 17.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM14.25 15.75a.75.75 0 100-1.5.75.75 0 000 1.5zM15 17.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM16.5 15.75a.75.75 0 100-1.5.75.75 0 000 1.5zM15 12.75a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM16.5 13.5a.75.75 0 100-1.5.75.75 0 000 1.5z" />
@@ -29,7 +29,8 @@
             </swiper>
         </div>
         <div class = "w-100 h-12 content-center text-center items-center py-2">
-            <p class=" items-center m-auto text-xs font-sans font-light">최근 판매정보 : {{product.salesLog.SOLDDATE}} {{getDay(product.salesLog.SOLDDATE)}}요일 / {{product.salesLog.product_last_sales_log.STORENAME}}{{product.salesLog.product_last_sales_log.STORELOCATION}}</p>
+            <p class=" items-center m-auto text-xs font-sans font-light" v-if="product.salesLog != null">최근 판매정보 : {{product.salesLog.SOLDDATE}} {{getDay(product.salesLog.SOLDDATE)}}요일 / {{product.salesLog.product_last_sales_log.STORENAME}}{{product.salesLog.product_last_sales_log.STORELOCATION}}</p>
+            <p class=" items-center m-auto text-xs font-sans font-light" v-if="product.salesLog == null">최근 판매정보가 없습니다.</p>
         </div>
 
         <div class = "relative w-100 h-42 content-center text-center items-center mt-3 pt-1 pl-10"  >
@@ -42,9 +43,10 @@
             <div class = "flex w-3/5 h-10 content-center text-left items-left">
                 <p class="w-full h-fit text-xs font-sans font-semilight pb-1  text-slate-600">{{product.COLOR}} / {{product.MATERIAL}} / {{product.COLOR2}}</p>
             </div>
-            <div class = "absolute right-0 top-0 flex  content-center align-middle mt-4 mr-10 ">
+            <div class = "absolute w-1/6 right-0 top-0 flex  content-center align-middle mt-4 mr-10">
                 <div class = "relative flex w-full h-full content-center text-left items-left bg-black rounded-xl align-middle pt-3 pb-4 px-4">
-                    <p class="text-2xl font-sans font-bold text-white text-center align-middle  m-auto">{{getDayDiff(product.salesLog.SOLDDATE)}}</p>
+                    <p class="text-2xl font-sans font-bold text-white text-center align-middle  m-auto" v-if="product.salesLog != null">{{getDayDiff(product.salesLog.SOLDDATE)}}</p>
+                    <p class="text-2xl font-sans font-bold text-white text-center align-middle  m-auto" v-if="product.salesLog == null">-</p>
                 </div>
             </div>
         </div>

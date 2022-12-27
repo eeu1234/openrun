@@ -1,11 +1,15 @@
 <template>
+
     <div id="logBox" class="w-full mt-14 my-20">
-        <div class="w-4/5 font-bold bg-white mt-10 p-2 m-auto text-gray-800 border-b-2">
-            <p class="w-full  text-xl">총 {{this.totalCnt}}회</p>
+        <div class="w-4/5 bg-white  px-2 m-auto">
+            <div class="w-full font-medium text-center" v-if="this.salesArr.length == 0">
+                데이터가 없습니다.
+            </div>
+            <p class="w-full font-bold text-xl text-gray-800 border-b-2" v-if="this.salesArr.length != 0">총 {{this.totalCnt}}회</p>
         </div>
         <div class="w-4/5 p-2 m-auto">
             <div class="w-full bg-white p-2" v-for="salesData in salesArr">
-                <div class="w-full">
+                <div class="w-full" v-if="salesData != null">
                     <div class="float-left text-gray-800 text-base">{{salesData.STORENAME}} {{salesData.STORELOCATION}}</div>
                     <div class="float-right w-1/10 text-gray-800 text-base">{{salesData.STORECNT}}회</div>
                     <div class = "clear-both"></div>
@@ -20,10 +24,11 @@
 
 
 import dayjs from "dayjs";
+import Loading from 'vue3-loading-overlay';
 
 export default {
     components: {
-
+        Loading,
     },
 
     setup() {
@@ -35,6 +40,7 @@ export default {
         type : false,
         salesArr : [],
         totalCnt : 0,
+        loading : false,
 
     }),
 
@@ -73,6 +79,7 @@ export default {
 
     methods: {
         getSalesData : function(storeArrData,periodArrData){
+            this.loading = true;
             const data = {
                 "no" : this.no,
                 "startDate" : dayjs(new Date(this.dateRange[0])).format('YYYY-MM-DD'),
@@ -96,7 +103,7 @@ export default {
                     this.totalCnt += parseInt(item.STORECNT);//총 판매횟수 합계
                 });
 
-
+                this.loading = false;
 
 
 

@@ -1,18 +1,18 @@
 <template>
-    <body className="bg-white min-h-screen dark:bg-gray-900">
+    <body className="bg-white min-h-screen ">
     <div  className="flex items-center justify-center py-8 px-4">
         <div className="w-11/12 shadow-lg m-auto">
-            <div className="md:p-8 p-5 dark:bg-gray-800 bg-white rounded-t">
+            <div className="md:p-8 p-5  bg-white rounded-t">
                 <div className="px-4 flex items-center justify-between">
-                    <span tabIndex="0" className=" focus:outline-none text-xl font-bold dark:text-gray-100 text-gray-800">{{ dayData.year}} {{shortMonth[dayData.month%12]}}</span>
+                    <span tabIndex="0" className=" focus:outline-none text-xl font-bold  text-gray-800">{{ dayData.year}} {{shortMonth[dayData.month%12]}}</span>
                     <div className="flex items-center">
-                        <button @click = "preMonth" aria-label="calendar backward" className="focus:text-gray-400 hover:text-gray-400 text-gray-800 dark:text-gray-100">
+                        <button @click = "preMonth" aria-label="calendar backward" className="focus:text-gray-400 hover:text-gray-400 text-gray-800 ">
                             <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                                 <polyline points="15 6 9 12 15 18"/>
                             </svg>
                         </button>
-                        <button @click = "nextMonth" aria-label="calendar forward" className="focus:text-gray-400 hover:text-gray-400 ml-3 text-gray-800 dark:text-gray-100">
+                        <button @click = "nextMonth" aria-label="calendar forward" className="focus:text-gray-400 hover:text-gray-400 ml-3 text-gray-800 ">
                             <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-chevron-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                                 <polyline points="9 6 15 12 9 18"/>
@@ -26,49 +26,49 @@
                         <tr>
                             <th>
                                 <div className="w-full flex justify-center">
-                                    <p className="text-base font-medium text-center text-gray-800 dark:text-gray-100">
+                                    <p className="text-base font-medium text-center text-gray-800 ">
                                         Mo
                                     </p>
                                 </div>
                             </th>
                             <th>
                                 <div className="w-full flex justify-center">
-                                    <p className=" text-base font-medium text-center text-gray-800 dark:text-gray-100">
+                                    <p className=" text-base font-medium text-center text-gray-800">
                                         Tu
                                     </p>
                                 </div>
                             </th>
                             <th>
                                 <div className="w-full flex justify-center">
-                                    <p className="text-base font-medium text-center text-gray-800 dark:text-gray-100">
+                                    <p className="text-base font-medium text-center text-gray-800 ">
                                         We
                                     </p>
                                 </div>
                             </th>
                             <th>
                                 <div class ="w-full flex justify-center">
-                                    <p className="text-base font-medium text-center text-gray-800 dark:text-gray-100">
+                                    <p className="text-base font-medium text-center text-gray-800 ">
                                         Th
                                     </p>
                                 </div>
                             </th>
                             <th>
                                 <div className="w-full flex justify-center">
-                                    <p className=" text-base font-medium text-center text-gray-800 dark:text-gray-100" >
+                                    <p className=" text-base font-medium text-center text-gray-800 " >
                                         Fr
                                     </p>
                                 </div>
                             </th>
                             <th>
                                 <div className="w-full flex justify-center">
-                                    <p className="text-base font-medium text-center text-gray-800 dark:text-gray-100">
+                                    <p className="text-base font-medium text-center text-gray-800 ">
                                         Sa
                                     </p>
                                 </div>
                             </th>
                             <th>
                                 <div className="w-full flex justify-center">
-                                    <p className="text-base font-medium text-center text-gray-800 dark:text-gray-100">
+                                    <p className="text-base font-medium text-center text-gray-800 ">
                                         Su
                                     </p>
                                 </div>
@@ -87,12 +87,12 @@
                                     </div>
                                     <div v-if="this.salesThisYearMonthData.length != 0"><!--해당 월에 판매 내역이있을경우-->
                                             <div v-if="this.salesThisYearMonthData.includes(day) == false">
-                                                <p v-bind:id="day" @click = "setSendDate($event)" className="text-base text-gray-500 dark:text-gray-100 font-medium">
+                                                <p v-bind:id="day" @click = "setSendDate($event)" className="text-base text-gray-500  font-medium">
                                                     {{day}}
                                                 </p>
                                             </div>
                                             <div v-if="this.salesThisYearMonthData.includes(day) == true">
-                                                <p v-bind:id="day" @click = "setSendDate($event)" className="text-base text-indigo-500 dark:text-gray-100 font-bold">
+                                                <p v-bind:id="day" @click = "setSendDate($event)" className="text-base text-indigo-500  font-bold">
                                                     {{day}}
                                                 </p>
                                             </div>
@@ -111,17 +111,17 @@
                 </div>
             </div>
 
-            <div className="dark:bg-gray-700 bg-gray-50 rounded-b pb-2" v-for="salesInfo in salesList">
+            <div className=" bg-gray-50 rounded-b pb-2" v-for="salesInfo in salesList">
                 <div className="px-4">
                     <div className="h-14 border-b py-2 border-gray-400 border-dashed">
                         <div class="w-24 h-10 pr-4 pt-1 float-left border-r-2 border-r-blue-600">
-                            <p className=" text-xs font-light leading-3 text-gray-500 dark:text-gray-300">
+                            <p className=" text-xs font-light leading-3 text-gray-500 ">
                                 {{salesInfo.storeInfo.STORENAME}}
                             </p>
-                            <a tabIndex="0" className="h-10 focus:outline-none text-sm font-medium leading-5 text-gray-800 dark:text-gray-100 mt-2">{{salesInfo.storeInfo.STORELOCATION}}</a>
+                            <a tabIndex="0" className="h-10 focus:outline-none text-sm font-medium leading-5 text-gray-800 mt-2">{{salesInfo.storeInfo.STORELOCATION}}</a>
                         </div>
                         <div class="w-50 float-left">
-                            <p className="pl-4 text-xs pt-2 leading-4 leading-none text-gray-600 dark:text-gray-300" @click="goDetail(salesInfo.productInfo.FINALPRODUCTCODE)">
+                            <p className="pl-4 text-xs pt-2 leading-4 leading-none text-gray-600 " @click="goDetail(salesInfo.productInfo.FINALPRODUCTCODE)">
                                 {{salesInfo.productInfo.product_name.PRODUCTNAME}} {{salesInfo.productInfo.SIZE}} {{salesInfo.productInfo.MATERIAL}} {{salesInfo.productInfo.PATTERN}} {{salesInfo.productInfo.COLOR}} {{salesInfo.productInfo.COLOR2}}
                             </p>
                         </div>
@@ -259,7 +259,7 @@ export default {
                 for(let value of yearMonthDateArr){
                     let yearMonthDate = [];
                     yearMonthDate = value.split('-')//일만 잘라냄
-                    $('#'+yearMonthDate[2]).addClass('text-base text-indigo-500 dark:text-gray-100 font-bold');
+                    $('#'+yearMonthDate[2]).addClass('text-base text-indigo-500 font-bold');
                     this.salesThisYearMonthData.push(Number.parseInt(yearMonthDate[2]));
                 }
 
