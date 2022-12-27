@@ -28,7 +28,6 @@ Route::any('/search','\App\Http\Controllers\Controller@searchPage');
 Route::any('/admin','\App\Http\Controllers\Admin\AdminController@main');
 
 /*사용자 페이지*/
-//Route::get('/productView/{productCode?}','\App\Http\Controllers\User\ProductController@main');
 Route::any('/productView',function () { return view('productView');});
 Route::any('/productView/{no}',function($no){
     return view('productView',['no' => $no]);
@@ -39,6 +38,7 @@ Route::any('/getProductDetail','\App\Http\Controllers\User\ProductController@get
 Route::any('/salesData/{no}',function($no){
     return view('salesData',['no' => $no]);
 });
+
 Route::any('/getSalesData','\App\Http\Controllers\User\SalesController@getSalesData');
 Route::any('/getSalesTimelineData','\App\Http\Controllers\User\SalesController@getSalesTimelineData');
 
@@ -47,9 +47,8 @@ Route::any('/getSalesLogThisYearMonth','\App\Http\Controllers\User\SalesControll
 
 
 
-/*체크박스 검색페이지*/
+/*검색페이지*/
 Route::any('/searchMain','\App\Http\Controllers\User\SearchController@main'); // 사용자가 페이지 접근시
-Route::any('/checkSearch/searchData','\App\Http\Controllers\User\SearchController@searchData'); //사용자가 검색버튼을 누를 때 데이터 불러옴
 Route::any('/checkSearch/loadData','\App\Http\Controllers\User\SearchController@loadData'); //사용자가 페이지 접근시 데이터 불러옴
 
 Route::any('/checkSearch/getStoreList','\App\Http\Controllers\User\SearchController@getStoreList'); //사용자가 페이지 접근시 데이터 불러옴

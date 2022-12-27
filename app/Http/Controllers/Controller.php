@@ -67,17 +67,16 @@ class Controller extends \Illuminate\Routing\Controller
 
     public function searchPage(Request $request)
     {
-
         $searchWord = $request->input('searchWord') ?? "";
-       /* $productInfo = DB::table('PRODUCT_DETAIL')
-            ->where('FINALPRODUCTNAME', 'like', '%' . $searchWord . '%')
-            ->get();
-       */
-        $productInfo = Product_Detail::with(['productName'])
-            ->where('FINALPRODUCTNAME', 'like', '%' . $searchWord . '%')
-            ->get();
-
-        \Log::info([$productInfo]);
+        $productInfo = DB::select("select A.*,B.PRODUCTNAME from PRODUCT_DETAIL A INNER JOIN PRODUCT B ON A.PRODUCTCODE = B.PRODUCTCODE
+            where (
+                A.FINALPRODUCTNAME LIKE '%{$searchWord}%' or
+                A.SIZE LIKE '%{$searchWord}%' or
+                A.COLOR LIKE '%{$searchWord}%' or
+                A.COLOR2 LIKE '%{$searchWord}%' or
+                A.PATTERN LIKE '%{$searchWord}%' or
+                A.MATERIAL LIKE '%{$searchWord}%' or
+                B.PRODUCTNAME LIKE '%{$searchWord}%')");
         return response()->json($productInfo);
     }
 

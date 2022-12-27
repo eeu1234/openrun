@@ -23,9 +23,9 @@
                                 </div>
                                 <div id="productInfo" class = "float-left pl-4 w-3/4 text-left">
                                     <div class=" w-full text-xs tracking-wide font-medium">Chanel</div>
-                                    <div class=" w-full text-base tracking-wide font-medium">{{result.product_name.PRODUCTNAME}} {{result.FINALPRODUCTNAME}} {{result.SIZE}} </div>
-                                    <div class=" w-full text-xs tracking-wide text-slate-400">{{result.COLOR}} {{result.MATERIAL}}</div>
-                                    <div class=" w-full text-xs tracking-wide text-slate-400">{{result.COLOR2}}</div>
+                                    <div class=" w-full text-base tracking-wide font-medium">{{result.PRODUCTNAME}} {{result.FINALPRODUCTNAME}} {{result.SIZE}} </div>
+                                    <div class=" w-full text-xs tracking-wide text-slate-400">{{result.COLOR}} {{result.COLOR2}}</div>
+                                    <div class=" w-full text-xs tracking-wide text-slate-400">{{result.MATERIAL}} {{result.PATTERN}}</div>
                                 </div>
                             </div>
                         </button>

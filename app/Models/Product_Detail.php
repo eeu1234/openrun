@@ -26,7 +26,7 @@ class Product_Detail extends Model
 
     public function productName(){
 
-            return $this->hasOne(Product::class,'PRODUCTCODE','PRODUCTCODE');
+            return $this->hasMany(Product::class,'PRODUCTCODE','PRODUCTCODE');
     }
 
     public function productLastSalesLog(){

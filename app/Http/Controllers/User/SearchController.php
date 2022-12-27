@@ -23,8 +23,4 @@ class SearchController extends Controller
             ->get();
         return response()->json($storeList);
     }
-    public function searchData()
-    {
-
-    }
 }
