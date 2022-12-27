@@ -44,8 +44,8 @@
                 <p class="w-full h-fit text-xs font-sans font-semilight pb-1  text-slate-600">{{product.COLOR}} / {{product.MATERIAL}} / {{product.COLOR2}}</p>
             </div>
             <div class = "absolute w-1/6 right-0 top-0 flex  content-center align-middle mt-4 mr-10">
-                <div class = "relative flex w-full h-full content-center text-left items-left bg-black rounded-xl align-middle pt-3 pb-4 px-4">
-                    <p class="text-2xl font-sans font-bold text-white text-center align-middle  m-auto" v-if="product.salesLog != null">{{getDayDiff(product.salesLog.SOLDDATE)}}</p>
+                <div class = "relative flex w-full h-full content-center text-left items-left bg-black rounded-xl align-middle pt-3 pb-4 px-2">
+                    <p class="text-2xl font-sans font-bold text-white text-center align-middle  m-auto" v-if="product.salesLog != null">D+{{getDayDiff(product.salesLog.SOLDDATE)}}</p>
                     <p class="text-2xl font-sans font-bold text-white text-center align-middle  m-auto" v-if="product.salesLog == null">-</p>
                 </div>
             </div>
@@ -111,7 +111,8 @@ export default {
             let today = dayjs();
             let expired_at = dayjs(soldDate);
             let result = expired_at.diff(today, "day", true);
-            return Math.floor(result);
+            console.log(result);
+            return Math.floor(result*-1);
 
         },
         back : function(){
