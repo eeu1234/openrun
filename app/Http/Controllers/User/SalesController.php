@@ -33,12 +33,18 @@ class SalesController extends Controller
         return response()->json($salesLogInfoArr);
 
     }
+    public function getSalesLogThisYearMonth(Request $request){//캘린더 vue에서 해당 월 판매데이터 존재 여부
+        $salesDate = Sale_Log::whereMonth('SOLDDATE',$request->thisMonth)->whereYear('SOLDDATE',$request->thisYear)->orderBy('SOLDDATE','DESC')->get('SOLDDATE');
+
+        return response()->json($salesDate);
+    }
 
     //
     public function getSalesTimelineData(Request $request){//타임라인
         $salesLog = Sale_Log::with(['productLastSalesLog'])->where('FINALPRODUCTCODE',$request->no)->orderBy('SOLDDATE','DESC')->get();
         return response()->json($salesLog);
     }
+
     public function getSalesData(Request $request){//판매기록
         $groupStoreCode = Sale_Log::with(['productLastSalesLog'])->whereBetween('SOLDDATE', [$request->startDate, $request->endDate])->groupBy('STORECODE')->get('STORECODE');
         $groupStoreInfoArr = [];
@@ -51,7 +57,14 @@ class SalesController extends Controller
 
         }
 
-        //array_multisort 정렬필요
+        //판매 횟수 순 정렬
+        $volume = [];
+        foreach ( $groupStoreInfoArr as $key => $row) {
+            $volume[$key] = $row['STORECNT'];
+        }
+        array_multisort($volume,SORT_DESC,$groupStoreInfoArr);
+
+
         return response()->json($groupStoreInfoArr);
     }
 

@@ -4,7 +4,7 @@
         <div className="w-11/12 shadow-lg m-auto">
             <div className="md:p-8 p-5 dark:bg-gray-800 bg-white rounded-t">
                 <div className="px-4 flex items-center justify-between">
-            <span tabIndex="0" className=" focus:outline-none text-xl font-bold dark:text-gray-100 text-gray-800">{{ dayData.year}} {{shortMonth[dayData.month%12]}}</span>
+                    <span tabIndex="0" className=" focus:outline-none text-xl font-bold dark:text-gray-100 text-gray-800">{{ dayData.year}} {{shortMonth[dayData.month%12]}}</span>
                     <div className="flex items-center">
                         <button @click = "preMonth" aria-label="calendar backward" className="focus:text-gray-400 hover:text-gray-400 text-gray-800 dark:text-gray-100">
                             <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -79,14 +79,31 @@
 
                         <tr v-for="calender in calenders">
                             <td v-for="day in calender">
-                                <div v-if="day != 0 && day != nowPoint" className="px-2 py-2 cursor-pointer flex w-full justify-center">
-                                    <p v-bind:id="day" @click = "setSendDate($event)" className="text-base text-gray-500 dark:text-gray-100 font-medium" >
-                                        {{day}}
-                                    </p>
+                                <div v-if="day != 0 && day != nowPoint" className="px-2 py-2 cursor-pointer flex w-full justify-center"><!--선택된 날짜가 없을 경우-->
+                                    <div v-if="this.salesThisYearMonthData.length == 0"><!--해당 월에 판매 내역이없을경우-->
+                                        <p v-bind:id="day" @click = "setSendDate($event)" >
+                                            {{day}}
+                                        </p>
+                                    </div>
+                                    <div v-if="this.salesThisYearMonthData.length != 0"><!--해당 월에 판매 내역이있을경우-->
+                                            <div v-if="this.salesThisYearMonthData.includes(day) == false">
+                                                <p v-bind:id="day" @click = "setSendDate($event)" className="text-base text-gray-500 dark:text-gray-100 font-medium">
+                                                    {{day}}
+                                                </p>
+                                            </div>
+                                            <div v-if="this.salesThisYearMonthData.includes(day) == true">
+                                                <p v-bind:id="day" @click = "setSendDate($event)" className="text-base text-indigo-500 dark:text-gray-100 font-bold">
+                                                    {{day}}
+                                                </p>
+                                            </div>
+
+                                    </div>
                                 </div>
-                                <div v-if="day != 0 && day == nowPoint" className="flex items-center justify-center w-full rounded-full cursor-pointer">
+
+                                <div v-if="day != 0 && day == nowPoint" className="flex items-center justify-center w-full rounded-full cursor-pointer"><!--선택된 날짜가 있을 경우-->
                                     <p v-bind:id= "day" @click = "setSendDate($event)" role="link"  className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:bg-indigo-500 hover:bg-indigo-500 text-base w-8 h-8 flex items-center justify-center font-medium text-white bg-indigo-700 rounded-full">{{day}}</p>
                                 </div>
+
                             </td>
                         </tr>
                         </tbody>
@@ -133,6 +150,7 @@ export default {
             sendDate:'',
             salesList:[],
             nowPoint:'',
+            salesThisYearMonthData:[],//해당년월에 판매된 데이터 배열
         };
     },
     created() {
@@ -141,27 +159,16 @@ export default {
     },
     methods: {
         changePoint:function(event){
-            $('#'+this.nowPoint).removeClass('focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:bg-indigo-500 hover:bg-indigo-500 text-base w-8 h-8 flex items-center justify-center font-medium text-white bg-indigo-700 rounded-full');
-            $('#'+this.nowPoint).addClass('text-base text-gray-500 dark:text-gray-100 font-medium');
-            $('#'+this.nowPoint).parent().removeClass('flex items-center justify-center w-full rounded-full cursor-pointer');
-            $('#'+this.nowPoint).parent().addClass('px-2 py-2 cursor-pointer flex w-full justify-center');
             this.nowPoint = event.currentTarget.id;
-            $('#'+this.nowPoint).removeClass('text-base text-gray-500 dark:text-gray-100 font-medium');
-            $('#'+this.nowPoint).addClass('focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:bg-indigo-500 hover:bg-indigo-500 text-base w-8 h-8 flex items-center justify-center font-medium text-white bg-indigo-700 rounded-full');
-            $('#'+this.nowPoint).parent().removeClass('px-2 py-2 cursor-pointer flex w-full justify-center');
-            $('#'+this.nowPoint).parent().addClass('flex items-center justify-center w-full rounded-full cursor-pointer');
         },
         setSendDate:function(event){
             let day = event.currentTarget.id;
             this.sendDate = this.dayData.year+'-'+(this.dayData.month+1)+'-'+day;
-            console.log(this.sendDate);
             this.changePoint(event);
             axios.post('/getSalesLog',
                 {sendDate: this.sendDate}
             ).then(response => {
                 this.salesList = response.data;
-                console.log(this.salesList);
-
             });
         },
         preMonth:function (){
@@ -201,6 +208,7 @@ export default {
             let monthData = []
             let startDay = 1;
 
+            //캘린더 데이터 생성
             for(let j = 0; j<6; j++){
                 let temp = []
                 for(let i = 0; i<7; i++){
@@ -226,9 +234,38 @@ export default {
                 if(startDay > LastDay){
                     break;
                 }
+
+
+
+
             }
 
             this.calenders = monthData;
+
+            //날짜에 판매데이터있는지
+            const data = {
+                thisYear: this.dayData.year,
+                thisMonth: this.dayData.month+1,//월은 0부터시작함
+            }
+            axios.post('./getSalesLogThisYearMonth', data
+            ).then(response => {
+                let yearMonthDateArr = [];
+                for(let i=0;i < response.data.length;i++){
+                    yearMonthDateArr.push(response.data[i].SOLDDATE);//판매일 array 생성
+                }
+                yearMonthDateArr = new Set(yearMonthDateArr)//date 중복제거
+
+                this.salesThisYearMonthData =[];//판매내역 배열 월변경 등 초기화
+                for(let value of yearMonthDateArr){
+                    let yearMonthDate = [];
+                    yearMonthDate = value.split('-')//일만 잘라냄
+                    $('#'+yearMonthDate[2]).addClass('text-base text-indigo-500 dark:text-gray-100 font-bold');
+                    this.salesThisYearMonthData.push(Number.parseInt(yearMonthDate[2]));
+                }
+
+
+            });
+
 
         },
         //제품상세페이지로 이동한다.

@@ -43,6 +43,7 @@ Route::any('/getSalesData','\App\Http\Controllers\User\SalesController@getSalesD
 Route::any('/getSalesTimelineData','\App\Http\Controllers\User\SalesController@getSalesTimelineData');
 
 Route::any('/getSalesLog','\App\Http\Controllers\User\SalesController@getSalesLog');
+Route::any('/getSalesLogThisYearMonth','\App\Http\Controllers\User\SalesController@getSalesLogThisYearMonth');
 
 
 
