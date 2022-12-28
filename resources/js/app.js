@@ -22,6 +22,13 @@ import salesTimeline from './components/user/sales/salesTimeline.vue';
 //체크박스 검색페이지
 import checkSearch from './components/user/sales/checkSearch.vue';
 
+//관리자 헤드 메뉴
+import head_menu from './components/admin/head_menu.vue';
+//관리자 상품 조회
+import adminProduct from './components/admin/adminProduct.vue';
+//관리자 상품 등록
+import adminEdit from "./components/admin/adminEdit.vue";
+
 
 // const app = createApp({});
 //
@@ -39,7 +46,10 @@ createApp(salesTimeline).mount("#salesTimeline");
 createApp(checkSearch).mount("#checkSearch");
 */
 
-const app = createApp({})
+const app = createApp({}) //사용자
+
+const admin = createApp({})//관리자
+
 
 // Vue.component('example-component1', require('./components/ExampleComponent1.vue').default);
 app.component('header_search', header_search)
@@ -52,3 +62,9 @@ app.component('checkSearch', checkSearch)
 
 
 app.mount('#app')
+
+admin.component('head_menu',head_menu);
+admin.component('adminProduct',adminProduct);
+admin.component('adminEdit',adminEdit);
+admin.mount('#adminApp');
+

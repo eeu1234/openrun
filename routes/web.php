@@ -25,7 +25,14 @@ Route::any('/store','\App\Http\Controllers\Controller@storeList');
 Route::any('/search','\App\Http\Controllers\Controller@searchPage');
 
 /*관리자 페이지*/
-Route::any('/admin','\App\Http\Controllers\Admin\AdminController@main');
+Route::any('/admin',function () {
+    return view('adminProduct');
+})->name('admin');//관리자 메인페이지
+Route::any('/admin/loadData','\App\Http\Controllers\Admin\AdminController@loadProductInfo'); //관리자가 페이지 접근시 데이터 불러옴
+Route::any('/admin/edit',function () {
+    return view('adminEdit');}); //관리자가 수정하는 페이지
+Route::any('/admin/searchData','\App\Http\Controllers\Admin\AdminController@searchProduct'); //관리자가 페이지 접근시 데이터 불러옴
+
 
 /*사용자 페이지*/
 Route::any('/productView',function () { return view('productView');});

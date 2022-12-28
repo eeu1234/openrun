@@ -173,7 +173,7 @@ export default {
             axios.post('/checkSearch/getStoreList', {
                 }
             ).then(response => {
-                // console.log(response.data);
+                console.log(response.data);
                 this.storeList = response.data;
                 for(let i=0;i < response.data.length;i++){
                     this.chkStoreList[i] = response.data[i].STORECODE;//전체리스트 선택
