@@ -122,7 +122,7 @@
                         </div>
                         <div class="w-50 float-left">
                             <p className="pl-4 text-xs pt-2 leading-4 leading-none text-gray-600 " @click="goDetail(salesInfo.productInfo.FINALPRODUCTCODE)">
-                                {{salesInfo.productInfo.product_name.PRODUCTNAME}} {{salesInfo.productInfo.SIZE}} {{salesInfo.productInfo.MATERIAL}} {{salesInfo.productInfo.PATTERN}} {{salesInfo.productInfo.COLOR}} {{salesInfo.productInfo.COLOR2}}
+                                {{salesInfo.productInfo.product_name[0].PRODUCTNAME}} {{salesInfo.productInfo.SIZE}} {{salesInfo.productInfo.MATERIAL}} {{salesInfo.productInfo.PATTERN}} {{salesInfo.productInfo.COLOR}} {{salesInfo.productInfo.COLOR2}}
                             </p>
                         </div>
                         <div class="clear-both"></div>

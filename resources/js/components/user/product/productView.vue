@@ -45,7 +45,7 @@
             </div>
             <div class = "absolute w-1/6 right-0 top-0 flex  content-center align-middle mt-4 mr-10">
                 <div class = "relative flex w-full h-full content-center text-left items-left bg-black rounded-xl align-middle pt-3 pb-4 px-2">
-                    <p class="text-2xl font-sans font-bold text-white text-center align-middle  m-auto" v-if="product.salesLog != null">D+{{getDayDiff(product.salesLog.SOLDDATE)}}</p>
+                    <p class="text-xl font-sans font-bold text-white text-center align-middle  m-auto" v-if="product.salesLog != null">D+{{getDayDiff(product.salesLog.SOLDDATE)}}</p>
                     <p class="text-2xl font-sans font-bold text-white text-center align-middle  m-auto" v-if="product.salesLog == null">-</p>
                 </div>
             </div>
