@@ -1,6 +1,6 @@
 <template>
-<!--    <div @click = "test" class = "w-3/12 py-2 text-center float-right border-2 border-black m-3 rounded-2xl ">상품검색</div>-->
-<!--    <div class = "clear-both"></div>-->
+    <div @click = "test" class = "w-3/12 py-2 text-center float-right border-2 border-black m-3 rounded-2xl ">상품검색</div>
+    <div class = "clear-both"></div>
     <div class = "border-2 border-black w-11/12 m-auto z-50 mb-10 py-4 px-2 mt-4">
         <div class = "w-full text-xs text-center my-4"></div>
         <table class = "m-auto">
@@ -83,18 +83,18 @@
                             <tbody>
                             <tr>
                                 <td class = "px-1 py-1 border">
-                                    <select v-model = "insertData[index][0]" class = "w-full float-left my-1 bg-slate-200 rounded">
+                                    <select v-model = "insertData[index][1]" class = "w-full float-left my-1 bg-slate-200 rounded">
                                         <option v-for="item in  store">{{item}}</option>
                                     </select>
                                 </td>
                                 <td class = "px-1 border">
-                                    <select v-model = "insertData[index][1]" class = "float-left my-1 w-full bg-slate-200 rounded">
+                                    <select v-model = "insertData[index][2]" class = "float-left my-1 w-full bg-slate-200 rounded">
                                         <option v-for="item in  storeLocation">{{item}}</option>
                                     </select>
 
                                 </td>
                                 <td class = "px-1 border">
-                                    <datepicker  v-model = "insertData[index][2]" class="float-left my-1 w-full"></datepicker>
+                                    <datepicker  v-model = "insertData[index][3]" class="float-left my-1 w-full"></datepicker>
                                 </td>
                             </tr>
                             </tbody>
@@ -105,7 +105,7 @@
                 </div>
             </div>
         </div>
-        <div class = "float-right px-5 py-1 mx-4 mt-4 border rounded bg-slate-200 border-slate-300">등록</div>
+        <div @click = "insertDB" class = "float-right px-5 py-1 mx-4 mt-4 border rounded bg-slate-200 border-slate-300">등록</div>
         <div class="clear-both"></div>
     </div>
 
@@ -188,7 +188,7 @@ export default {
                 }
             }
             this.selectedProduct.push(item);
-            this.insertData.push([]);
+            this.insertData.push([item.FINALPRODUCTCODE]);
         },
         delProduct:function(item){
             for(let i = 0; i<this.selectedProduct.length; i++){
@@ -221,6 +221,17 @@ export default {
             });
         },
         insertDB:function (){
+            console.log('hi');
+            for(let i = 0; i<this.insertData.length; i++){
+                if(this.insertData[i].length != 4){
+                    alert("데이터를 다 입력해주세요");
+                    return;
+                }
+            }//데이터가 다 들어있는지
+            for(let i = 0; i<this.insertData.length; i++){
+                this.insertData[i][3] = dayjs(this.insertData[3]).format('YYYY-MM-DD');
+            }
+            console.log(this.insertData);
             axios.post('/admin/insertData', this.insertData
             ).then(response => {
 

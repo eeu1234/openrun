@@ -145,16 +145,21 @@ class AdminController extends Controller
     }
     public function insertData(Request $request)
     {
-        \Log::info($request);
-        $productInfo = DB::table('PRODUCT_DETAIL')
-            ->join('PRODUCT', 'PRODUCT_DETAIL.PRODUCTCODE', '=', 'PRODUCT.PRODUCTCODE')
-            ->join('PRODUCT_CLASSIFY', 'PRODUCT.CLASSIFYCODE', '=', 'PRODUCT_CLASSIFY.CLASSIFYCODE')
-            ->select( 'FINALPRODUCTNAME')
-            ->where('PRODUCT_CLASSIFY.CLASSIFYNAME','=',$request->classify)
-            ->where('PRODUCT.PRODUCTNAME','=',$request->category)
+        foreach ($request as $value) {
+            \Log::info($value);
+        }
+        $storeCode = DB::table('STORE')
+            ->where('STORENAME','=',$request[0][1])
+            ->where('STORELOCATION','=',$request[0][2])
+            ->select( 'STORECODE')
             ->get();
-        \Log::info($productInfo);
-        return response()->json($productInfo);
+        \Log::info($request);
+//        DB::table('SALES_LOG')
+//            ->insert([
+//                'SOLDDATE' => $request[0][3],
+//                'STORECODE' => $storeCode[0]->STORECODE,
+//                'FINALPRODUCTCODE' => $request[0][0]
+//            ]);
     }
 
 }
