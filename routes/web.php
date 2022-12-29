@@ -32,6 +32,12 @@ Route::any('/admin/loadData','\App\Http\Controllers\Admin\AdminController@loadPr
 Route::any('/admin/edit',function () {
     return view('adminEdit');}); //관리자가 수정하는 페이지
 Route::any('/admin/searchData','\App\Http\Controllers\Admin\AdminController@searchProduct'); //관리자가 페이지 접근시 데이터 불러옴
+Route::any('/admin/loadCategory','\App\Http\Controllers\Admin\AdminController@loadCategory');
+Route::any('/admin/loadClassify','\App\Http\Controllers\Admin\AdminController@loadClassify');
+Route::any('/admin/loadProductName','\App\Http\Controllers\Admin\AdminController@loadProductName');
+Route::any('/admin/insertData','\App\Http\Controllers\Admin\AdminController@insertData');
+
+
 
 
 /*사용자 페이지*/

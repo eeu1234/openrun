@@ -1,43 +1,36 @@
 <template>
-    <div @click="test" class = "w-3/12 py-2 text-center float-right border-2 border-black m-3 rounded-2xl ">상품검색</div>
-    <div class = "clear-both"></div>
-    <div class = "border-2 border-black w-11/12 m-auto z-50 mb-10 py-4 px-2">
-        <div class = "w-full text-xs text-center my-4"> *사이즈 색상 색상2은 꼭 입력해주셔야 검색이 가능합니다.*</div>
+<!--    <div @click = "test" class = "w-3/12 py-2 text-center float-right border-2 border-black m-3 rounded-2xl ">상품검색</div>-->
+<!--    <div class = "clear-both"></div>-->
+    <div class = "border-2 border-black w-11/12 m-auto z-50 mb-10 py-4 px-2 mt-4">
+        <div class = "w-full text-xs text-center my-4"></div>
         <table class = "m-auto">
             <thead>
                 <tr>
-                    <td class = "w-1/5 text-center border ">제품명</td>
-                    <td class = "w-1/5 text-center border">사이즈</td>
-                    <td class = "w-1/5 text-center border">색상</td>
-                    <td class = "w-1/5 text-center border">색상2</td>
-                    <td class = "w-1/5 text-center border">재질</td>
+                    <td class = "w-1/3 text-center border ">종류</td>
+                    <td class = "w-1/3 text-center border">상품분류</td>
+                    <td class = "w-1/3 text-center border">상품명</td>
                 </tr>
             </thead>
             <tbody>
             <tr>
                 <td class = "px-1 py-1 border">
-                    <input v-model="sendData[0]" class = "w-full bg-slate-200 rounded" type="text">
+                    <input v-model="sendData.classify" type="text" list="classify" class = " w-full bg-slate-200 rounded"/>
+                    <datalist id = "classify"  >
+                        <option v-for="item in classify">{{item}}</option>
+                    </datalist>
                 </td>
                 <td class = "px-1 border">
-                    <select v-model="sendData[1]" class = "w-full bg-slate-200 rounded">
-                        <option v-for="item in size">{{item}}</option>
-                    </select>
+                    <input v-model="sendData.category" type="text" list="category" class = " w-full bg-slate-200 rounded"/>
+                    <datalist id = "category"  >
+                        <option v-for="item in category">{{item}}</option>
+                    </datalist>
 
                 </td>
                 <td class = "px-1 border">
-                    <select v-model="sendData[2]" class = "w-full bg-slate-200 rounded">
-                        <option v-for="item in color">{{item}}</option>
-                    </select>
-                </td>
-                <td class = "px-1 border">
-                    <select v-model="sendData[3]" class = "w-full bg-slate-200 rounded">
-                        <option v-for="item in color2">{{item}}</option>
-                    </select>
-                </td>
-                <td class = "px-1 border">
-                    <select v-model="sendData[4]" class = "w-full bg-slate-200 rounded">
-                        <option v-for="item in material">{{item}}</option>
-                    </select>
+                    <input v-model="sendData.productName" type="text" list="productName" class = "w-full bg-slate-200 rounded"/>
+                    <datalist id = "productName">
+                        <option v-for="item in productName">{{item}}</option>
+                    </datalist>
                 </td>
             </tr>
             </tbody>
@@ -79,7 +72,7 @@
                     </div>
                     <div class="clear-both"></div>
                     <div class = "w-full text-left">
-                        <table class = "m-auto">
+                        <table class = "float-left w-10/12">
                             <thead>
                             <tr>
                                 <td class = "w-1/3 text-center border ">백화점</td>
@@ -106,6 +99,8 @@
                             </tr>
                             </tbody>
                         </table>
+                        <div @click="delProduct(item)" class = "w-12 mx-3 my-4 h-10 float-left bg-slate-200 border-slate-300 p-2 rounded-xl">제거</div>
+                        <div class = "clear-both"></div>
                     </div>
                 </div>
             </div>
@@ -113,6 +108,7 @@
         <div class = "float-right px-5 py-1 mx-4 mt-4 border rounded bg-slate-200 border-slate-300">등록</div>
         <div class="clear-both"></div>
     </div>
+
 
 
 
@@ -133,32 +129,55 @@ export default {
          },
     data: () =>({
         productInfos:[],
-        sendData:[],
+        sendData:{
+            classify: '',
+            category: '',
+            productName:'',
+        },
         selectedProduct:[],
-        size:['뉴미니','동그리','라지','맥시','미니','미디움','쁘띠삭','원사이즈','정사각','직사각'],
-        color:['베이지','블랙','베이비'],
-        color2:['금장','은장','샴페인골드'],
-        material:['고트스킨','램','램스킨','카프스킨','캐비어'],
+        classify:[],
+        category:[],
+        productName:[],
         insertData:[],
         store:['갤러리아백화점','롯데백화점','샤넬플러그쉽','신세계백화점','현대백화점'],
         storeLocation:['강남점','대구점','명동본점','센텀시티','압구정점','잠실월드몰점','청담점']
     }),
+    watch: {
+        // sendData: {
+        //     handler() {
+        //         this.loadCategory();
+        //         console.log('test');
+        //     },
+        //     deep: true
+        // }
+        'sendData.classify':function(){
+            this.sendData.category = '';
+            this.sendData.productName = '';
+            this.loadCategory()
+        },
+        'sendData.category':function(){
+            this.loadProductName();
+            this.sendData.productName = '';
+        },
+        'sendData.productName':function(){
+        }
+    },
+
     created() {
+        this.loadClassify();
     },
     mounted(){
     },
     methods:{
-        test:function (){
-            console.log(this.sendData);
+        test:function(){
+            console.log(this.insertData);
+            console.log(this.selectedProduct);
+
         },
         searchData:function(){
-            // this.sendData[5] = 'hidden';
-            console.log(this.sendData);
             axios.post('/admin/searchData', this.sendData
             ).then(response => {
-                console.log(response.data);
                 this.productInfos = response.data;
-                console.log(this.productInfos);
             });
         },
         pushProduct:function (item){
@@ -171,8 +190,41 @@ export default {
             this.selectedProduct.push(item);
             this.insertData.push([]);
         },
-        test:function (){
-            console.log(this.insertData);
+        delProduct:function(item){
+            for(let i = 0; i<this.selectedProduct.length; i++){
+                if(item.FINALPRODUCTCODE == this.selectedProduct[i].FINALPRODUCTCODE){
+                    this.selectedProduct.splice(i, 1);
+                    this.insertData.splice(i, 1);
+                    return;
+                }
+            }
+        },
+        loadClassify:function (){
+            axios.post('/admin/loadClassify', {}
+            ).then(response => {
+                this.classify = [];
+                for (var i = 0; i < response.data.length; i++) {this.classify.push(response.data[i].CLASSIFYNAME);}
+            });
+        },
+        loadCategory:function (){
+            axios.post('/admin/loadCategory', this.sendData
+            ).then(response => {
+                this.category = [];
+                for (var i = 0; i < response.data.length; i++) {this.category.push(response.data[i].PRODUCTNAME);}
+            });
+        },
+        loadProductName:function (){
+            axios.post('/admin/loadProductName', this.sendData
+            ).then(response => {
+                this.productName = [];
+                for (var i = 0; i < response.data.length; i++) {this.productName.push(response.data[i].FINALPRODUCTNAME);}
+            });
+        },
+        insertDB:function (){
+            axios.post('/admin/insertData', this.insertData
+            ).then(response => {
+
+            });
         }
     }
 }
