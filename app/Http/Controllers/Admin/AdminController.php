@@ -19,7 +19,6 @@ class AdminController extends Controller
 
     public function loadProductInfo(Request $request)
     {
-        \Log::info($request[0]);
         $productInfo = DB::table('SALES_LOG')
             ->join('STORE', 'SALES_LOG.STORECODE', '=', 'STORE.STORECODE')
             ->join('PRODUCT_DETAIL', 'SALES_LOG.FINALPRODUCTCODE', '=', 'PRODUCT_DETAIL.FINALPRODUCTCODE')
@@ -145,15 +144,21 @@ class AdminController extends Controller
     }
     public function insertData(Request $request)
     {
-        foreach ($request as $value) {
-            \Log::info($value);
+
+        $tempArr = $request->insertDataArr;
+        foreach ($tempArr as $value => $temp) {
+            \Log::info("ddddddd");
+            \Log::info([$temp[0]]);//productCode
+            \Log::info([$temp[1]]);//STORE NAME
+            \Log::info([$temp[2]]);//STORE 지점
+            \Log::info([$temp[3]]);//날짜
+
         }
         $storeCode = DB::table('STORE')
             ->where('STORENAME','=',$request[0][1])
             ->where('STORELOCATION','=',$request[0][2])
             ->select( 'STORECODE')
             ->get();
-        \Log::info($request);
 //        DB::table('SALES_LOG')
 //            ->insert([
 //                'SOLDDATE' => $request[0][3],

@@ -232,7 +232,7 @@ export default {
                 this.insertData[i][3] = dayjs(this.insertData[3]).format('YYYY-MM-DD');
             }
             console.log(this.insertData);
-            axios.post('/admin/insertData', this.insertData
+            axios.post('/admin/insertData',{insertDataArr : this.insertData}
             ).then(response => {
 
             });
