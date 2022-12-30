@@ -146,25 +146,27 @@ class AdminController extends Controller
     {
 
         $tempArr = $request->insertDataArr;
-        foreach ($tempArr as $value => $temp) {
-            \Log::info("ddddddd");
-            \Log::info([$temp[0]]);//productCode
-            \Log::info([$temp[1]]);//STORE NAME
-            \Log::info([$temp[2]]);//STORE 지점
-            \Log::info([$temp[3]]);//날짜
+        \Log::info($tempArr);
+        foreach ($tempArr as $value) {
+            \Log::info([$value[0]]);//productCode
+            \Log::info([$value[1]]);//STORE NAME
+            \Log::info([$value[2]]);//STORE 지점
+            \Log::info([$value[3]]);//날짜
+
+            $storeCode = DB::table('STORE')
+                ->where('STORENAME','=',$value[1])
+                ->where('STORELOCATION','=',$value[2])
+                ->select( 'STORECODE')
+                ->get();
+            DB::table('SALES_LOG')
+                ->insert([
+                    'SOLDDATE' => $value[3],
+                    'STORECODE' => $storeCode[0]->STORECODE,
+                    'FINALPRODUCTCODE' => $value[0]
+                ]);
 
         }
-        $storeCode = DB::table('STORE')
-            ->where('STORENAME','=',$request[0][1])
-            ->where('STORELOCATION','=',$request[0][2])
-            ->select( 'STORECODE')
-            ->get();
-//        DB::table('SALES_LOG')
-//            ->insert([
-//                'SOLDDATE' => $request[0][3],
-//                'STORECODE' => $storeCode[0]->STORECODE,
-//                'FINALPRODUCTCODE' => $request[0][0]
-//            ]);
+
     }
 
 }

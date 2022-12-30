@@ -1,6 +1,6 @@
 <template>
-    <div @click = "test" class = "w-3/12 py-2 text-center float-right border-2 border-black m-3 rounded-2xl ">상품검색</div>
-    <div class = "clear-both"></div>
+<!--    <div @click = "test" class = "w-3/12 py-2 text-center float-right border-2 border-black m-3 rounded-2xl ">상품검색</div>-->
+<!--    <div class = "clear-both"></div>-->
     <div class = "border-2 border-black w-11/12 m-auto z-50 mb-10 py-4 px-2 mt-4">
         <div class = "w-full text-xs text-center my-4"></div>
         <table class = "m-auto">
@@ -143,13 +143,6 @@ export default {
         storeLocation:['강남점','대구점','명동본점','센텀시티','압구정점','잠실월드몰점','청담점']
     }),
     watch: {
-        // sendData: {
-        //     handler() {
-        //         this.loadCategory();
-        //         console.log('test');
-        //     },
-        //     deep: true
-        // }
         'sendData.classify':function(){
             this.sendData.category = '';
             this.sendData.productName = '';
@@ -169,11 +162,10 @@ export default {
     mounted(){
     },
     methods:{
-        test:function(){
-            console.log(this.insertData);
-            console.log(this.selectedProduct);
-
-        },
+        // test:function(){
+        //     console.log(this.productName);
+        //
+        // },
         searchData:function(){
             axios.post('/admin/searchData', this.sendData
             ).then(response => {
@@ -221,6 +213,11 @@ export default {
             });
         },
         insertDB:function (){
+            if(this.selectedProduct.length == 0){
+                alert('추가된 상품이 없습니다.');
+                return;
+            }
+
             console.log('hi');
             for(let i = 0; i<this.insertData.length; i++){
                 if(this.insertData[i].length != 4){
@@ -234,7 +231,7 @@ export default {
             console.log(this.insertData);
             axios.post('/admin/insertData',{insertDataArr : this.insertData}
             ).then(response => {
-
+                alert('판매기록이 등록되었습니다.');
             });
         }
     }
