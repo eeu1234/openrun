@@ -40,7 +40,7 @@
         <div v-for="item in productInfos" class = "repeatComponent w-full border " @click = "pushProduct(item)" >
             <div class = "w-full mt-4 my-2">
                 <div class = "float-left w-1/4">
-                    <img class = "h-full" src="/img/classic_medium_bag.jpg">
+                    <img class = "w-full" src="/img/classic_medium_bag.jpg">
                 </div>
                 <div id="productInfo" class = "float-left pl-4 w-3/4 text-left">
                     <div class=" w-full text-xs tracking-wide font-medium">Chanel</div>
