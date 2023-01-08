@@ -22,7 +22,7 @@ class AdminController extends Controller
         $productInfo = DB::table('SALES_LOG')
             ->join('STORE', 'SALES_LOG.STORECODE', '=', 'STORE.STORECODE')
             ->join('PRODUCT_DETAIL', 'SALES_LOG.FINALPRODUCTCODE', '=', 'PRODUCT_DETAIL.FINALPRODUCTCODE')
-            ->select( 'SALES_LOG.SOLDDATE','PRODUCT_DETAIL.FINALPRODUCTNAME', 'STORE.STORENAME', 'STORE.STORELOCATION','PRODUCT_DETAIL.SIZE','PRODUCT_DETAIL.COLOR','PRODUCT_DETAIL.COLOR2','PRODUCT_DETAIL.PATTERN','PRODUCT_DETAIL.MATERIAL')
+            ->select( 'SALES_LOG.SOLDDATE','PRODUCT_DETAIL.FINALPRODUCTNAME', 'STORE.STORENAME', 'STORE.STORELOCATION','PRODUCT_DETAIL.SIZE','PRODUCT_DETAIL.COLOR','PRODUCT_DETAIL.COLOR2','PRODUCT_DETAIL.PATTERN','PRODUCT_DETAIL.MATERIAL','SALES_LOG.SALECODE')
             ->where('SALES_LOG.SOLDDATE', '>=',$request[0])
             ->where('SALES_LOG.SOLDDATE', '<=',$request[1])
             ->get();
@@ -167,6 +167,14 @@ class AdminController extends Controller
 
         }
 
+    }
+
+    public function deleteLog(Request $request)
+    {
+        \Log::info($request);
+        $productInfo = DB::table('SALES_LOG')
+            ->where('SALECODE', '=', $request[0])
+            ->delete();
     }
 
 }

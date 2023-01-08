@@ -30,26 +30,44 @@
             <th class ="border-black border-2 w-1/6">
                 <div class ="w-full flex justify-center">
                     <p className="text-base font-medium text-center text-gray-800 ">
-                        사이즈
+                        기타
                     </p>
                 </div>
             </th>
             <th class ="border-black border-2 w-1/6">
                 <div className="w-full flex justify-center">
                     <p className=" text-base font-medium text-center text-gray-800 " >
-                        색상
+                        삭제
                     </p>
                 </div>
             </th>
         </tr>
         </thead>
         <tbody>
-        <tr v-for="info in productInfos" class = "border-black border-2">
-            <td class="text-center border-black border-2 w-1/6 "><p>{{info.FINALPRODUCTNAME}}</p></td>
-            <td class="text-center border-black border-2 w-1/6"><p>{{info.SOLDDATE}}</p></td>
-            <td class="text-center border-black border-2 w-2/6"><p>{{info.STORELOCATION}} {{info.STORENAME}}</p></td>
-            <td class="text-center border-black border-2 w-1/6">{{info.SIZE}}</td>
-            <td class="text-center border-black border-2 w-1/6">{{info.COLOR}} {{info.COLOR2}}</td>
+        <tr v-for="(info,index) in productInfos" class = "border-black border-2">
+            <td class="text-center border-black border-2 w-1/6 text-sm"><p>{{info.FINALPRODUCTNAME}}</p></td>
+            <td class="text-center border-black border-2 w-1/6 text-sm"><p>{{info.SOLDDATE}}</p></td>
+            <td class="text-center border-black border-2 w-2/6 text-sm"><p>{{info.STORELOCATION}} {{info.STORENAME}}</p></td>
+            <td class="text-center border-black border-2 w-1/6 text-sm">
+                <div @click="showMoreInfo(index)" class = "m-2 border rounded " >더보기</div>
+            </td>
+            <td class="text-center border-black border-2 w-1/6 text-sm">
+                <div @click = "deleteLog(info)"  class = "m-2 border rounded " >삭제</div>
+            </td>
+            <div v-bind:id="index" class ="absolute top-1/3 left-1/3 w-60 h-48 hidden rounded-xl bg-slate-200 border-slate-300">
+                <div class = 'w-full h-3/12 border-b-2 border-black' >
+                    <div @click = "closeInfo(index)" class = "w-2/12 h-full float-right">X</div>
+                    <div class = "clear-both"></div>
+                </div>
+                <div class = "px-3 pt-3">
+                    <p>판매일자: {{info.SOLDDATE}}</p>
+                    <p>상품명: {{info.FINALPRODUCTNAME}}</p>
+                    <p>백화점: {{info.STORENAME}}</p>
+                    <p>백화점 지점:{{info.STORELOCATION}}</p>
+                    <p>사이즈: {{info.SIZE}}</p>
+                    <p>색상: {{info.COLOR}} {{info.COLOR2}}</p>
+                </div>
+            </div>
         </tr>
         </tbody>
     </table>
@@ -117,6 +135,22 @@ export default {
             this.dateRange[0] = dayjs(this.dateRange[0]).format('YYYY-MM-DD');
             this.dateRange[1] = dayjs(this.dateRange[1]).format('YYYY-MM-DD');
             console.log(this.dateRange);
+        },
+        showMoreInfo:function(index){
+            $('#'+index).css('display','block');
+        },
+        closeInfo:function(index){
+            console.log(index);
+            $('#'+index).css('display','none');
+        },
+        deleteLog:function(info){
+            console.log(info);
+            console.log(info.SALECODE);
+            let data = [info.SALECODE];
+            axios.post('/admin/deleteLog', data
+            ).then(response => {
+                this.loadData();
+            });
         },
     }
 }

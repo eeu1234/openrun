@@ -36,6 +36,7 @@ Route::any('/admin/loadCategory','\App\Http\Controllers\Admin\AdminController@lo
 Route::any('/admin/loadClassify','\App\Http\Controllers\Admin\AdminController@loadClassify');
 Route::any('/admin/loadProductName','\App\Http\Controllers\Admin\AdminController@loadProductName');
 Route::any('/admin/insertData','\App\Http\Controllers\Admin\AdminController@insertData');
+Route::any('/admin/deleteLog','\App\Http\Controllers\Admin\AdminController@deleteLog');
 
 
 
