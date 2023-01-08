@@ -144,13 +144,15 @@ export default {
             $('#'+index).css('display','none');
         },
         deleteLog:function(info){
-            console.log(info);
-            console.log(info.SALECODE);
             let data = [info.SALECODE];
-            axios.post('/admin/deleteLog', data
-            ).then(response => {
-                this.loadData();
-            });
+            if (confirm('삭제하시겠습니까?')) {
+                // Save it!
+                axios.post('/admin/deleteLog', data
+                ).then(response => {
+                    this.loadData();
+                });
+            }
+
         },
     }
 }
