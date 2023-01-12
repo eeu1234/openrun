@@ -1,8 +1,62 @@
 <template>
 <!--    <div @click = "test" class = "w-3/12 py-2 text-center float-right border-2 border-black m-3 rounded-2xl ">상품검색</div>-->
 <!--    <div class = "clear-both"></div>-->
-    <div class = "border-2 border-black w-11/12 m-auto z-50 mb-10 py-4 px-2 mt-4">
-        <div class = "w-full text-xs text-center my-4"></div>
+    <div class = "border-2 border-black w-11/12 mt-4 py-4 z-1 m-auto overflow-y-scroll h-72 ">
+        <p v-if="selectedProduct.length == 0" id ="notice" class = "text-center">추가된 상품이 없습니다.</p>
+        <div v-if="selectedProduct.length > 0" class = "repeatComponent w-full border " >
+            <div v-for="(item,index) in selectedProduct">
+                <div class = "w-full  mt-4 my-2">
+                    <div class = "float-left w-1/4">
+                        <img class = "w-full" src="/img/classic_medium_bag.jpg">
+                    </div>
+                    <div id="productInfo" class = "float-left pl-4 w-3/4 text-left">
+                        <div class=" w-full text-xs tracking-wide font-medium">Chanel</div>
+                        <div class=" w-full text-base tracking-wide font-medium">가브리엘 스트랩 호보 클래식 미디움</div>
+                        <div class=" w-full text-xs tracking-wide text-slate-400">{{item.COLOR}} {{item.COLOR2}}</div>
+                        <div class=" w-full text-xs tracking-wide text-slate-400">{{item.PATTERN}}</div>
+                        <div class=" w-full text-xs tracking-wide text-slate-400">{{item.SIZE}}</div>
+                        <div class=" w-full text-xs tracking-wide text-slate-400">{{item.MATTRIAL}}</div>
+                    </div>
+                    <div class="clear-both"></div>
+                    <div class = "w-full text-left">
+                        <table class = "float-left w-10/12">
+                            <thead>
+                            <tr>
+                                <td class = "w-1/3 text-center border ">백화점</td>
+                                <td class = "w-1/3 text-center border">지점</td>
+                                <td class = "w-1/3 text-center border">판매일자</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td class = "px-1 py-1 border">
+                                    <select v-model = "insertData[index][1]" class = "w-full float-left my-1 bg-slate-200 rounded">
+                                        <option v-for="item in  store">{{item}}</option>
+                                    </select>
+                                </td>
+                                <td class = "px-1 border">
+                                    <select v-model = "insertData[index][2]" class = "float-left my-1 w-full bg-slate-200 rounded">
+                                        <option v-for="item in  storeLocation">{{item}}</option>
+                                    </select>
+
+                                </td>
+                                <td class = "px-1 border">
+                                    <datepicker  v-model = "insertData[index][3]" class="float-left my-1 w-full"></datepicker>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div @click="delProduct(item)" class = "w-12 mx-2 my-4 h-10 float-left bg-slate-200 border-slate-300 p-2 rounded-xl">제거</div>
+                        <div class = "clear-both"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div @click = "insertDB" class = "float-right px-5 py-1 mx-4 mt-4 border rounded bg-slate-200 border-slate-300">등록</div>
+        <div class="clear-both"></div>
+    </div>
+    <div class = "h-96 border-2 border-black w-11/12 m-auto z-50 mb-10 py-4 px-2 mt-4 overflow-y-scroll">
+        <div class = "w-full text-xs text-center my-4 "></div>
         <table class = "m-auto">
             <thead>
                 <tr>
@@ -53,60 +107,7 @@
             </div>
         </div>
     </div>
-    <div class = "border-2 border-black w-full py-4 z-1">
-        <p v-if="selectedProduct.length == 0" id ="notice" class = "text-center">추가된 상품이 없습니다.</p>
-        <div v-if="selectedProduct.length > 0" class = "repeatComponent w-full border " >
-            <div v-for="(item,index) in selectedProduct">
-                <div class = "w-full  mt-4 my-2">
-                    <div class = "float-left w-1/4">
-                        <img class = "w-full" src="/img/classic_medium_bag.jpg">
-                    </div>
-                    <div id="productInfo" class = "float-left pl-4 w-3/4 text-left">
-                        <div class=" w-full text-xs tracking-wide font-medium">Chanel</div>
-                        <div class=" w-full text-base tracking-wide font-medium">가브리엘 스트랩 호보 클래식 미디움</div>
-                        <div class=" w-full text-xs tracking-wide text-slate-400">{{item.COLOR}} {{item.COLOR2}}</div>
-                        <div class=" w-full text-xs tracking-wide text-slate-400">{{item.PATTERN}}</div>
-                        <div class=" w-full text-xs tracking-wide text-slate-400">{{item.SIZE}}</div>
-                        <div class=" w-full text-xs tracking-wide text-slate-400">{{item.MATTRIAL}}</div>
-                    </div>
-                    <div class="clear-both"></div>
-                    <div class = "w-full text-left">
-                        <table class = "float-left w-10/12">
-                            <thead>
-                            <tr>
-                                <td class = "w-1/3 text-center border ">백화점</td>
-                                <td class = "w-1/3 text-center border">지점</td>
-                                <td class = "w-1/3 text-center border">판매일자</td>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td class = "px-1 py-1 border">
-                                    <select v-model = "insertData[index][1]" class = "w-full float-left my-1 bg-slate-200 rounded">
-                                        <option v-for="item in  store">{{item}}</option>
-                                    </select>
-                                </td>
-                                <td class = "px-1 border">
-                                    <select v-model = "insertData[index][2]" class = "float-left my-1 w-full bg-slate-200 rounded">
-                                        <option v-for="item in  storeLocation">{{item}}</option>
-                                    </select>
 
-                                </td>
-                                <td class = "px-1 border">
-                                    <datepicker  v-model = "insertData[index][3]" class="float-left my-1 w-full"></datepicker>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                        <div @click="delProduct(item)" class = "w-12 mx-3 my-4 h-10 float-left bg-slate-200 border-slate-300 p-2 rounded-xl">제거</div>
-                        <div class = "clear-both"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div @click = "insertDB" class = "float-right px-5 py-1 mx-4 mt-4 border rounded bg-slate-200 border-slate-300">등록</div>
-        <div class="clear-both"></div>
-    </div>
 
 
 
