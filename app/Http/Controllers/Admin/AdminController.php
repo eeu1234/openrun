@@ -135,7 +135,9 @@ class AdminController extends Controller
                 ->join('PRODUCT_CLASSIFY', 'PRODUCT.CLASSIFYCODE', '=', 'PRODUCT_CLASSIFY.CLASSIFYCODE')
                 ->where('PRODUCT_CLASSIFY.CLASSIFYNAME','=',$request->classify)
                 ->where('PRODUCT.PRODUCTNAME','=',$request->category)
-                ->where('PRODUCT_DETAIL.FINALPRODUCTNAME','=',$request->productName)
+                ->orWhere('PRODUCT_DETAIL.FINALPRODUCTNAME','=',$request->productName)
+                ->orWhere('PRODUCT_DETAIL.SIZE','=',$request->productName)
+                ->orWhere('PRODUCT_DETAIL.SIZE','=',$request->productName)
                 ->get();
             \Log::info($productInfo);
             return response()->json($productInfo);

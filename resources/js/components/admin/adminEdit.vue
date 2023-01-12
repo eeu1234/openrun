@@ -44,11 +44,10 @@
                 </div>
                 <div id="productInfo" class = "float-left pl-4 w-3/4 text-left">
                     <div class=" w-full text-xs tracking-wide font-medium">Chanel</div>
-                    <div class=" w-full text-base tracking-wide font-medium">{{item.FINALPRODUCTNAME}}</div>
+                    <div class=" w-full text-base tracking-wide font-medium">{{item.PRODUCTNAME}} {{item.FINALPRODUCTNAME}} {{item.SIZE}} {{item.MATERIAL}}</div>
                     <div class=" w-full text-xs tracking-wide text-slate-400">{{item.COLOR}} {{item.COLOR2}}</div>
                     <div class=" w-full text-xs tracking-wide text-slate-400">{{item.PATTERN}}</div>
-                    <div class=" w-full text-xs tracking-wide text-slate-400">{{item.SIZE}}</div>
-                    <div class=" w-full text-xs tracking-wide text-slate-400">{{item.MATTRIAL}}</div>
+                    <div class=" w-full text-xs tracking-wide text-slate-400"></div>
                 </div>
                 <div class="clear-both"></div>
             </div>
