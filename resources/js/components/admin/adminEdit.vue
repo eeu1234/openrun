@@ -1,69 +1,13 @@
 <template>
-<!--    <div @click = "test" class = "w-3/12 py-2 text-center float-right border-2 border-black m-3 rounded-2xl ">상품검색</div>-->
-<!--    <div class = "clear-both"></div>-->
-    <div class = "border-2 border-black w-11/12 mt-4 py-4 z-1 m-auto overflow-y-scroll h-72 ">
-        <p v-if="selectedProduct.length == 0" id ="notice" class = "text-center">추가된 상품이 없습니다.</p>
-        <div v-if="selectedProduct.length > 0" class = "repeatComponent w-full border " >
-            <div v-for="(item,index) in selectedProduct">
-                <div class = "w-full  mt-4 my-2">
-                    <div class = "float-left w-1/4">
-                        <img class = "w-full" src="/img/classic_medium_bag.jpg">
-                    </div>
-                    <div id="productInfo" class = "float-left pl-4 w-3/4 text-left">
-                        <div class=" w-full text-xs tracking-wide font-medium">Chanel</div>
-                        <div class=" w-full text-base tracking-wide font-medium">가브리엘 스트랩 호보 클래식 미디움</div>
-                        <div class=" w-full text-xs tracking-wide text-slate-400">{{item.COLOR}} {{item.COLOR2}}</div>
-                        <div class=" w-full text-xs tracking-wide text-slate-400">{{item.PATTERN}}</div>
-                        <div class=" w-full text-xs tracking-wide text-slate-400">{{item.SIZE}}</div>
-                        <div class=" w-full text-xs tracking-wide text-slate-400">{{item.MATTRIAL}}</div>
-                    </div>
-                    <div class="clear-both"></div>
-                    <div class = "w-full text-left">
-                        <table class = "float-left w-10/12">
-                            <thead>
-                            <tr>
-                                <td class = "w-1/3 text-center border ">백화점</td>
-                                <td class = "w-1/3 text-center border">지점</td>
-                                <td class = "w-1/3 text-center border">판매일자</td>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td class = "px-1 py-1 border">
-                                    <select v-model = "insertData[index][1]" class = "w-full float-left my-1 bg-slate-200 rounded">
-                                        <option v-for="item in  store">{{item}}</option>
-                                    </select>
-                                </td>
-                                <td class = "px-1 border">
-                                    <select v-model = "insertData[index][2]" class = "float-left my-1 w-full bg-slate-200 rounded">
-                                        <option v-for="item in  storeLocation">{{item}}</option>
-                                    </select>
-
-                                </td>
-                                <td class = "px-1 border">
-                                    <datepicker  v-model = "insertData[index][3]" class="float-left my-1 w-full"></datepicker>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                        <div @click="delProduct(item)" class = "w-12 mx-2 my-4 h-10 float-left bg-slate-200 border-slate-300 p-2 rounded-xl">제거</div>
-                        <div class = "clear-both"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div @click = "insertDB" class = "float-right px-5 py-1 mx-4 mt-4 border rounded bg-slate-200 border-slate-300">등록</div>
-        <div class="clear-both"></div>
-    </div>
     <div class = "h-96 border-2 border-black w-11/12 m-auto z-50 mb-10 py-4 px-2 mt-4 overflow-y-scroll">
         <div class = "w-full text-xs text-center my-4 "></div>
         <table class = "m-auto">
             <thead>
-                <tr>
-                    <td class = "w-1/3 text-center border ">종류</td>
-                    <td class = "w-1/3 text-center border">상품분류</td>
-                    <td class = "w-1/3 text-center border">상품명</td>
-                </tr>
+            <tr>
+                <td class = "w-1/3 text-center border ">종류</td>
+                <td class = "w-1/3 text-center border">상품분류</td>
+                <td class = "w-1/3 text-center border">상품명</td>
+            </tr>
             </thead>
             <tbody>
             <tr>
@@ -108,6 +52,62 @@
         </div>
     </div>
 
+    <div class = "border-2 border-black w-11/12 mt-4 py-4 z-1 m-auto overflow-y-scroll h-72 ">
+        <p v-if="selectedProduct.length == 0" id ="notice" class = "text-center">추가된 상품이 없습니다.</p>
+        <div v-if="selectedProduct.length > 0" class = "repeatComponent w-full border " >
+            <div v-for="(item,index) in selectedProduct">
+                <div class = "w-full  mt-4 my-2">
+                    <div class = "float-left w-1/4">
+                        <img class = "w-full" src="/img/classic_medium_bag.jpg">
+                    </div>
+                    <div id="productInfo" class = "float-left pl-4 w-3/4 text-left">
+                        <div class=" w-full text-xs tracking-wide font-medium">Chanel</div>
+                        <div class=" w-full text-base tracking-wide font-medium">{{item.FINALPRODUCTNAME}}</div>
+                        <div class=" w-full text-xs tracking-wide text-slate-400">{{item.COLOR}} {{item.COLOR2}}</div>
+                        <div class=" w-full text-xs tracking-wide text-slate-400">{{item.PATTERN}}</div>
+                        <div class=" w-full text-xs tracking-wide text-slate-400">{{item.SIZE}}</div>
+                        <div class=" w-full text-xs tracking-wide text-slate-400">{{item.MATTRIAL}}</div>
+                    </div>
+                    <div class="clear-both"></div>
+                    <div class = "w-full text-left">
+                        <table class = "float-left w-10/12">
+                            <thead>
+                            <tr>
+                                <td class = "w-1/3 text-center border ">백화점</td>
+                                <td class = "w-1/3 text-center border">지점</td>
+                                <td class = "w-1/3 text-center border">판매일자</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td class = "px-1 py-1 border">
+                                    <select v-model = "insertData[index][1]" class = "w-full float-left my-1 bg-slate-200 rounded" @change="loadStoreLocationList($event)">
+                                        <option v-for="item in  store" :value="item.STORENAME">{{item.STORENAME}}</option>
+                                    </select>
+                                </td>
+                                <td class = "px-1 border">
+                                    <select v-model = "insertData[index][2]" class = "float-left my-1 w-full bg-slate-200 rounded">
+                                        <option v-for="item in  storeLocation" :value="item.STORECODE">{{item.STORELOCATION}}</option>
+                                    </select>
+
+                                </td>
+                                <td class = "px-1 border">
+                                    <datepicker v-model="insertData[index][3]" class="float-left my-1 w-full" :format="'yyyy.mm.dd'"></datepicker>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div @click="delProduct(item)" class = "w-12 mx-2 my-4 h-10 float-left bg-slate-200 border-slate-300 p-2 rounded-xl">제거</div>
+                        <div class = "clear-both"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div @click = "insertDB" class = "float-right px-5 py-1 mx-4 mt-4 border rounded bg-slate-200 border-slate-300">등록</div>
+        <div class="clear-both"></div>
+    </div>
+
+
 
 
 
@@ -119,8 +119,8 @@ import Datepicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 import { ref, onMounted } from 'vue';
 import dayjs from "dayjs";
-// import vSelect from 'vue-select'
-// import 'vue-select/dist/vue-select.css';
+import _ from "lodash";
+
 
 
 export default {
@@ -139,8 +139,9 @@ export default {
         category:[],
         productName:[],
         insertData:[],
-        store:['갤러리아백화점','롯데백화점','샤넬플러그쉽','신세계백화점','현대백화점'],
-        storeLocation:['강남점','대구점','명동본점','센텀시티','압구정점','잠실월드몰점','청담점']
+        store:[],
+        allStoreInfoList:[],
+        storeLocation:[]
     }),
     watch: {
         'sendData.classify':function(){
@@ -153,19 +154,20 @@ export default {
             this.sendData.productName = '';
         },
         'sendData.productName':function(){
-        }
+        },
+
+
     },
 
     created() {
         this.loadClassify();
+        this.loadStoreList();
     },
     mounted(){
+        const datepicker = this.$refs.datepicker;
     },
     methods:{
-        // test:function(){
-        //     console.log(this.productName);
-        //
-        // },
+
         searchData:function(){
             axios.post('/admin/searchData', this.sendData
             ).then(response => {
@@ -191,6 +193,23 @@ export default {
                 }
             }
         },
+        loadStoreList:function (){
+            axios.post('/admin/loadStoreList', {}
+            ).then(response => {
+                this.allStoreInfoList = response.data;
+                this.store = _.uniqBy(response.data,'STORENAME');
+
+            });
+        },
+        loadStoreLocationList:function (event){
+            let locationList = [];
+            this.allStoreInfoList.forEach(function(value,index){
+                if(value.STORENAME == event.target.value){
+                    locationList.push(value);
+                }
+            });
+            this.storeLocation = locationList;
+        },
         loadClassify:function (){
             axios.post('/admin/loadClassify', {}
             ).then(response => {
@@ -213,12 +232,11 @@ export default {
             });
         },
         insertDB:function (){
+
             if(this.selectedProduct.length == 0){
                 alert('추가된 상품이 없습니다.');
                 return;
             }
-
-            console.log('hi');
             for(let i = 0; i<this.insertData.length; i++){
                 if(this.insertData[i].length != 4){
                     alert("데이터를 다 입력해주세요");
@@ -226,9 +244,9 @@ export default {
                 }
             }//데이터가 다 들어있는지
             for(let i = 0; i<this.insertData.length; i++){
-                this.insertData[i][3] = dayjs(this.insertData[3]).format('YYYY-MM-DD');
+                this.insertData[i][3] = dayjs(this.insertData[i][3]).format('YYYY-MM-DD');
             }
-            console.log(this.insertData);
+
             axios.post('/admin/insertData',{insertDataArr : this.insertData}
             ).then(response => {
                 alert('판매기록이 등록되었습니다.');

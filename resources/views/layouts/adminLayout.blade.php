@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body class="antialiased max-w-5xl w-full m-auto " style = "min-width:450px;">
-<div id="adminApp" class="w-full max-w-md m-auto">
+<div id="adminApp" class="w-full  m-auto">
     <div><head_menu/></div>
     @yield('content')
 </div>

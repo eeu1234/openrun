@@ -34,7 +34,13 @@ class SalesController extends Controller
 
     }
     public function getSalesLogThisYearMonth(Request $request){//캘린더 vue에서 해당 월 판매데이터 존재 여부
-        $salesDate = Sale_Log::whereMonth('SOLDDATE',$request->thisMonth)->whereYear('SOLDDATE',$request->thisYear)->orderBy('SOLDDATE','DESC')->get('SOLDDATE');
+        $salesDate = Sale_Log::whereMonth('SOLDDATE',$request->thisMonth)->whereYear('SOLDDATE',$request->thisYear);
+        if($request->no){
+            $salesDate = $salesDate->where('FINALPRODUCTCODE',$request->no);
+        }
+        $salesDate = $salesDate->orderBy('SOLDDATE','DESC')->get('SOLDDATE');
+
+
 
         return response()->json($salesDate);
     }

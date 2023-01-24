@@ -16,9 +16,12 @@ use Illuminate\Support\Facades\Route;
 //Route::get('/', function () {
 //    return view('welcome') ;
 //});
-Route::get('/', function () {
+Route::any('/', function () {
     return view('main');
-})->name('home');   // 변경하지 말것
+});  // 변경하지 말것
+Route::any('/calendar/{no}',function($no){
+    return view('main',['no' => $no]);
+});
 Route::any('/store','\App\Http\Controllers\Controller@storeList');
 
 //검색페이지 검색 axios 메서도 호출
@@ -37,6 +40,8 @@ Route::any('/admin/loadClassify','\App\Http\Controllers\Admin\AdminController@lo
 Route::any('/admin/loadProductName','\App\Http\Controllers\Admin\AdminController@loadProductName');
 Route::any('/admin/insertData','\App\Http\Controllers\Admin\AdminController@insertData');
 Route::any('/admin/deleteLog','\App\Http\Controllers\Admin\AdminController@deleteLog');
+
+Route::any('/admin/loadStoreList','\App\Http\Controllers\Admin\AdminController@loadStoreList');
 
 
 

@@ -123,7 +123,6 @@ export default {
             dateRange: [],
             chkStoreList:[],
             allChkFlag: true,
-            // datepicker:'',
         }),
         created() {
             this.getStoreList();

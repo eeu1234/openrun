@@ -114,7 +114,7 @@
             <div className=" bg-gray-50 rounded-b pb-2" v-for="salesInfo in salesList">
                 <div className="px-4">
                     <div className="h-14 border-b py-2 border-gray-400 border-dashed">
-                        <div class="w-24 h-10 pr-4 pt-1 float-left border-r-2 border-r-blue-600">
+                        <div class="w-26 h-10 pr-4 pt-1 float-left border-r-2 border-r-blue-600">
                             <p className=" text-xs font-light leading-3 text-gray-500 ">
                                 {{salesInfo.storeInfo.STORENAME}}
                             </p>
@@ -153,10 +153,12 @@ export default {
             salesThisYearMonthData:[],//해당년월에 판매된 데이터 배열
         };
     },
+    props: ['no'],
     created() {
         this.setToday();
         this.setDate();
     },
+
     methods: {
         changePoint:function(event){
             this.nowPoint = event.currentTarget.id;
@@ -247,8 +249,13 @@ export default {
                 thisYear: this.dayData.year,
                 thisMonth: this.dayData.month+1,//월은 0부터시작함
             }
-            axios.post('./getSalesLogThisYearMonth', data
+            if(typeof(this.no) !== 'undefined' || this.no != null){
+                data.no = this.no;
+            }
+            console.log(data);
+            axios.post('/getSalesLogThisYearMonth', data
             ).then(response => {
+
                 let yearMonthDateArr = [];
                 for(let i=0;i < response.data.length;i++){
                     yearMonthDateArr.push(response.data[i].SOLDDATE);//판매일 array 생성
@@ -270,7 +277,7 @@ export default {
         },
         //제품상세페이지로 이동한다.
         goDetail:function(productCode) {
-            location.href='./productView/'+productCode;
+            location.href='/productView/'+productCode;
 
         },
     },

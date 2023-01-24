@@ -60,43 +60,6 @@ class AdminController extends Controller
 
     public function searchProduct(Request $request)
     {
-//        if($request[0] != null and $request[4] == null ){
-//            $productInfo = DB::table('PRODUCT_DETAIL')
-//                ->where('SIZE','like', '%'.$request[1].'%')
-//                ->where('COLOR', '=', $request[2])
-//                ->where('COLOR2', 'like', '%'.$request[3].'%')
-//                ->where('FINALPRODUCTNAME','like','%'.$request[0].'%')
-//                ->get();
-//            return response()->json($productInfo);
-//        }
-//        elseif($request[4] != null and $request[0] == null){
-//            $productInfo = DB::table('PRODUCT_DETAIL')
-//                ->where('SIZE','like', '%'.$request[1].'%')
-//                ->where('COLOR', '=', $request[2])
-//                ->where('COLOR2', 'like', '%'.$request[3].'%')
-//                ->where('MATERIAL','like','%'.$request[4].'%')
-//                ->get();
-//            return response()->json($productInfo);
-//        }
-//        elseif($request[4] != null and $request[0] != null){
-//            $productInfo = DB::table('PRODUCT_DETAIL')
-//                ->where('SIZE','like', '%'.$request[1].'%')
-//                ->where('COLOR', '=', $request[2])
-//                ->where('COLOR2', 'like', '%'.$request[3].'%')
-//                ->Where('FINALPRODUCTNAME','like','%'.$request[0].'%')
-//                ->where('MATERIAL','like','%'.$request[4].'%')
-//                ->get();
-//            return response()->json($productInfo);
-//        }
-//        else{ //둘다 비어있을때
-//            $productInfo = DB::table('PRODUCT_DETAIL')
-//                ->where('SIZE','like', '%'.$request[1].'%')
-//                ->where('COLOR', '=', $request[2])
-//                ->where('COLOR2', 'like', '%'.$request[3].'%')
-//                ->get();
-////            $test = $productInfo->where('SIZE','=','뉴미니')->get();
-//            return response()->json($productInfo);
-//        }
         if($request->classify == null){
             \Log::info('1번');
             $productInfo = DB::table('PRODUCT_DETAIL')
@@ -119,6 +82,8 @@ class AdminController extends Controller
         }
         else if($request->productName == null){
             \Log::info('3번');
+            \Log::info($request->classify);
+            \Log::info($request->category);
             $productInfo = DB::table('PRODUCT_DETAIL')
                 ->join('PRODUCT', 'PRODUCT_DETAIL.PRODUCTCODE', '=', 'PRODUCT.PRODUCTCODE')
                 ->join('PRODUCT_CLASSIFY', 'PRODUCT.CLASSIFYCODE', '=', 'PRODUCT_CLASSIFY.CLASSIFYCODE')
@@ -136,8 +101,9 @@ class AdminController extends Controller
                 ->where('PRODUCT_CLASSIFY.CLASSIFYNAME','=',$request->classify)
                 ->where('PRODUCT.PRODUCTNAME','=',$request->category)
                 ->orWhere('PRODUCT_DETAIL.FINALPRODUCTNAME','=',$request->productName)
-                ->orWhere('PRODUCT_DETAIL.SIZE','=',$request->productName)
-                ->orWhere('PRODUCT_DETAIL.SIZE','=',$request->productName)
+                ->where('PRODUCT_DETAIL.SIZE','=',$request->productName)
+                ->orderByDesc('PRODUCT.PRODUCTNAME')
+                ->orderByDesc('PRODUCT_DETAIL.SIZE')
                 ->get();
             \Log::info($productInfo);
             return response()->json($productInfo);
@@ -151,19 +117,14 @@ class AdminController extends Controller
         \Log::info($tempArr);
         foreach ($tempArr as $value) {
             \Log::info([$value[0]]);//productCode
-            \Log::info([$value[1]]);//STORE NAME
-            \Log::info([$value[2]]);//STORE 지점
+            \Log::info([$value[2]]);//STORE CODE
+            \Log::info([$value[1]]);//STORE 지점
             \Log::info([$value[3]]);//날짜
 
-            $storeCode = DB::table('STORE')
-                ->where('STORENAME','=',$value[1])
-                ->where('STORELOCATION','=',$value[2])
-                ->select( 'STORECODE')
-                ->get();
             DB::table('SALES_LOG')
                 ->insert([
                     'SOLDDATE' => $value[3],
-                    'STORECODE' => $storeCode[0]->STORECODE,
+                    'STORECODE' => $value[2],
                     'FINALPRODUCTCODE' => $value[0]
                 ]);
 
@@ -178,5 +139,15 @@ class AdminController extends Controller
             ->where('SALECODE', '=', $request[0])
             ->delete();
     }
+
+
+    public function loadStoreList(Request $request)
+    {
+        //백화점 선택
+        $storeList = STORE::get();
+
+        return response()->json($storeList);
+    }
+
 
 }
