@@ -25,7 +25,7 @@ class AdminController extends Controller
             ->select( 'SALES_LOG.SOLDDATE','PRODUCT_DETAIL.FINALPRODUCTNAME', 'STORE.STORENAME', 'STORE.STORELOCATION','PRODUCT_DETAIL.SIZE','PRODUCT_DETAIL.COLOR','PRODUCT_DETAIL.COLOR2','PRODUCT_DETAIL.PATTERN','PRODUCT_DETAIL.MATERIAL','SALES_LOG.SALECODE')
             ->where('SALES_LOG.SOLDDATE', '>=',$request[0])
             ->where('SALES_LOG.SOLDDATE', '<=',$request[1])
-            ->get();
+            ->orderBy('SALES_LOG.SOLDDATE','DESC')->get();
         return response()->json($productInfo);
     }
     public function loadClassify(Request $request)
