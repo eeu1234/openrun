@@ -120,7 +120,7 @@
                             </p>
                             <a tabIndex="0" className="h-10 focus:outline-none text-sm font-medium leading-5 text-gray-800 mt-2">{{salesInfo.storeInfo.STORELOCATION}}</a>
                         </div>
-                        <div class="w-50 float-left">
+                        <div class="w-48 float-left break-words">
                             <p className="pl-4 text-xs pt-2 leading-4 leading-none text-gray-600 " @click="goDetail(salesInfo.productInfo.FINALPRODUCTCODE)">
                                 {{salesInfo.productInfo.product_name[0].PRODUCTNAME}} {{salesInfo.productInfo.SIZE}} {{salesInfo.productInfo.MATERIAL}} {{salesInfo.productInfo.PATTERN}} {{salesInfo.productInfo.COLOR}} {{salesInfo.productInfo.COLOR2}}
                             </p>
