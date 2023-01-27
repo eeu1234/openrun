@@ -23,9 +23,9 @@
         </div>
         <div id="productImg" class="w-full h-fit">
             <swiper :modules="[EffectFade]" effect="fade">
-                <swiper-slide> <img class = "w-full h-fit " src="/img/classic_medium_bag.jpg"></swiper-slide>
-                <swiper-slide><img class = "w-full h-fit " src="/img/boy_medium.PNG"></swiper-slide>
-                <swiper-slide><img class = "w-full h-fit " src="/img/woc.PNG"></swiper-slide>
+                <swiper-slide><img class = "w-full h-fit " src="/img/default_img.png"></swiper-slide>
+                <swiper-slide><img class = "w-full h-fit " src="/img/default_img.png"></swiper-slide>
+                <swiper-slide><img class = "w-full h-fit " src="/img/default_img.png"></swiper-slide>
             </swiper>
         </div>
         <div class = "w-100 h-12 content-center text-center items-center py-2">

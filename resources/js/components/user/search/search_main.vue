@@ -19,7 +19,7 @@
                         <button class = "repeatComponent " @click="goDetail(result.FINALPRODUCTCODE)">
                             <div class = "w-full h-18 mt-4 my-2">
                                 <div class = "float-left w-1/4">
-                                    <img class = "h-full" src="/img/classic_medium_bag.jpg">
+                                    <img class = "h-full" src="/img/{{result.IMG}}" onerror="this.onerror=null; this.src='/img/default_img.png';">
                                 </div>
                                 <div id="productInfo" class = "float-left pl-4 w-3/4 text-left">
                                     <div class=" w-full text-xs tracking-wide font-medium">Chanel</div>
@@ -59,7 +59,7 @@ export default {
             var data = {
                 searchWord: this.searchWord
             }
-            axios.post('./search', data
+            axios.post('/search', data
             ).then(response => {
                 console.log(response.data);
                 this.results = response.data;

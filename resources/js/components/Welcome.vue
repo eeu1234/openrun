@@ -27,7 +27,7 @@ export default {
     },
     methods: {
         getStoreList() {
-            axios.post('./store', {}
+            axios.post('/store', {}
             ).then(response => {
                 console.log(response.data);
                 this.stores = response.data;

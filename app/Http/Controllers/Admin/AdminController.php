@@ -98,10 +98,9 @@ class AdminController extends Controller
             $productInfo = DB::table('PRODUCT_DETAIL')
                 ->join('PRODUCT', 'PRODUCT_DETAIL.PRODUCTCODE', '=', 'PRODUCT.PRODUCTCODE')
                 ->join('PRODUCT_CLASSIFY', 'PRODUCT.CLASSIFYCODE', '=', 'PRODUCT_CLASSIFY.CLASSIFYCODE')
-                ->where('PRODUCT_CLASSIFY.CLASSIFYNAME','=',$request->classify)
-                ->where('PRODUCT.PRODUCTNAME','=',$request->category)
-                ->orWhere('PRODUCT_DETAIL.FINALPRODUCTNAME','=',$request->productName)
-                ->where('PRODUCT_DETAIL.SIZE','=',$request->productName)
+                ->where('PRODUCT_DETAIL.FINALPRODUCTNAME','=',$request->productName)
+                ->orwhere('PRODUCT_DETAIL.SIZE','=',$request->productName)
+                ->orwhere('PRODUCT_DETAIL.MATERIAL','=',$request->productName)
                 ->orderByDesc('PRODUCT.PRODUCTNAME')
                 ->orderByDesc('PRODUCT_DETAIL.SIZE')
                 ->get();

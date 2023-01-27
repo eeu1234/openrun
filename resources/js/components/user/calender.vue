@@ -252,7 +252,7 @@ export default {
             if(typeof(this.no) !== 'undefined' || this.no != null){
                 data.no = this.no;
             }
-            console.log(data);
+
             axios.post('/getSalesLogThisYearMonth', data
             ).then(response => {
 

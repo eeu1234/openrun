@@ -1,5 +1,5 @@
 <template>
-    <div class = "h-96 border-2 border-black w-11/12 m-auto z-50 mb-10 py-4 px-2 mt-4 overflow-y-scroll">
+    <div class = " w-11/12 m-auto z-50 mb-10 py-4 px-2 mt-4 ">
         <div class = "w-full text-xs text-center my-4 "></div>
         <table class = "m-auto">
             <thead>
@@ -35,10 +35,12 @@
         </table>
         <div @click = "searchData" class = "rounded-xl bg-slate-200 border-slate-300 block w-12 text-center py-1 float-right border mx-4 my-4">검색</div>
         <div class = "clear-both"></div>
-        <div v-for="item in productInfos" class = "repeatComponent w-full border " @click = "pushProduct(item)" >
+    </div>
+    <div class="overflow-y-scroll h-64  border-2 border-black  py-4 px-2 mt-4">
+        <div v-for="item in productInfos" class = "repeatComponent w-full border" @click = "pushProduct(item)" >
             <div class = "w-full mt-4 my-2">
                 <div class = "float-left w-1/4">
-                    <img class = "w-full" src="/img/classic_medium_bag.jpg">
+                    <img class = "w-2/4 m-auto" src="/img/{{item.IMG}}" onerror="this.onerror=null; this.src='/img/default_img.png';">
                 </div>
                 <div id="productInfo" class = "float-left pl-4 w-3/4 text-left">
                     <div class=" w-full text-xs tracking-wide font-medium">Chanel</div>
@@ -58,15 +60,14 @@
             <div v-for="(item,index) in selectedProduct">
                 <div class = "w-full  mt-4 my-2">
                     <div class = "float-left w-1/4">
-                        <img class = "w-full" src="/img/classic_medium_bag.jpg">
+                        <img class = "w-2/4 m-auto"  src="/img/{{item.IMG}}" onerror="this.onerror=null; this.src='/img/default_img.png';">
                     </div>
                     <div id="productInfo" class = "float-left pl-4 w-3/4 text-left">
                         <div class=" w-full text-xs tracking-wide font-medium">Chanel</div>
-                        <div class=" w-full text-base tracking-wide font-medium">{{item.FINALPRODUCTNAME}}</div>
+                        <div class=" w-full text-base tracking-wide font-medium">{{item.PRODUCTNAME}} {{item.FINALPRODUCTNAME}} {{item.SIZE}} {{item.MATERIAL}}</div>
                         <div class=" w-full text-xs tracking-wide text-slate-400">{{item.COLOR}} {{item.COLOR2}}</div>
                         <div class=" w-full text-xs tracking-wide text-slate-400">{{item.PATTERN}}</div>
-                        <div class=" w-full text-xs tracking-wide text-slate-400">{{item.SIZE}}</div>
-                        <div class=" w-full text-xs tracking-wide text-slate-400">{{item.MATTRIAL}}</div>
+                        <div class=" w-full text-xs tracking-wide text-slate-400"></div>
                     </div>
                     <div class="clear-both"></div>
                     <div class = "w-full text-left">
